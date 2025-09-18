@@ -7,59 +7,59 @@
     "text": "Foreword\nThis is a draft of the workshops for the PHUSE EU Connect 2025 event.\nThe workshops lasts for 90 minutes, is intended for statistical programmers as well as everyone else interested in learning about how teal can help them with interactive data visualization for clinical trials.\nAll the code samples mentioned in the draft should be available via the POSIT Cloud project."
   },
   {
-    "objectID": "index.html#topic-1-introduction-to-teal-5-minutes",
-    "href": "index.html#topic-1-introduction-to-teal-5-minutes",
+    "objectID": "index.html#topic-1-introduction-to-teal",
+    "href": "index.html#topic-1-introduction-to-teal",
     "title": "Interactive Data Visualisation Using the Teal Framework",
-    "section": "Topic 1: Introduction to teal (5 minutes)",
-    "text": "Topic 1: Introduction to teal (5 minutes)\n\nTODO\n\n\nWhat is teal?\nWhat teal can be used for?\nWhat is the teal framework - other packages from the teal family."
+    "section": "Topic 1: Introduction to teal",
+    "text": "Topic 1: Introduction to teal\n\n(5 minutes) · status: TODO\n\n\nWhat is teal?\nWhat teal can be used for?\nWhat is the teal framework - other packages from the teal family."
   },
   {
-    "objectID": "index.html#topic-2-how-to-install-the-teal-framework-2-minutes",
-    "href": "index.html#topic-2-how-to-install-the-teal-framework-2-minutes",
+    "objectID": "index.html#topic-2-how-to-install-the-teal-framework",
+    "href": "index.html#topic-2-how-to-install-the-teal-framework",
     "title": "Interactive Data Visualisation Using the Teal Framework",
-    "section": "Topic 2: How to install the teal framework? (2 minutes)",
-    "text": "Topic 2: How to install the teal framework? (2 minutes)\n\nTODO\n\n\nInstallation of teal and its dependencies - code samples"
+    "section": "Topic 2: How to install the teal framework?",
+    "text": "Topic 2: How to install the teal framework?\n\n(2 minutes) · status: TODO\n\n\nInstallation of teal and its dependencies - code samples"
   },
   {
-    "objectID": "index.html#topic-3-launching-a-simple-teal-application-7-minutes",
-    "href": "index.html#topic-3-launching-a-simple-teal-application-7-minutes",
+    "objectID": "index.html#topic-3-launching-a-simple-teal-application",
+    "href": "index.html#topic-3-launching-a-simple-teal-application",
     "title": "Interactive Data Visualisation Using the Teal Framework",
-    "section": "Topic 3: Launching a simple teal application (7 minutes)",
-    "text": "Topic 3: Launching a simple teal application (7 minutes)\n\n✅\n\n\nLaunching a simple teal application - code samples\nAnatomy of a teal application - code samples:\n\nteal data\nteal"
+    "section": "Topic 3: Launching a simple teal application",
+    "text": "Topic 3: Launching a simple teal application\n\n(7 minutes) · status: ✅\n\n\nLaunching a simple teal application - code samples\nAnatomy of a teal application - code samples:\n\nteal data\nteal"
   },
   {
-    "objectID": "index.html#topic-4-introduction-to-teal.modules.clinical-and-anatomy-of-a-module-15-minutes",
-    "href": "index.html#topic-4-introduction-to-teal.modules.clinical-and-anatomy-of-a-module-15-minutes",
+    "objectID": "index.html#topic-4-introduction-to-teal.modules.clinical-and-anatomy-of-a-module",
+    "href": "index.html#topic-4-introduction-to-teal.modules.clinical-and-anatomy-of-a-module",
     "title": "Interactive Data Visualisation Using the Teal Framework",
-    "section": "Topic 4: Introduction to teal.modules.clinical and anatomy of a module (15 minutes)",
-    "text": "Topic 4: Introduction to teal.modules.clinical and anatomy of a module (15 minutes)\n\n✅\n\n\nWhat is teal.modules.clinical?\nLaunching a simple teal.modules.clinical application - code samples\nAnatomy of a teal.modules.clinical module:\n\nmain output\nencoding panel\nfilter panel\nShow R Code button"
+    "section": "Topic 4: Introduction to teal.modules.clinical and anatomy of a module",
+    "text": "Topic 4: Introduction to teal.modules.clinical and anatomy of a module\n\n(15 minutes) · status: ✅\n\n\nWhat is teal.modules.clinical?\nLaunching a simple teal.modules.clinical application - code samples\nAnatomy of a teal.modules.clinical module:\n\nmain output\nencoding panel\nfilter panel\nShow R Code button"
   },
   {
-    "objectID": "index.html#topic-5-deeper-dive-into-how-to-provide-and-pre-process-data-in-teal.modules.clinical-15-minutes",
-    "href": "index.html#topic-5-deeper-dive-into-how-to-provide-and-pre-process-data-in-teal.modules.clinical-15-minutes",
+    "objectID": "index.html#topic-5-deeper-dive-into-how-to-provide-and-pre-process-data-in-teal.modules.clinical",
+    "href": "index.html#topic-5-deeper-dive-into-how-to-provide-and-pre-process-data-in-teal.modules.clinical",
     "title": "Interactive Data Visualisation Using the Teal Framework",
-    "section": "Topic 5: Deeper dive into how to provide and pre-process data in teal.modules.clinical (15 minutes)",
-    "text": "Topic 5: Deeper dive into how to provide and pre-process data in teal.modules.clinical (15 minutes)\n\nPartially covered (3 of the bullet points)\n\n\nHow to provide data to a teal application? - code samples\nIntroduction to teal.data in the context of the CDISC data standard\nIntroduction to the concept of keys in teal.data\nCreating a custom teal.data object with custom user-defined keys - code samples\nPreprocessing data - code samples\n\nCode samples should reuse the application code from the previous topic to put the new information in the context of something already familiar.\nWe want to support the following scenarios that app developers face: * providing custom non-CDISC data to a teal.modules.clinical application * pre-processing data to create new variables, filter data or make summaries"
+    "section": "Topic 5: Deeper dive into how to provide and pre-process data in teal.modules.clinical",
+    "text": "Topic 5: Deeper dive into how to provide and pre-process data in teal.modules.clinical\n\n(15 minutes) · status: Partially covered (3 of the bullet points)\n\n\nHow to provide data to a teal application? - code samples\nIntroduction to teal.data in the context of the CDISC data standard\nIntroduction to the concept of keys in teal.data\nCreating a custom teal.data object with custom user-defined keys - code samples\nPreprocessing data - code samples\n\nCode samples should reuse the application code from the previous topic to put the new information in the context of something already familiar.\nWe want to support the following scenarios that app developers face: * providing custom non-CDISC data to a teal.modules.clinical application * pre-processing data to create new variables, filter data or make summaries"
   },
   {
-    "objectID": "index.html#topic-6-deeper-dive-into-customizing-the-parameters-of-teal.modules.clinical-modules-10-minutes",
-    "href": "index.html#topic-6-deeper-dive-into-customizing-the-parameters-of-teal.modules.clinical-modules-10-minutes",
+    "objectID": "index.html#topic-6-deeper-dive-into-customizing-the-parameters-of-teal.modules.clinical-modules",
+    "href": "index.html#topic-6-deeper-dive-into-customizing-the-parameters-of-teal.modules.clinical-modules",
     "title": "Interactive Data Visualisation Using the Teal Framework",
-    "section": "Topic 6: Deeper dive into customizing the parameters of teal.modules.clinical modules (10 minutes)",
-    "text": "Topic 6: Deeper dive into customizing the parameters of teal.modules.clinical modules (10 minutes)\n\nTODO @averissimo – But first rethink on this topic\n\n\nIntroduction to choices_selected - code samples\nParametrising choices_selected for different results:\n\nchoices_selected with variable_choices - code samples\nchoices_selected with delayed evaluation - code samples\nchoices_selected with eager evaluation and limited values - code samples (* Introduction to data_extract_spec - I am hesitant on this one because I received information the data_extract_spec will be reworked in the coming months and also it’s not widely used inside teal.modules.clinical).\n\n\nCode samples should reuse the application code from the previous topic to put the new information in the context of something already familiar.\nWe want to cover the following scenarios that app developers face: * limiting the choices of variables in an input to a module * providing choices to an input inside a module without knowing the dataset (simulating dataset being downloaded from somewhere interactively) * changing the dataset that is used by a module"
+    "section": "Topic 6: Deeper dive into customizing the parameters of teal.modules.clinical modules",
+    "text": "Topic 6: Deeper dive into customizing the parameters of teal.modules.clinical modules\n\n(10 minutes) · status: TODO @averissimo – But first rethink on this topic\n\n\nIntroduction to choices_selected - code samples\nParametrising choices_selected for different results:\n\nchoices_selected with variable_choices - code samples\nchoices_selected with delayed evaluation - code samples\nchoices_selected with eager evaluation and limited values - code samples (* Introduction to data_extract_spec - I am hesitant on this one because I received information the data_extract_spec will be reworked in the coming months and also it’s not widely used inside teal.modules.clinical).\n\n\nCode samples should reuse the application code from the previous topic to put the new information in the context of something already familiar.\nWe want to cover the following scenarios that app developers face: * limiting the choices of variables in an input to a module * providing choices to an input inside a module without knowing the dataset (simulating dataset being downloaded from somewhere interactively) * changing the dataset that is used by a module"
   },
   {
-    "objectID": "index.html#topic-7-creating-custom-teal-modules-20-minutes",
-    "href": "index.html#topic-7-creating-custom-teal-modules-20-minutes",
+    "objectID": "index.html#topic-7-creating-custom-teal-modules",
+    "href": "index.html#topic-7-creating-custom-teal-modules",
     "title": "Interactive Data Visualisation Using the Teal Framework",
-    "section": "Topic 7: Creating custom teal modules (20 minutes)",
-    "text": "Topic 7: Creating custom teal modules (20 minutes)\n\nTODO @averissimo\n\n\nWhen to create a custom teal module?\nCreating a custom teal module:\n\nUI function\nServer function\nCustom teal module arguments - data, reporter, filtering API"
+    "section": "Topic 7: Creating custom teal modules",
+    "text": "Topic 7: Creating custom teal modules\n\n(20 minutes) · status: TODO @averissimo\n\n\nWhen to create a custom teal module?\nCreating a custom teal module:\n\nUI function\nServer function\nCustom teal module arguments - data, reporter, filtering API"
   },
   {
-    "objectID": "index.html#topic-8-discussion-and-qa-whats-left",
-    "href": "index.html#topic-8-discussion-and-qa-whats-left",
+    "objectID": "index.html#topic-8-discussion-and-qa",
+    "href": "index.html#topic-8-discussion-and-qa",
     "title": "Interactive Data Visualisation Using the Teal Framework",
-    "section": "Topic 8: Discussion and QA (what’s left)",
-    "text": "Topic 8: Discussion and QA (what’s left)"
+    "section": "Topic 8: Discussion and QA",
+    "text": "Topic 8: Discussion and QA\n\n(what’s left)"
   }
 ]

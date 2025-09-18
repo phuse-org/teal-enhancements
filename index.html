@@ -48,6 +48,7 @@
     }
     .reveal .slide:not(.center) {
       height: 100%;
+      overflow-y: auto;
     }
     .reveal .slide.scrollable {
       overflow-y: auto;
@@ -126,6 +127,10 @@
   </style>
   <script type="module" src="site_libs/quarto-ojs/quarto-ojs-runtime.js"></script>
   <link href="site_libs/quarto-ojs/quarto-ojs.css" rel="stylesheet">
+  <style>
+  .reveal .slides section.fs-50 { font-size: .5em; }
+  .reveal .slides section.fs-60 { font-size: .6em; }
+  </style>
 </head>
 <body class="quarto-light">
   <div class="reveal">
@@ -145,10 +150,10 @@
 <p>The workshops lasts for 90 minutes, is intended for statistical programmers as well as everyone else interested in learning about how <code>teal</code> can help them with interactive data visualization for clinical trials.</p>
 <p>All the code samples mentioned in the draft should be available via the POSIT Cloud project.</p>
 </section>
-<section id="topic-1-introduction-to-teal-5-minutes" class="slide level2">
-<h2>Topic 1: Introduction to <code>teal</code> (5 minutes)</h2>
+<section id="topic-1-introduction-to-teal" class="slide level2">
+<h2>Topic 1: Introduction to <code>teal</code></h2>
 <blockquote>
-<p>TODO</p>
+<p>(5 minutes) · status: TODO</p>
 </blockquote>
 <ul>
 <li>What is <code>teal</code>?</li>
@@ -156,19 +161,19 @@
 <li>What is the <code>teal</code> framework - other packages from the <code>teal</code> family.</li>
 </ul>
 </section>
-<section id="topic-2-how-to-install-the-teal-framework-2-minutes" class="slide level2">
-<h2>Topic 2: How to install the <code>teal</code> framework? (2 minutes)</h2>
+<section id="topic-2-how-to-install-the-teal-framework" class="slide level2">
+<h2>Topic 2: How to install the <code>teal</code> framework?</h2>
 <blockquote>
-<p>TODO</p>
+<p>(2 minutes) · status: TODO</p>
 </blockquote>
 <ul>
 <li>Installation of <code>teal</code> and its dependencies - code samples</li>
 </ul>
 </section>
-<section id="topic-3-launching-a-simple-teal-application-7-minutes" class="slide level2">
-<h2>Topic 3: Launching a simple <code>teal</code> application (7 minutes)</h2>
+<section id="topic-3-launching-a-simple-teal-application" class="slide level2">
+<h2>Topic 3: Launching a simple <code>teal</code> application</h2>
 <blockquote>
-<p>✅</p>
+<p>(7 minutes) · status: ✅</p>
 </blockquote>
 <ul>
 <li>Launching a simple <code>teal</code> application - code samples</li>
@@ -179,10 +184,10 @@
 </ul></li>
 </ul>
 </section>
-<section id="topic-4-introduction-to-teal.modules.clinical-and-anatomy-of-a-module-15-minutes" class="slide level2">
-<h2>Topic 4: Introduction to <code>teal.modules.clinical</code> and anatomy of a module (15 minutes)</h2>
+<section id="topic-4-introduction-to-teal.modules.clinical-and-anatomy-of-a-module" class="slide level2">
+<h2>Topic 4: Introduction to <code>teal.modules.clinical</code> and anatomy of a module</h2>
 <blockquote>
-<p>✅</p>
+<p>(15 minutes) · status: ✅</p>
 </blockquote>
 <ul>
 <li>What is <code>teal.modules.clinical</code>?</li>
@@ -196,10 +201,10 @@
 </ul></li>
 </ul>
 </section>
-<section id="topic-5-deeper-dive-into-how-to-provide-and-pre-process-data-in-teal.modules.clinical-15-minutes" class="slide level2">
-<h2>Topic 5: Deeper dive into how to provide and pre-process data in <code>teal.modules.clinical</code> (15 minutes)</h2>
+<section id="topic-5-deeper-dive-into-how-to-provide-and-pre-process-data-in-teal.modules.clinical" class="slide level2 fs-50">
+<h2>Topic 5: Deeper dive into how to provide and pre-process data in <code>teal.modules.clinical</code></h2>
 <blockquote>
-<p>Partially covered (3 of the bullet points)</p>
+<p>(15 minutes) · status: Partially covered (3 of the bullet points)</p>
 </blockquote>
 <ul>
 <li>How to provide data to a <code>teal</code> application? - code samples</li>
@@ -211,10 +216,10 @@
 <p>Code samples should reuse the application code from the previous topic to put the new information in the context of something already familiar.</p>
 <p>We want to support the following scenarios that app developers face: * providing custom non-CDISC data to a <code>teal.modules.clinical</code> application * pre-processing data to create new variables, filter data or make summaries</p>
 </section>
-<section id="topic-6-deeper-dive-into-customizing-the-parameters-of-teal.modules.clinical-modules-10-minutes" class="slide level2">
-<h2>Topic 6: Deeper dive into customizing the parameters of <code>teal.modules.clinical</code> modules (10 minutes)</h2>
+<section id="topic-6-deeper-dive-into-customizing-the-parameters-of-teal.modules.clinical-modules" class="slide level2 fs-50">
+<h2>Topic 6: Deeper dive into customizing the parameters of <code>teal.modules.clinical</code> modules</h2>
 <blockquote>
-<p>TODO <span class="citation" data-cites="averissimo">@averissimo</span> – But first rethink on this topic</p>
+<p>(10 minutes) · status: TODO <span class="citation" data-cites="averissimo">@averissimo</span> – But first rethink on this topic</p>
 </blockquote>
 <ul>
 <li>Introduction to <code>choices_selected</code> - code samples</li>
@@ -228,10 +233,10 @@
 <p>Code samples should reuse the application code from the previous topic to put the new information in the context of something already familiar.</p>
 <p>We want to cover the following scenarios that app developers face: * limiting the choices of variables in an input to a module * providing choices to an input inside a module without knowing the dataset (simulating dataset being downloaded from somewhere interactively) * changing the dataset that is used by a module</p>
 </section>
-<section id="topic-7-creating-custom-teal-modules-20-minutes" class="slide level2">
-<h2>Topic 7: Creating custom <code>teal</code> modules (20 minutes)</h2>
+<section id="topic-7-creating-custom-teal-modules" class="slide level2">
+<h2>Topic 7: Creating custom <code>teal</code> modules</h2>
 <blockquote>
-<p>TODO <span class="citation" data-cites="averissimo">@averissimo</span></p>
+<p>(20 minutes) · status: TODO <span class="citation" data-cites="averissimo">@averissimo</span></p>
 </blockquote>
 <ul>
 <li>When to create a custom <code>teal</code> module?</li>
@@ -243,8 +248,11 @@
 </ul></li>
 </ul>
 </section>
-<section id="topic-8-discussion-and-qa-whats-left" class="slide level2">
-<h2>Topic 8: Discussion and QA (what’s left)</h2>
+<section id="topic-8-discussion-and-qa" class="slide level2">
+<h2>Topic 8: Discussion and QA</h2>
+<blockquote>
+<p>(what’s left)</p>
+</blockquote>
 
 
 <script type="ojs-module-contents">
@@ -298,7 +306,7 @@ W10=
 'autoAnimateUnmatched': true,
 'jumpToSlide': true,
 'menu': {"side":"left","useTextContentForMissingTitles":true,"markers":false,"loadIcons":false,"custom":[{"title":"Tools","icon":"<i class=\"fas fa-gear\"></i>","content":"<ul class=\"slide-menu-items\">\n<li class=\"slide-tool-item active\" data-item=\"0\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.fullscreen(event)\"><kbd>f</kbd> Fullscreen</a></li>\n<li class=\"slide-tool-item\" data-item=\"1\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.speakerMode(event)\"><kbd>s</kbd> Speaker View</a></li>\n<li class=\"slide-tool-item\" data-item=\"2\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>o</kbd> Slide Overview</a></li>\n<li class=\"slide-tool-item\" data-item=\"3\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.togglePdfExport(event)\"><kbd>e</kbd> PDF Export Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"4\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleScrollView(event)\"><kbd>r</kbd> Scroll View Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"5\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.keyboardHelp(event)\"><kbd>?</kbd> Keyboard Help</a></li>\n</ul>"}],"openButton":true},
-'smaller': false,
+'smaller': true,
  
         // Display controls in the bottom right corner
         controls: false,
@@ -596,7 +604,7 @@ W10=
         }
           var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
           var mailtoRegex = new RegExp(/^mailto:/);
-            var filterRegex = new RegExp("https:\/\/averissimo\.github\.io\/teal-enhancements\/");
+            var filterRegex = new RegExp("https:\/\/phuse-org\.github\.io\/teal-enhancements\/");
           var isInternal = (href) => {
               return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
           }

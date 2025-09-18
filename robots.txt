@@ -1,1 +1,1 @@
-Sitemap: https://averissimo.github.io/teal-enhancements/sitemap.xml
+Sitemap: https://phuse-org.github.io/teal-enhancements/sitemap.xml
