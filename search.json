@@ -7,25 +7,39 @@
     "text": "Foreword\nThis is a draft of the workshops for the PHUSE EU Connect 2025 event.\nThe workshops lasts for 90 minutes, is intended for statistical programmers as well as everyone else interested in learning about how teal can help them with interactive data visualization for clinical trials.\nAll the code samples mentioned in the draft should be available via the POSIT Cloud project."
   },
   {
-    "objectID": "index.html#topic-1-introduction-to-teal",
-    "href": "index.html#topic-1-introduction-to-teal",
+    "objectID": "index.html#overview-objectives",
+    "href": "index.html#overview-objectives",
     "title": "Interactive Data Visualisation Using the Teal Framework",
-    "section": "Topic 1: Introduction to teal",
-    "text": "Topic 1: Introduction to teal\n\n(5 minutes) · status: TODO\n\n\nWhat is teal?\nWhat teal can be used for?\nWhat is the teal framework - other packages from the teal family."
+    "section": "Overview & Objectives",
+    "text": "Overview & Objectives\nWelcome to the Interactive Data Visualisation Using the Teal Framework workshop! This comprehensive training will guide you through the powerful capabilities of the teal framework for creating interactive data analysis applications.\nLearning Objectives\nBy the end of this workshop, you will be able to:\n\nUnderstand what teal is and why it’s valuable for data analysis\nInstall and configure the teal framework and its dependencies\n\nCreate basic teal applications from scratch\nRecognize the key components and structure of teal applications\nLaunch and customize pre-built modules from teal.modules.general and teal.modules.clinical\nManage data effectively using teal.data and understand data relationships\nUtilize advanced features like filtering, reporting, and bookmarking\nDevelop custom teal modules for specialized analysis needs"
   },
   {
-    "objectID": "index.html#topic-2-how-to-install-the-teal-framework",
-    "href": "index.html#topic-2-how-to-install-the-teal-framework",
+    "objectID": "index.html#introduction-to-teal",
+    "href": "index.html#introduction-to-teal",
     "title": "Interactive Data Visualisation Using the Teal Framework",
-    "section": "Topic 2: How to install the teal framework?",
-    "text": "Topic 2: How to install the teal framework?\n\n(2 minutes) · status: TODO\n\n\nInstallation of teal and its dependencies - code samples"
+    "section": "Introduction to teal",
+    "text": "Introduction to teal\nWhat is teal?\nteal is a powerful R framework designed to streamline the development of interactive data analysis applications. Built on top of Shiny, teal provides a modular, standardized approach to creating sophisticated data exploration and visualization tools.\nKey Characteristics of teal:\n\n🧩 Modular Architecture: Build applications using reusable, interchangeable components\n🔄 Reproducible Analytics: Maintain complete analysis reproducibility with built-in code tracking\n👥 User-Friendly Interface: Intuitive design accessible to both developers and end-users\n🏥 Clinical Focus: Specialized modules for pharmaceutical and clinical trial data analysis\n📊 Interactive Exploration: Real-time data filtering, visualization, and analysis capabilities\n\nWhy Use teal?\n1. Accelerated Development\n\nPre-built modules for common analysis tasks reduce development time\nStandardized framework ensures consistent application structure\nPlug-and-play architecture allows rapid prototyping and iteration\n\n2. Enhanced Reproducibility\n\nAutomatic code generation for all analysis steps\nBuilt-in version tracking of data transformations and analysis parameters\nComplete audit trail for regulatory and scientific compliance\n\n3. Clinical Data Expertise\n\nCDISC/ADaM integration with specialized data handling\nPharmaceutical workflows designed for clinical trial analysis\nRegulatory compliance features for submission-ready documentation\n\n4. Collaborative Analytics\n\nShared analysis environments for team-based data exploration\nReport generation for communicating findings\nFilter state management for consistent analysis contexts\n\n5. Scalable Architecture\n\nModular design supports applications from simple to enterprise-scale\nPerformance optimization for large datasets\nFlexible deployment options from local to cloud environments"
   },
   {
-    "objectID": "index.html#topic-3-launching-a-simple-teal-application",
-    "href": "index.html#topic-3-launching-a-simple-teal-application",
+    "objectID": "index.html#installation-setup",
+    "href": "index.html#installation-setup",
     "title": "Interactive Data Visualisation Using the Teal Framework",
-    "section": "Topic 3: Launching a simple teal application",
-    "text": "Topic 3: Launching a simple teal application\n\n(7 minutes) · status: ✅\n\n\nLaunching a simple teal application - code samples\nAnatomy of a teal application - code samples:\n\nteal data\nteal"
+    "section": "Installation & Setup",
+    "text": "Installation & Setup\nQuick Walkthrough to Get Started\nStep 1: Install Core Packages\n\n\n\n\n\n\n\n\nStep 2: Load Required Libraries\n\n\n\n\n\n\n\n\nStep 3: Verify Installation with Example"
+  },
+  {
+    "objectID": "index.html#code-sample-demonstration-of-a-simple-teal-app",
+    "href": "index.html#code-sample-demonstration-of-a-simple-teal-app",
+    "title": "Interactive Data Visualisation Using the Teal Framework",
+    "section": "Code Sample: Demonstration of a Simple teal App",
+    "text": "Code Sample: Demonstration of a Simple teal App\nBasic teal Application\nLet’s create a complete, functional teal application step by step:\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nWhat This Application Provides\nInteractive Features:\n\n📋 Data Table: Browse and search through subject-level data\n📊 Visualizations: Dynamic plots that update with filtering\n🔍 Filtering Panel: Real-time data subsetting capabilities\n📈 Statistical Summaries: Automated demographic analysis\n📄 Report Generation: Export findings for documentation\n\nUser Experience:\n\nIntuitive Navigation: Tab-based interface for different analyses\nReal-time Updates: All modules respond instantly to filter changes\nReproducible Code: Every analysis step is automatically documented\nProfessional Presentation: Clean, clinical trial-ready interface"
+  },
+  {
+    "objectID": "index.html#anatomy-of-a-teal-app-key-components-structure",
+    "href": "index.html#anatomy-of-a-teal-app-key-components-structure",
+    "title": "Interactive Data Visualisation Using the Teal Framework",
+    "section": "Anatomy of a teal App: Key Components & Structure",
+    "text": "Anatomy of a teal App: Key Components & Structure\nCore Architecture Overview\nA teal application consists of four fundamental components that work together to create a powerful, interactive data analysis environment:\n\n\n\n\n\n\n\n\nComponent 1: Data Management (teal.data)\nThe data layer provides robust, reproducible data management:\n\n\n\n\n\n\n\n\nComponent 2: Modular Analytics (teal.modules.*)\nModules are self-contained analysis components:\n\n\n\n\n\n\n\n\nComponent 3: Application Integration (teal::init)\nThe initialization layer brings everything together:\n\n\n\n\n\n\n\n\nThis architectural overview demonstrates how teal provides a comprehensive, professional framework for interactive data analysis applications, particularly suited for clinical trial and pharmaceutical research contexts."
   },
   {
     "objectID": "index.html#topic-4-introduction-to-teal.modules.clinical-and-anatomy-of-a-module",
