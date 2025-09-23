@@ -35,27 +35,435 @@ can help them with interactive data visualization for clinical trials.
 All the code samples mentioned in the draft should be available via
 the POSIT Cloud project.
 
-## Topic 1: Introduction to `teal`
-> (5 minutes) · status:  TODO
+## Overview & Objectives
 
-* What is `teal`?
-* What `teal` can be used for?
-* What is the `teal` framework - other packages from the `teal` family.
+Welcome to the **Interactive Data Visualisation Using the Teal Framework** workshop! This comprehensive training will guide you through the powerful capabilities of the `teal` framework for creating interactive data analysis applications.
 
-## Topic 2: How to install the `teal` framework? 
+### Learning Objectives
 
-> (2 minutes) · status:  TODO
+By the end of this workshop, you will be able to:
 
-* Installation of `teal` and its dependencies - code samples
+- **Understand** what `teal` is and why it's valuable for data analysis
+- **Install and configure** the `teal` framework and its dependencies  
+- **Create** basic `teal` applications from scratch
+- **Recognize** the key components and structure of `teal` applications
+- **Launch and customize** pre-built modules from `teal.modules.general` and `teal.modules.clinical`
+- **Manage data** effectively using `teal.data` and understand data relationships
+- **Utilize** advanced features like filtering, reporting, and bookmarking
+- **Develop** custom `teal` modules for specialized analysis needs
 
-## Topic 3: Launching a simple `teal` application
+---
 
-> (7 minutes) · status:  ✅
+## Introduction to `teal`
 
-* Launching a simple `teal` application - code samples
-* Anatomy of a `teal` application - code samples:
-  * `teal` data
-  * `teal`
+### What is `teal`?
+
+`teal` is a powerful **R framework** designed to streamline the development of **interactive data analysis applications**. Built on top of Shiny, `teal` provides a modular, standardized approach to creating sophisticated data exploration and visualization tools.
+
+### Key Characteristics of `teal`:
+
+- **🧩 Modular Architecture**: Build applications using reusable, interchangeable components
+- **🔄 Reproducible Analytics**: Maintain complete analysis reproducibility with built-in code tracking
+- **👥 User-Friendly Interface**: Intuitive design accessible to both developers and end-users
+- **🏥 Clinical Focus**: Specialized modules for pharmaceutical and clinical trial data analysis
+- **📊 Interactive Exploration**: Real-time data filtering, visualization, and analysis capabilities
+
+### Why Use `teal`?
+
+### **1. Accelerated Development**
+- **Pre-built modules** for common analysis tasks reduce development time
+- **Standardized framework** ensures consistent application structure
+- **Plug-and-play architecture** allows rapid prototyping and iteration
+
+### **2. Enhanced Reproducibility**
+- **Automatic code generation** for all analysis steps
+- **Built-in version tracking** of data transformations and analysis parameters
+- **Complete audit trail** for regulatory and scientific compliance
+
+### **3. Clinical Data Expertise**
+- **CDISC/ADaM integration** with specialized data handling
+- **Pharmaceutical workflows** designed for clinical trial analysis
+- **Regulatory compliance** features for submission-ready documentation
+
+### **4. Collaborative Analytics**
+- **Shared analysis environments** for team-based data exploration
+- **Report generation** for communicating findings
+- **Filter state management** for consistent analysis contexts
+
+### **5. Scalable Architecture**
+- **Modular design** supports applications from simple to enterprise-scale
+- **Performance optimization** for large datasets
+- **Flexible deployment** options from local to cloud environments
+
+---
+
+## Installation & Setup
+
+### Quick Walkthrough to Get Started
+
+### **Step 1: Install Core Packages**
+
+```{webr}
+#| eval: false
+# Install the main teal package
+install.packages("teal")
+
+# Install commonly used module packages
+install.packages(c(
+  "teal.modules.general",    # General-purpose analysis modules
+  "teal.modules.clinical",   # Clinical trial specific modules
+  "teal.data",              # Data management utilities
+  "teal.reporter"           # Report generation capabilities
+))
+```
+
+### **Step 2: Load Required Libraries**
+
+```{webr}
+# Load core teal framework
+library(teal)
+library(teal.modules.general)
+library(teal.data)
+
+# For demonstration data
+library(pharmaverseadam)
+
+# Verify installation
+cat("✅ teal framework loaded successfully!\n")
+cat("📦 Available packages:\n")
+cat("   - teal version:", as.character(packageVersion("teal")), "\n")
+cat("   - teal.modules.general version:", as.character(packageVersion("teal.modules.general")), "\n")
+cat("   - teal.data version:", as.character(packageVersion("teal.data")), "\n")
+```
+
+### **Step 3: Verify Installation with Example**
+
+```{webr}
+# Create a simple test application
+test_data <- teal_data()
+test_data <- within(test_data, {
+  IRIS <- iris
+  MTCARS <- mtcars
+})
+
+# Simple test app
+test_app <- teal::init(
+  data = test_data,
+  modules = teal::modules(
+    tm_data_table(
+      label = "Data Explorer", 
+      dataname = "IRIS"
+    )
+  ),
+  title = "Installation Verification"
+)
+
+cat("✅ Test application created successfully!\n")
+cat("🚀 Ready to start building teal applications!\n")
+```
+
+---
+
+## Code Sample: Demonstration of a Simple `teal` App
+
+### Basic `teal` Application
+
+Let's create a complete, functional `teal` application step by step:
+
+```{webr}
+# Load required packages
+library(teal)
+library(teal.modules.general)
+library(teal.data)
+library(pharmaverseadam)
+
+# Step 1: Prepare the data
+data("adsl", package = "pharmaverseadam")
+
+# Create a teal_data object
+demo_data <- teal_data()
+demo_data <- within(demo_data, {
+  # Add the ADSL dataset
+  ADSL <- adsl
+  
+  # Basic data preprocessing
+  ADSL$ARM <- as.factor(ADSL$ARM)
+  ADSL$SEX <- as.factor(ADSL$SEX)
+  ADSL$RACE <- as.factor(ADSL$RACE)
+})
+
+cat("📊 Data prepared: ADSL with", nrow(adsl), "subjects\n")
+```
+
+```{webr}
+# Step 2: Define application modules
+app_modules <- teal::modules(
+  # Data exploration module
+  tm_data_table(
+    label = "📋 Subject Data",
+    dataname = "ADSL"
+  ),
+  
+  # Visualization modules
+  tm_g_distribution(
+    label = "📊 Age Distribution", 
+    dataname = "ADSL",
+    dist_var = data_extract_spec(
+      dataname = "ADSL",
+      select = select_spec(
+        choices = variable_choices("ADSL", "AGE"),
+        selected = "AGE"
+      )
+    ),
+    strata_var = data_extract_spec(
+      dataname = "ADSL", 
+      select = select_spec(
+        choices = variable_choices("ADSL", "ARM"),
+        selected = "ARM"
+      )
+    )
+  ),
+  
+  # Summary analysis module
+  tm_t_summary(
+    label = "📈 Demographics Summary",
+    dataname = "ADSL",
+    summarize_vars = data_extract_spec(
+      dataname = "ADSL",
+      select = select_spec(
+        choices = variable_choices("ADSL", c("AGE", "SEX", "RACE")),
+        selected = c("AGE", "SEX"),
+        multiple = TRUE
+      )
+    ),
+    by_vars = data_extract_spec(
+      dataname = "ADSL",
+      select = select_spec(
+        choices = variable_choices("ADSL", "ARM"),
+        selected = "ARM"
+      )
+    )
+  )
+)
+
+cat("🧩 Application modules defined successfully!\n")
+```
+
+```{webr}
+# Step 3: Create the complete teal application
+clinical_app <- teal::init(
+  data = demo_data,
+  modules = app_modules,
+  title = "Clinical Data Analysis Dashboard",
+  header = "Interactive Clinical Trial Data Explorer",
+  footer = "Powered by the teal framework"
+)
+
+cat("🎯 Complete teal application created!\n")
+cat("📱 Application includes:\n")
+cat("   - Data table for subject-level exploration\n") 
+cat("   - Age distribution visualization by treatment\n")
+cat("   - Demographics summary table\n")
+cat("   - Interactive filtering capabilities\n")
+cat("   - Report generation functionality\n")
+
+# Note: In an interactive R session, you would run:
+# if (interactive()) {
+#   shiny::shinyApp(clinical_app$ui, clinical_app$server)
+# }
+```
+
+### What This Application Provides
+
+#### **Interactive Features:**
+- **📋 Data Table**: Browse and search through subject-level data
+- **📊 Visualizations**: Dynamic plots that update with filtering
+- **🔍 Filtering Panel**: Real-time data subsetting capabilities
+- **📈 Statistical Summaries**: Automated demographic analysis
+- **📄 Report Generation**: Export findings for documentation
+
+#### **User Experience:**
+- **Intuitive Navigation**: Tab-based interface for different analyses
+- **Real-time Updates**: All modules respond instantly to filter changes
+- **Reproducible Code**: Every analysis step is automatically documented
+- **Professional Presentation**: Clean, clinical trial-ready interface
+
+---
+
+## Anatomy of a `teal` App: Key Components & Structure
+
+### Core Architecture Overview
+
+A `teal` application consists of **four fundamental components** that work together to create a powerful, interactive data analysis environment:
+
+```{webr}
+# Demonstrate the core components structure
+library(teal)
+
+# 1. DATA COMPONENT - The foundation
+cat("🏗️  TEAL APPLICATION ARCHITECTURE\n")
+cat("================================\n\n")
+
+cat("1️⃣  DATA LAYER (teal.data)\n")
+cat("   └── teal_data() objects\n")
+cat("   └── Dataset relationships (join_keys)\n") 
+cat("   └── Data preprocessing and validation\n")
+cat("   └── Reproducible data transformations\n\n")
+
+cat("2️⃣  MODULE LAYER (teal.modules.*)\n")
+cat("   └── Pre-built analysis modules\n")
+cat("   └── Custom module development\n")
+cat("   └── Module configuration and parameters\n")
+cat("   └── Interactive UI components\n\n")
+
+cat("3️⃣  APPLICATION LAYER (teal::init)\n")
+cat("   └── Application initialization and configuration\n")
+cat("   └── Module integration\n")
+cat("   └── Global settings and customization\n")
+cat("   └── Security and access control\n\n")
+
+cat("4️⃣  EXECUTION LAYER (Shiny)\n")
+cat("   └── Web-based user interface\n")
+cat("   └── Server-side computation engine\n")
+cat("   └── Real-time interactivity\n")
+cat("   └── Session management\n")
+```
+
+### Component 1: Data Management (`teal.data`)
+
+The data layer provides robust, reproducible data management:
+
+```{webr}
+library(teal.data)
+library(pharmaverseadam)
+
+# Load sample clinical data
+data("adsl", package = "pharmaverseadam")
+data("adae", package = "pharmaverseadam")
+
+# Create a comprehensive teal_data object
+clinical_data <- teal_data()
+clinical_data <- within(clinical_data, {
+  # Subject-level data
+  ADSL <- adsl
+  ADSL$ARM <- as.factor(ADSL$ARM)
+  ADSL$SEX <- as.factor(ADSL$SEX)
+  
+  # Adverse events data  
+  ADAE <- adae
+  ADAE$AESEV <- as.factor(ADAE$AESEV)
+  ADAE$AEREL <- as.factor(ADAE$AEREL)
+  
+  # Create a summary dataset
+  DEMO_SUMMARY <- ADSL %>%
+    group_by(ARM, SEX) %>%
+    summarise(
+      n = n(),
+      mean_age = round(mean(AGE, na.rm = TRUE), 1),
+      .groups = "drop"
+    )
+})
+
+cat("📊 Data Structure:\n")
+cat("   - ADSL: Subject-level data (", nrow(adsl), " subjects)\n")
+cat("   - ADAE: Adverse events (", nrow(adae), " events)\n") 
+cat("   - DEMO_SUMMARY: Demographics summary\n")
+cat("   - Automatic join keys detected for data relationships\n")
+```
+
+### Component 2: Modular Analytics (`teal.modules.*`)
+
+Modules are self-contained analysis components:
+
+```{webr}
+# Demonstrate different types of modules
+library(teal.modules.general)
+
+# Data exploration modules
+data_modules <- teal::modules(
+  label = "📊 Data Exploration",
+  tm_data_table(
+    label = "Raw Data Browser",
+    dataname = "ADSL"
+  ),
+  tm_variable_browser(
+    label = "Variable Explorer", 
+    dataname = "ADSL"
+  )
+)
+
+# Visualization modules
+viz_modules <- teal::modules(
+  label = "📈 Visualizations",
+  tm_g_scatterplot(
+    label = "Scatter Plot Analysis",
+    dataname = "ADSL",
+    x = data_extract_spec(
+      dataname = "ADSL",
+      select = select_spec(
+        choices = variable_choices("ADSL", "AGE"),
+        selected = "AGE"
+      )
+    ),
+    y = data_extract_spec(
+      dataname = "ADSL", 
+      select = select_spec(
+        choices = variable_choices("ADSL", "BMIBL"),
+        selected = "BMIBL"
+      )
+    )
+  ),
+  tm_g_distribution(
+    label = "Distribution Analysis",
+    dataname = "ADSL",
+    dist_var = data_extract_spec(
+      dataname = "ADSL",
+      select = select_spec(
+        choices = variable_choices("ADSL", c("AGE", "BMIBL")),
+        selected = "AGE"
+      )
+    )
+  )
+)
+
+cat("🧩 Module Categories:\n")
+cat("   📊 Data Exploration: Browse and understand your data\n")
+cat("   📈 Visualizations: Create interactive plots and charts\n") 
+cat("   🔬 Statistical Analysis: Perform statistical computations\n")
+cat("   📋 Clinical Modules: Specialized pharmaceutical analyses\n")
+```
+
+### Component 3: Application Integration (`teal::init`)
+
+The initialization layer brings everything together:
+
+```{webr}
+# Create a comprehensive application architecture
+complete_app <- teal::init(
+  # Data foundation
+  data = clinical_data,
+  
+  # Modular structure
+  modules = teal::modules(
+    data_modules,
+    viz_modules
+  ),
+  
+  # Application configuration
+  title = "Clinical Data Analysis Platform",
+  header = "Comprehensive Clinical Trial Data Explorer",
+  footer = "Built with teal framework | Reproducible Analytics"
+)
+
+cat("🎯 Application Architecture:\n")
+cat("   🏗️  Foundation: Robust data management\n")
+cat("   🧩 Modules: Modular analysis components\n")
+cat("   ⚙️  Configuration: Customized user experience\n")
+cat("   🔍 Filtering: Pre-configured analysis context\n")
+cat("   📱 Interface: Professional, intuitive design\n")
+```
+
+This architectural overview demonstrates how `teal` provides a comprehensive, professional framework for interactive data analysis applications, particularly suited for clinical trial and pharmaceutical research contexts.
 
 ## Topic 4: Introduction to `teal.modules.clinical` and anatomy of a module
 
