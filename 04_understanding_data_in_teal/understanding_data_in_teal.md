@@ -9,15 +9,85 @@ Data management is at the heart of every `teal` application. The `teal.data` pac
 
 ---
 
+## Data Flow in `teal` Applications
+
+**Learning Objective:** Understand how data flows from `teal.data` objects through the filter panel to modules.
+
+Understanding data flow is crucial for building effective `teal` applications. Let's trace how data moves through the system:
+
+### The Complete Data Flow
+
+```
+Raw Data → teal.data → Filter Panel → Filtered Data → Modules → Output
+```
+
+### Demonstrating Data Flow with Code
+
+```r
+# Create a complete example showing data flow
+library(teal)
+library(teal.modules.general)
+
+# Step 1: Create data with clear relationships
+demo_data <- cdisc_data()
+demo_data <- within(demo_data, {
+  ADSL <- data.frame(
+    USUBJID = paste0("SUBJ", sprintf("%03d", 1:20)),
+    AGE = c(25, 35, 45, 55, 65, 75, 30, 40, 50, 60, 
+            28, 38, 48, 58, 68, 32, 42, 52, 62, 72),
+    SEX = as.factor(rep(c("M", "F"), 10)),
+    ARM = as.factor(rep(c("Placebo", "Treatment"), each = 10)),
+    SAFFL = "Y"
+  )
+  
+  ADAE <- data.frame(
+    USUBJID = rep(ADSL$USUBJID[1:15], each = 2),  # Only first 15 subjects have AEs
+    AESEQ = rep(1:2, 15),
+    AEDECOD = sample(c("Headache", "Nausea", "Fatigue"), 30, replace = TRUE),
+    AESEV = as.factor(sample(c("MILD", "MODERATE"), 30, replace = TRUE))
+  )
+})
+
+# Step 2: Create teal app to demonstrate data flow
+app <- teal::init(
+  data = demo_data,
+  modules = teal::modules(
+    tm_data_table(
+      label = "ADSL Data",
+      dataname = "ADSL"
+    ),
+    tm_data_table(
+      label = "ADAE Data", 
+      dataname = "ADAE"
+    )
+  )
+)
+
+# Understanding what happens when filters are applied:
+# When you filter ADSL for:
+# - AGE >= 50 (reduces ADSL from 20 to 10 subjects)
+# - SEX == "M" (further reduces to 5 subjects)
+# 
+# The ADAE dataset automatically gets filtered to only show
+# adverse events for those 5 remaining subjects
+# This happens because of the join keys: USUBJID
+
+# Launch the app to see data flow in action
+if (interactive()) {
+  shiny::shinyApp(app$ui, app$server)
+}
+```
+
+---
+
 ## `teal.data` as a Vehicle for User Data
 
-**Learning objective**: Understand `teal` data management and relationships.
+**Learning objective**: Understand `teal` data management prototypes.
 
 The `teal.data` package serves as the foundation for all data operations in `teal`. It provides a structured way to:
 - Store multiple datasets in a single object
 - Track the code used to create or modify data
 - Define relationships between datasets
-- Ensure reproducible analysis workflows
 
 ### Creating Basic `teal_data` Objects
 
@@ -38,7 +108,7 @@ print(my_data)
 
 ### Understanding the `teal_data` Structure
 
-When you create a `teal_data` object, several important things happen:
+When you create a `teal_data` object, `teal` does several things behind the scenes:
 
 1. **Data storage** - Your datasets are stored within the object
 2. **Code tracking** - The creation process is recorded for reproducibility
@@ -68,6 +138,9 @@ my_data <- within(my_data, {
 get_code(my_data)
 ```
 
+This ability is later required by the `teal` modules to generate the reproducible
+code for the analysis.
+
 ---
 
 ## Understanding `join_keys`
@@ -75,9 +148,11 @@ get_code(my_data)
 **Learning Objective:** Master the creation and management of dataset relationships using `join_keys`.
 
 `join_keys` define how datasets relate to each other, which is crucial for:
-- Proper filtering across related datasets
-- Correct data merging in modules
-- Maintaining data integrity in analysis
+- Proper filtering across related datasets (coming back to the first
+  example - filtering on the parent dataset filtered out entries in the child
+  dataset as well!)
+- Correct data merging in modules (`join_key` are used by the modules
+  to merge datasets together)
 
 ### What is the Purpose of `join_keys`?
 
@@ -86,7 +161,6 @@ get_code(my_data)
 1. **Data Relationships** - Define how datasets connect (parent-child relationships)
 2. **Filter Propagation** - Ensure filters apply correctly across related datasets  
 3. **Module Integration** - Help modules understand how to merge data correctly
-4. **Data Integrity** - Prevent incorrect joins that could lead to wrong results
 
 ### How to Create `join_keys` Manually
 
@@ -434,48 +508,107 @@ create_clinical_data <- function(raw_adsl, raw_adae) {
 
 ---
 
-## Data Flow in `teal` Applications
+## Data Flow in `teal` Applications Continued
 
-**Learning Objective:** Understand how data flows from `teal.data` objects through the filter panel to modules.
+### Overwriting Automatic Join Keys in `cdisc_data`
 
-Understanding data flow is crucial for building effective `teal` applications. Let's trace how data moves through the system:
+**Learning Objective:** Understand how to modify the automatic join keys of a `cdisc_data` object to customize dataset relationships.
 
-### The Complete Data Flow
-
-```
-Raw Data → teal.data → Filter Panel → Filtered Data → Modules → Output
-```
-
-### Demonstrating Data Flow with Code
+Sometimes the automatic join key detection in `cdisc_data()` doesn't match your specific needs. Here's how to override the default behavior:
 
 ```r
-# Create a complete example showing data flow
 library(teal)
 library(teal.modules.general)
+library(teal.data)
 
-# Step 1: Create data with clear relationships
-demo_data <- cdisc_data()
-demo_data <- within(demo_data, {
+# Step 1: Create datasets with CDISC structure
+create_cdisc_datasets <- function() {
+  # ADSL with standard CDISC variables
   ADSL <- data.frame(
-    USUBJID = paste0("SUBJ", sprintf("%03d", 1:20)),
-    AGE = c(25, 35, 45, 55, 65, 75, 30, 40, 50, 60, 
-            28, 38, 48, 58, 68, 32, 42, 52, 62, 72),
-    SEX = as.factor(rep(c("M", "F"), 10)),
-    ARM = as.factor(rep(c("Placebo", "Treatment"), each = 10)),
+    STUDYID = rep("STUDY001", 30),
+    USUBJID = paste0("SUBJ", sprintf("%03d", 1:30)),
+    SUBJID = sprintf("%03d", 1:30),
+    SITEID = sample(paste0("SITE", sprintf("%02d", 1:5)), 30, replace = TRUE),
+    AGE = sample(18:80, 30, replace = TRUE),
+    SEX = as.factor(sample(c("M", "F"), 30, replace = TRUE)),
+    ARM = as.factor(sample(c("Placebo", "Treatment A", "Treatment B"), 30, replace = TRUE)),
     SAFFL = "Y"
   )
   
+  # ADAE with additional sequence variable
+  n_aes <- 90
   ADAE <- data.frame(
-    USUBJID = rep(ADSL$USUBJID[1:15], each = 2),  # Only first 15 subjects have AEs
-    AESEQ = rep(1:2, 15),
-    AEDECOD = sample(c("Headache", "Nausea", "Fatigue"), 30, replace = TRUE),
-    AESEV = as.factor(sample(c("MILD", "MODERATE"), 30, replace = TRUE))
+    STUDYID = rep("STUDY001", n_aes),
+    USUBJID = sample(ADSL$USUBJID, n_aes, replace = TRUE),
+    SUBJID = sample(ADSL$SUBJID, n_aes, replace = TRUE),
+    SITEID = sample(ADSL$SITEID, n_aes, replace = TRUE),
+    AESEQ = sequence(table(sample(ADSL$USUBJID, n_aes, replace = TRUE))),
+    AEDECOD = sample(c("Headache", "Nausea", "Fatigue", "Dizziness"), n_aes, replace = TRUE),
+    AESEV = as.factor(sample(c("MILD", "MODERATE", "SEVERE"), n_aes, replace = TRUE)),
+    SAFFL = "Y"
   )
-})
+  
+  # ADCM (Concomitant Medications) with different structure
+  n_cms <- 60
+  ADCM <- data.frame(
+    STUDYID = rep("STUDY001", n_cms),
+    USUBJID = sample(ADSL$USUBJID, n_cms, replace = TRUE),
+    SUBJID = sample(ADSL$SUBJID, n_cms, replace = TRUE),
+    CMSEQ = sequence(table(sample(ADSL$USUBJID, n_cms, replace = TRUE))),
+    CMDECOD = sample(c("Aspirin", "Ibuprofen", "Acetaminophen"), n_cms, replace = TRUE),
+    CMCLAS = sample(c("ANALGESICS", "ANTI-INFLAMMATORY"), n_cms, replace = TRUE),
+    SAFFL = "Y"
+  )
+  
+  return(list(ADSL = ADSL, ADAE = ADAE, ADCM = ADCM))
+}
 
-# Step 2: Create teal app to demonstrate data flow
-app <- teal::init(
-  data = demo_data,
+# Step 2: Create cdisc_data with automatic join keys
+datasets <- create_cdisc_datasets()
+auto_data <- cdisc_data(
+  ADSL = datasets$ADSL,
+  ADAE = datasets$ADAE,
+  ADCM = datasets$ADCM
+)
+
+# View automatic join keys
+cat("Automatic join keys:\n")
+print(join_keys(auto_data))
+
+# Step 3: Define custom join keys
+# Let's say we want to use different joining variables or add additional relationships
+custom_keys <- join_keys(
+  # Primary keys for each dataset
+  join_key("ADSL", "ADSL", c("STUDYID", "USUBJID")),
+  join_key("ADAE", "ADAE", c("STUDYID", "USUBJID", "AESEQ")),
+  join_key("ADCM", "ADCM", c("STUDYID", "USUBJID", "CMSEQ")),
+  
+  # Relationships between datasets
+  join_key("ADSL", "ADAE", c("STUDYID", "USUBJID")),
+  join_key("ADSL", "ADCM", c("STUDYID", "USUBJID")),
+  
+  # Custom: Allow direct relationship between ADAE and ADCM
+  # This might be useful for analyzing AEs and concomitant medications together
+  join_key("ADAE", "ADCM", c("STUDYID", "USUBJID"))
+)
+
+# Step 4: Create cdisc_data with custom join keys
+custom_data <- cdisc_data(
+  ADSL = datasets$ADSL,
+  ADAE = datasets$ADAE,
+  ADCM = datasets$ADCM
+)
+
+# Override the automatic join keys
+join_keys(custom_data) <- custom_keys
+
+# View the custom join keys
+cat("\nCustom join keys:\n")
+print(join_keys(custom_data))
+
+# Step 5: Compare the difference in a teal application
+app_with_custom_keys <- teal::init(
+  data = custom_data,
   modules = teal::modules(
     tm_data_table(
       label = "ADSL Data",
@@ -484,25 +617,67 @@ app <- teal::init(
     tm_data_table(
       label = "ADAE Data", 
       dataname = "ADAE"
+    ),
+    tm_data_table(
+      label = "ADCM Data",
+      dataname = "ADCM"
+    ),
+    tm_variable_browser(
+      label = "Variable Browser",
+      dataname = "ADSL"
     )
   )
 )
 
-# Understanding what happens when filters are applied:
-# When you filter ADSL for:
-# - AGE >= 50 (reduces ADSL from 20 to 10 subjects)
-# - SEX == "M" (further reduces to 5 subjects)
-# 
-# The ADAE dataset automatically gets filtered to only show
-# adverse events for those 5 remaining subjects
-# This happens because of the join keys: USUBJID
+# Understanding the impact of custom join keys:
+# 1. The filter panel will show all three datasets
+# 2. Filtering ADSL will affect both ADAE and ADCM (as expected)
+# 3. Filtering ADAE will also affect ADCM due to our custom relationship
+# 4. This allows for more complex filtering scenarios
 
-# Launch the app to see data flow in action
+# Launch the app to see custom join keys in action
 if (interactive()) {
-  shiny::shinyApp(app$ui, app$server)
+  shiny::shinyApp(app_with_custom_keys$ui, app_with_custom_keys$server)
 }
 ```
 
+This example demonstrates how to override automatic join keys in `cdisc_data` objects, providing you with complete control over how datasets relate to each other in your `teal` applications. The custom relationships affect filtering behavior and merging behaviour inside
+the modules.
+
+### Advanced Join Key Customization
+
+```r
+# Example: Creating conditional or site-specific relationships
+create_advanced_join_keys <- function() {
+  # Sometimes you need more complex relationships
+  # For example, linking datasets only within the same site
+  
+  advanced_keys <- join_keys(
+    # Standard primary keys
+    join_key("ADSL", "ADSL", c("STUDYID", "USUBJID")),
+    join_key("ADAE", "ADAE", c("STUDYID", "USUBJID", "AESEQ")),
+    join_key("ADCM", "ADCM", c("STUDYID", "USUBJID", "CMSEQ")),
+    
+    # Site-aware relationships (include SITEID in joins)
+    join_key("ADSL", "ADAE", c("STUDYID", "USUBJID", "SITEID")),
+    join_key("ADSL", "ADCM", c("STUDYID", "USUBJID", "SITEID"))
+  )
+  
+  return(advanced_keys)
+}
+
+# Apply advanced join keys
+advanced_keys <- create_advanced_join_keys()
+advanced_data <- custom_data  # Start with our existing data
+join_keys(advanced_data) <- advanced_keys
+
+cat("\nAdvanced join keys (site-aware):\n")
+print(join_keys(advanced_data))
+
+# This approach ensures that:
+# - AEs are only linked to subjects from the same site
+# - Concomitant medications are only linked to subjects from the same site
+```
 ---
 
 ## Handling Large Datasets - Performance Considerations
@@ -548,22 +723,4 @@ create_development_sample <- function(data_obj, sample_size = 1000) {
   return(data_obj)
 }
 
-# Strategy 3: Memory monitoring
-check_data_size <- function(data_obj) {
-  total_size <- 0
-  
-  for (name in names(data_obj@data)) {
-    dataset <- data_obj[[name]]
-    size_mb <- as.numeric(object.size(dataset)) / 1024^2
-    cat(sprintf("Dataset %s: %.2f MB (%d rows, %d cols)\n", 
-                name, size_mb, nrow(dataset), ncol(dataset)))
-    total_size <- total_size + size_mb
-  }
-  
-  cat(sprintf("Total data size: %.2f MB\n", total_size))
-  return(total_size)
-}
-
-# Usage
-# check_data_size(clinical_data)
 ```
