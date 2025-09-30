@@ -1,79 +1,107 @@
 [
   {
-    "objectID": "index.html#foreword",
-    "href": "index.html#foreword",
+    "objectID": "README.html",
+    "href": "README.html",
+    "title": "Interactive Data Visualisation Using the Teal Framework",
+    "section": "",
+    "text": "A hands-on workshop at Phuse EU 2025 sponsored by Appsilon\n\nPresented by Peyman Eshghi, Konrad Pagacz and André Veríssimo\nFind out more at Phuse EU Connect 2025 webpage\n\n\nParticipants will engage in collaborative activities aimed at enhancing their understanding of the Teal framework. The workshop will be structured based on valuable feedback gathered from leaders during cross-industry discussions in forums such as the PHUSE Working Groups.\nWith increasing interest from regulatory agencies in promoting data transparency and accessibility, this workshop will provide a platform to showcase practical applications of the Teal framework while ensuring alignment with regulatory expectations. Our presentation at the PHUSE CSS in May highlights the relevance of this topic in ongoing industry conversations.\nWe welcome participants from various industry backgrounds to join us at the PHUSE EU Connect for this engaging workshop. Attendees will be guided through both beginner and advanced examples of creating interactive visualisations using Teal. They will learn how to build a Teal app with integrated modules and develop customised modules to address more complex scenarios.\nMoreover, the workshop will review the Teal roadmap and discuss the prioritisation of future features. If time allows, we will host a mini-hackathon, where attendees can actively contribute to Teal’s development by enhancing documentation or adding new modules to existing Teal packages.\nThis interactive experience promises to foster learning and collaboration while advancing skills in data visualisation.\n\n\n\n\n\n\nOverview & Objectives\nIntroduction to teal: What is teal? Why use it?\nInstallation & Setup: Quick walkthrough to get started\nCode Sample: Demonstration of a simple teal app\nAnatomy of a teal App: Key components & structure\n\n\n\n\nIntroduction to teal.modules.clinical and anatomy of a module (15 minutes)\nDeeper dive into how to provide and pre-process data in teal.modules.clinical (15 minutes)\nDeeper dive into customizing the parameters of teal.modules.clinical modules (10 minutes)\n\n\n\n\n\nStep-by-step Development: Building your own teal modules\nBest Practices: Tips for effective customization\nData Integration: Incorporating custom data processing inside modules\n\n\n\n\n\nFuture Directions: Upcoming features and plans for teal\nDiscussion & Q&A: Open floor for questions, insights, and sharing experiences"
+  },
+  {
+    "objectID": "README.html#description",
+    "href": "README.html#description",
+    "title": "Interactive Data Visualisation Using the Teal Framework",
+    "section": "",
+    "text": "Participants will engage in collaborative activities aimed at enhancing their understanding of the Teal framework. The workshop will be structured based on valuable feedback gathered from leaders during cross-industry discussions in forums such as the PHUSE Working Groups.\nWith increasing interest from regulatory agencies in promoting data transparency and accessibility, this workshop will provide a platform to showcase practical applications of the Teal framework while ensuring alignment with regulatory expectations. Our presentation at the PHUSE CSS in May highlights the relevance of this topic in ongoing industry conversations.\nWe welcome participants from various industry backgrounds to join us at the PHUSE EU Connect for this engaging workshop. Attendees will be guided through both beginner and advanced examples of creating interactive visualisations using Teal. They will learn how to build a Teal app with integrated modules and develop customised modules to address more complex scenarios.\nMoreover, the workshop will review the Teal roadmap and discuss the prioritisation of future features. If time allows, we will host a mini-hackathon, where attendees can actively contribute to Teal’s development by enhancing documentation or adding new modules to existing Teal packages.\nThis interactive experience promises to foster learning and collaboration while advancing skills in data visualisation."
+  },
+  {
+    "objectID": "README.html#agenda",
+    "href": "README.html#agenda",
+    "title": "Interactive Data Visualisation Using the Teal Framework",
+    "section": "",
+    "text": "Overview & Objectives\nIntroduction to teal: What is teal? Why use it?\nInstallation & Setup: Quick walkthrough to get started\nCode Sample: Demonstration of a simple teal app\nAnatomy of a teal App: Key components & structure\n\n\n\n\nIntroduction to teal.modules.clinical and anatomy of a module (15 minutes)\nDeeper dive into how to provide and pre-process data in teal.modules.clinical (15 minutes)\nDeeper dive into customizing the parameters of teal.modules.clinical modules (10 minutes)\n\n\n\n\n\nStep-by-step Development: Building your own teal modules\nBest Practices: Tips for effective customization\nData Integration: Incorporating custom data processing inside modules\n\n\n\n\n\nFuture Directions: Upcoming features and plans for teal\nDiscussion & Q&A: Open floor for questions, insights, and sharing experiences"
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Interactive Data Visualisation Using the Teal Framework",
+    "section": "",
+    "text": "A hands-on workshop at Phuse EU 2025 sponsored by Appsilon\n\nPresented by Peyman Eshghi, Konrad Pagacz and André Veríssimo\nFind out more at Phuse EU Connect 2025 webpage\n\n\nParticipants will engage in collaborative activities aimed at enhancing their understanding of the Teal framework. The workshop will be structured based on valuable feedback gathered from leaders during cross-industry discussions in forums such as the PHUSE Working Groups.\nWith increasing interest from regulatory agencies in promoting data transparency and accessibility, this workshop will provide a platform to showcase practical applications of the Teal framework while ensuring alignment with regulatory expectations. Our presentation at the PHUSE CSS in May highlights the relevance of this topic in ongoing industry conversations.\nWe welcome participants from various industry backgrounds to join us at the PHUSE EU Connect for this engaging workshop. Attendees will be guided through both beginner and advanced examples of creating interactive visualisations using Teal. They will learn how to build a Teal app with integrated modules and develop customised modules to address more complex scenarios.\nMoreover, the workshop will review the Teal roadmap and discuss the prioritisation of future features. If time allows, we will host a mini-hackathon, where attendees can actively contribute to Teal’s development by enhancing documentation or adding new modules to existing Teal packages.\nThis interactive experience promises to foster learning and collaboration while advancing skills in data visualisation.\n\n\n\n\n\n\nOverview & Objectives\nIntroduction to teal: What is teal? Why use it?\nInstallation & Setup: Quick walkthrough to get started\nCode Sample: Demonstration of a simple teal app\nAnatomy of a teal App: Key components & structure\n\n\n\n\nIntroduction to teal.modules.clinical and anatomy of a module (15 minutes)\nDeeper dive into how to provide and pre-process data in teal.modules.clinical (15 minutes)\nDeeper dive into customizing the parameters of teal.modules.clinical modules (10 minutes)\n\n\n\n\n\nStep-by-step Development: Building your own teal modules\nBest Practices: Tips for effective customization\nData Integration: Incorporating custom data processing inside modules\n\n\n\n\n\nFuture Directions: Upcoming features and plans for teal\nDiscussion & Q&A: Open floor for questions, insights, and sharing experiences"
+  },
+  {
+    "objectID": "index.html#description",
+    "href": "index.html#description",
+    "title": "Interactive Data Visualisation Using the Teal Framework",
+    "section": "",
+    "text": "Participants will engage in collaborative activities aimed at enhancing their understanding of the Teal framework. The workshop will be structured based on valuable feedback gathered from leaders during cross-industry discussions in forums such as the PHUSE Working Groups.\nWith increasing interest from regulatory agencies in promoting data transparency and accessibility, this workshop will provide a platform to showcase practical applications of the Teal framework while ensuring alignment with regulatory expectations. Our presentation at the PHUSE CSS in May highlights the relevance of this topic in ongoing industry conversations.\nWe welcome participants from various industry backgrounds to join us at the PHUSE EU Connect for this engaging workshop. Attendees will be guided through both beginner and advanced examples of creating interactive visualisations using Teal. They will learn how to build a Teal app with integrated modules and develop customised modules to address more complex scenarios.\nMoreover, the workshop will review the Teal roadmap and discuss the prioritisation of future features. If time allows, we will host a mini-hackathon, where attendees can actively contribute to Teal’s development by enhancing documentation or adding new modules to existing Teal packages.\nThis interactive experience promises to foster learning and collaboration while advancing skills in data visualisation."
+  },
+  {
+    "objectID": "index.html#agenda",
+    "href": "index.html#agenda",
+    "title": "Interactive Data Visualisation Using the Teal Framework",
+    "section": "",
+    "text": "Overview & Objectives\nIntroduction to teal: What is teal? Why use it?\nInstallation & Setup: Quick walkthrough to get started\nCode Sample: Demonstration of a simple teal app\nAnatomy of a teal App: Key components & structure\n\n\n\n\nIntroduction to teal.modules.clinical and anatomy of a module (15 minutes)\nDeeper dive into how to provide and pre-process data in teal.modules.clinical (15 minutes)\nDeeper dive into customizing the parameters of teal.modules.clinical modules (10 minutes)\n\n\n\n\n\nStep-by-step Development: Building your own teal modules\nBest Practices: Tips for effective customization\nData Integration: Incorporating custom data processing inside modules\n\n\n\n\n\nFuture Directions: Upcoming features and plans for teal\nDiscussion & Q&A: Open floor for questions, insights, and sharing experiences"
+  },
+  {
+    "objectID": "presentation.html#foreword",
+    "href": "presentation.html#foreword",
     "title": "Interactive Data Visualisation Using the Teal Framework",
     "section": "Foreword",
     "text": "Foreword\nThis is a draft of the workshops for the PHUSE EU Connect 2025 event.\nThe workshops lasts for 90 minutes, is intended for statistical programmers as well as everyone else interested in learning about how teal can help them with interactive data visualization for clinical trials.\nAll the code samples mentioned in the draft should be available via the POSIT Cloud project."
   },
   {
-    "objectID": "index.html#overview-objectives",
-    "href": "index.html#overview-objectives",
+    "objectID": "presentation.html#topic-1-introduction-to-teal-5-minutes",
+    "href": "presentation.html#topic-1-introduction-to-teal-5-minutes",
     "title": "Interactive Data Visualisation Using the Teal Framework",
-    "section": "Overview & Objectives",
-    "text": "Overview & Objectives\nWelcome to the Interactive Data Visualisation Using the Teal Framework workshop! This comprehensive training will guide you through the powerful capabilities of the teal framework for creating interactive data analysis applications.\nLearning Objectives\nBy the end of this workshop, you will be able to:\n\nUnderstand what teal is and why it’s valuable for data analysis\nInstall and configure the teal framework and its dependencies\n\nCreate basic teal applications from scratch\nRecognize the key components and structure of teal applications\nLaunch and customize pre-built modules from teal.modules.general and teal.modules.clinical\nManage data effectively using teal.data and understand data relationships\nUtilize advanced features like filtering, reporting, and bookmarking\nDevelop custom teal modules for specialized analysis needs"
+    "section": "Topic 1: Introduction to teal (5 minutes)",
+    "text": "Topic 1: Introduction to teal (5 minutes)\n\nTODO\n\n\nWhat is teal?\nWhat teal can be used for?\nWhat is the teal framework - other packages from the teal family."
   },
   {
-    "objectID": "index.html#introduction-to-teal",
-    "href": "index.html#introduction-to-teal",
+    "objectID": "presentation.html#topic-2-how-to-install-the-teal-framework-2-minutes",
+    "href": "presentation.html#topic-2-how-to-install-the-teal-framework-2-minutes",
     "title": "Interactive Data Visualisation Using the Teal Framework",
-    "section": "Introduction to teal",
-    "text": "Introduction to teal\nWhat is teal?\nteal is a powerful R framework designed to streamline the development of interactive data analysis applications. Built on top of Shiny, teal provides a modular, standardized approach to creating sophisticated data exploration and visualization tools.\nKey Characteristics of teal:\n\n🧩 Modular Architecture: Build applications using reusable, interchangeable components\n🔄 Reproducible Analytics: Maintain complete analysis reproducibility with built-in code tracking\n👥 User-Friendly Interface: Intuitive design accessible to both developers and end-users\n🏥 Clinical Focus: Specialized modules for pharmaceutical and clinical trial data analysis\n📊 Interactive Exploration: Real-time data filtering, visualization, and analysis capabilities\n\nWhy Use teal?\n1. Accelerated Development\n\nPre-built modules for common analysis tasks reduce development time\nStandardized framework ensures consistent application structure\nPlug-and-play architecture allows rapid prototyping and iteration\n\n2. Enhanced Reproducibility\n\nAutomatic code generation for all analysis steps\nBuilt-in version tracking of data transformations and analysis parameters\nComplete audit trail for regulatory and scientific compliance\n\n3. Clinical Data Expertise\n\nCDISC/ADaM integration with specialized data handling\nPharmaceutical workflows designed for clinical trial analysis\nRegulatory compliance features for submission-ready documentation\n\n4. Collaborative Analytics\n\nShared analysis environments for team-based data exploration\nReport generation for communicating findings\nFilter state management for consistent analysis contexts\n\n5. Scalable Architecture\n\nModular design supports applications from simple to enterprise-scale\nPerformance optimization for large datasets\nFlexible deployment options from local to cloud environments"
+    "section": "Topic 2: How to install the teal framework? (2 minutes)",
+    "text": "Topic 2: How to install the teal framework? (2 minutes)\n\nTODO\n\n\nInstallation of teal and its dependencies - code samples"
   },
   {
-    "objectID": "index.html#installation-setup",
-    "href": "index.html#installation-setup",
+    "objectID": "presentation.html#topic-3-launching-a-simple-teal-application-7-minutes",
+    "href": "presentation.html#topic-3-launching-a-simple-teal-application-7-minutes",
     "title": "Interactive Data Visualisation Using the Teal Framework",
-    "section": "Installation & Setup",
-    "text": "Installation & Setup\nQuick Walkthrough to Get Started\nStep 1: Install Core Packages\n\n\n\n\n\n\n\n\nStep 2: Load Required Libraries\n\n\n\n\n\n\n\n\nStep 3: Verify Installation with Example"
+    "section": "Topic 3: Launching a simple teal application (7 minutes)",
+    "text": "Topic 3: Launching a simple teal application (7 minutes)\n\n✅\n\n\nLaunching a simple teal application - code samples\nAnatomy of a teal application - code samples:\n\nteal data\nteal"
   },
   {
-    "objectID": "index.html#code-sample-demonstration-of-a-simple-teal-app",
-    "href": "index.html#code-sample-demonstration-of-a-simple-teal-app",
+    "objectID": "presentation.html#topic-4-introduction-to-teal.modules.clinical-and-anatomy-of-a-module-15-minutes",
+    "href": "presentation.html#topic-4-introduction-to-teal.modules.clinical-and-anatomy-of-a-module-15-minutes",
     "title": "Interactive Data Visualisation Using the Teal Framework",
-    "section": "Code Sample: Demonstration of a Simple teal App",
-    "text": "Code Sample: Demonstration of a Simple teal App\nBasic teal Application\nLet’s create a complete, functional teal application step by step:\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nWhat This Application Provides\nInteractive Features:\n\n📋 Data Table: Browse and search through subject-level data\n📊 Visualizations: Dynamic plots that update with filtering\n🔍 Filtering Panel: Real-time data subsetting capabilities\n📈 Statistical Summaries: Automated demographic analysis\n📄 Report Generation: Export findings for documentation\n\nUser Experience:\n\nIntuitive Navigation: Tab-based interface for different analyses\nReal-time Updates: All modules respond instantly to filter changes\nReproducible Code: Every analysis step is automatically documented\nProfessional Presentation: Clean, clinical trial-ready interface"
+    "section": "Topic 4: Introduction to teal.modules.clinical and anatomy of a module (15 minutes)",
+    "text": "Topic 4: Introduction to teal.modules.clinical and anatomy of a module (15 minutes)\n\n✅\n\n\nWhat is teal.modules.clinical?\nLaunching a simple teal.modules.clinical application - code samples\nAnatomy of a teal.modules.clinical module:\n\nmain output\nencoding panel\nfilter panel\nShow R Code button"
   },
   {
-    "objectID": "index.html#anatomy-of-a-teal-app-key-components-structure",
-    "href": "index.html#anatomy-of-a-teal-app-key-components-structure",
+    "objectID": "presentation.html#topic-5-deeper-dive-into-how-to-provide-and-pre-process-data-in-teal.modules.clinical-15-minutes",
+    "href": "presentation.html#topic-5-deeper-dive-into-how-to-provide-and-pre-process-data-in-teal.modules.clinical-15-minutes",
     "title": "Interactive Data Visualisation Using the Teal Framework",
-    "section": "Anatomy of a teal App: Key Components & Structure",
-    "text": "Anatomy of a teal App: Key Components & Structure\nCore Architecture Overview\nA teal application consists of four fundamental components that work together to create a powerful, interactive data analysis environment:\n\n\n\n\n\n\n\n\nComponent 1: Data Management (teal.data)\nThe data layer provides robust, reproducible data management:\n\n\n\n\n\n\n\n\nComponent 2: Modular Analytics (teal.modules.*)\nModules are self-contained analysis components:\n\n\n\n\n\n\n\n\nComponent 3: Application Integration (teal::init)\nThe initialization layer brings everything together:\n\n\n\n\n\n\n\n\nThis architectural overview demonstrates how teal provides a comprehensive, professional framework for interactive data analysis applications, particularly suited for clinical trial and pharmaceutical research contexts."
+    "section": "Topic 5: Deeper dive into how to provide and pre-process data in teal.modules.clinical (15 minutes)",
+    "text": "Topic 5: Deeper dive into how to provide and pre-process data in teal.modules.clinical (15 minutes)\n\nPartially covered (3 of the bullet points)\n\n\nHow to provide data to a teal application? - code samples\nIntroduction to teal.data in the context of the CDISC data standard\nIntroduction to the concept of keys in teal.data\nCreating a custom teal.data object with custom user-defined keys - code samples\nPreprocessing data - code samples\n\nCode samples should reuse the application code from the previous topic to put the new information in the context of something already familiar.\nWe want to support the following scenarios that app developers face: * providing custom non-CDISC data to a teal.modules.clinical application * pre-processing data to create new variables, filter data or make summaries"
   },
   {
-    "objectID": "index.html#topic-4-introduction-to-teal.modules.clinical-and-anatomy-of-a-module",
-    "href": "index.html#topic-4-introduction-to-teal.modules.clinical-and-anatomy-of-a-module",
+    "objectID": "presentation.html#topic-6-deeper-dive-into-customizing-the-parameters-of-teal.modules.clinical-modules-10-minutes",
+    "href": "presentation.html#topic-6-deeper-dive-into-customizing-the-parameters-of-teal.modules.clinical-modules-10-minutes",
     "title": "Interactive Data Visualisation Using the Teal Framework",
-    "section": "Topic 4: Introduction to teal.modules.clinical and anatomy of a module",
-    "text": "Topic 4: Introduction to teal.modules.clinical and anatomy of a module\n\n(15 minutes) · status: ✅\n\n\nWhat is teal.modules.clinical?\nLaunching a simple teal.modules.clinical application - code samples\nAnatomy of a teal.modules.clinical module:\n\nmain output\nencoding panel\nfilter panel\nShow R Code button"
+    "section": "Topic 6: Deeper dive into customizing the parameters of teal.modules.clinical modules (10 minutes)",
+    "text": "Topic 6: Deeper dive into customizing the parameters of teal.modules.clinical modules (10 minutes)\n\nTODO @averissimo – But first rethink on this topic\n\n\nIntroduction to choices_selected - code samples\nParametrising choices_selected for different results:\n\nchoices_selected with variable_choices - code samples\nchoices_selected with delayed evaluation - code samples\nchoices_selected with eager evaluation and limited values - code samples (* Introduction to data_extract_spec - I am hesitant on this one because I received information the data_extract_spec will be reworked in the coming months and also it’s not widely used inside teal.modules.clinical).\n\n\nCode samples should reuse the application code from the previous topic to put the new information in the context of something already familiar.\nWe want to cover the following scenarios that app developers face: * limiting the choices of variables in an input to a module * providing choices to an input inside a module without knowing the dataset (simulating dataset being downloaded from somewhere interactively) * changing the dataset that is used by a module"
   },
   {
-    "objectID": "index.html#topic-5-deeper-dive-into-how-to-provide-and-pre-process-data-in-teal.modules.clinical",
-    "href": "index.html#topic-5-deeper-dive-into-how-to-provide-and-pre-process-data-in-teal.modules.clinical",
+    "objectID": "presentation.html#topic-7-creating-custom-teal-modules-20-minutes",
+    "href": "presentation.html#topic-7-creating-custom-teal-modules-20-minutes",
     "title": "Interactive Data Visualisation Using the Teal Framework",
-    "section": "Topic 5: Deeper dive into how to provide and pre-process data in teal.modules.clinical",
-    "text": "Topic 5: Deeper dive into how to provide and pre-process data in teal.modules.clinical\n\n(15 minutes) · status: Partially covered (3 of the bullet points)\n\n\nHow to provide data to a teal application? - code samples\nIntroduction to teal.data in the context of the CDISC data standard\nIntroduction to the concept of keys in teal.data\nCreating a custom teal.data object with custom user-defined keys - code samples\nPreprocessing data - code samples\n\nCode samples should reuse the application code from the previous topic to put the new information in the context of something already familiar.\nWe want to support the following scenarios that app developers face: * providing custom non-CDISC data to a teal.modules.clinical application * pre-processing data to create new variables, filter data or make summaries"
+    "section": "Topic 7: Creating custom teal modules (20 minutes)",
+    "text": "Topic 7: Creating custom teal modules (20 minutes)\n\nTODO @averissimo\n\n\nWhen to create a custom teal module?\nCreating a custom teal module:\n\nUI function\nServer function\nCustom teal module arguments - data, reporter, filtering API"
   },
   {
-    "objectID": "index.html#topic-6-deeper-dive-into-customizing-the-parameters-of-teal.modules.clinical-modules",
-    "href": "index.html#topic-6-deeper-dive-into-customizing-the-parameters-of-teal.modules.clinical-modules",
+    "objectID": "presentation.html#topic-8-discussion-and-qa-whats-left",
+    "href": "presentation.html#topic-8-discussion-and-qa-whats-left",
     "title": "Interactive Data Visualisation Using the Teal Framework",
-    "section": "Topic 6: Deeper dive into customizing the parameters of teal.modules.clinical modules",
-    "text": "Topic 6: Deeper dive into customizing the parameters of teal.modules.clinical modules\n\n(10 minutes) · status: TODO @averissimo – But first rethink on this topic\n\n\nIntroduction to choices_selected - code samples\nParametrising choices_selected for different results:\n\nchoices_selected with variable_choices - code samples\nchoices_selected with delayed evaluation - code samples\nchoices_selected with eager evaluation and limited values - code samples (* Introduction to data_extract_spec - I am hesitant on this one because I received information the data_extract_spec will be reworked in the coming months and also it’s not widely used inside teal.modules.clinical).\n\n\nCode samples should reuse the application code from the previous topic to put the new information in the context of something already familiar.\nWe want to cover the following scenarios that app developers face: * limiting the choices of variables in an input to a module * providing choices to an input inside a module without knowing the dataset (simulating dataset being downloaded from somewhere interactively) * changing the dataset that is used by a module"
-  },
-  {
-    "objectID": "index.html#topic-7-creating-custom-teal-modules",
-    "href": "index.html#topic-7-creating-custom-teal-modules",
-    "title": "Interactive Data Visualisation Using the Teal Framework",
-    "section": "Topic 7: Creating custom teal modules",
-    "text": "Topic 7: Creating custom teal modules\n\n(20 minutes) · status: TODO @averissimo\n\n\nWhen to create a custom teal module?\nCreating a custom teal module:\n\nUI function\nServer function\nCustom teal module arguments - data, reporter, filtering API"
-  },
-  {
-    "objectID": "index.html#topic-8-discussion-and-qa",
-    "href": "index.html#topic-8-discussion-and-qa",
-    "title": "Interactive Data Visualisation Using the Teal Framework",
-    "section": "Topic 8: Discussion and QA",
-    "text": "Topic 8: Discussion and QA\n\n(what’s left)"
+    "section": "Topic 8: Discussion and QA (what’s left)",
+    "text": "Topic 8: Discussion and QA (what’s left)"
   }
 ]
