@@ -2,14 +2,18 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://phuse-org.github.io/teal-enhancements/README.html</loc>
-    <lastmod>2025-09-30T23:38:07.867Z</lastmod>
+    <lastmod>2025-10-07T07:39:02.303Z</lastmod>
   </url>
   <url>
     <loc>https://phuse-org.github.io/teal-enhancements/index.html</loc>
-    <lastmod>2025-09-30T23:38:07.872Z</lastmod>
+    <lastmod>2025-10-07T07:39:02.319Z</lastmod>
+  </url>
+  <url>
+    <loc>https://phuse-org.github.io/teal-enhancements/exercises/exercise_7/create_teal_module.html</loc>
+    <lastmod>2025-10-07T07:39:02.318Z</lastmod>
   </url>
   <url>
     <loc>https://phuse-org.github.io/teal-enhancements/presentation.html</loc>
-    <lastmod>2025-09-30T23:38:07.872Z</lastmod>
+    <lastmod>2025-10-07T07:39:02.319Z</lastmod>
   </url>
 </urlset>

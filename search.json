@@ -42,6 +42,69 @@
     "text": "Overview & Objectives\nIntroduction to teal: What is teal? Why use it?\nInstallation & Setup: Quick walkthrough to get started\nCode Sample: Demonstration of a simple teal app\nAnatomy of a teal App: Key components & structure\n\n\n\n\nIntroduction to teal.modules.clinical and anatomy of a module (15 minutes)\nDeeper dive into how to provide and pre-process data in teal.modules.clinical (15 minutes)\nDeeper dive into customizing the parameters of teal.modules.clinical modules (10 minutes)\n\n\n\n\n\nStep-by-step Development: Building your own teal modules\nBest Practices: Tips for effective customization\nData Integration: Incorporating custom data processing inside modules\n\n\n\n\n\nFuture Directions: Upcoming features and plans for teal\nDiscussion & Q&A: Open floor for questions, insights, and sharing experiences"
   },
   {
+    "objectID": "exercises/exercise_7/create_teal_module.html",
+    "href": "exercises/exercise_7/create_teal_module.html",
+    "title": "Interactive Data Visualisation Using the Teal Framework",
+    "section": "",
+    "text": "A teal module consists of two main components, similar to a Shiny module:\n\nUI function - defines the user interface\nServer function - contains the server logic\n\nThe key difference from a standard Shiny module is that the server function now has a data parameter:\n\nThis parameter is reactive and contains a teal_data object\nThe teal_data object holds all the datasets available in the teal application\nAccess datasets using data()[[\"dataset_name\"]]"
+  },
+  {
+    "objectID": "exercises/exercise_7/create_teal_module.html#how-to-create-a-teal-module",
+    "href": "exercises/exercise_7/create_teal_module.html#how-to-create-a-teal-module",
+    "title": "Interactive Data Visualisation Using the Teal Framework",
+    "section": "",
+    "text": "A teal module consists of two main components, similar to a Shiny module:\n\nUI function - defines the user interface\nServer function - contains the server logic\n\nThe key difference from a standard Shiny module is that the server function now has a data parameter:\n\nThis parameter is reactive and contains a teal_data object\nThe teal_data object holds all the datasets available in the teal application\nAccess datasets using data()[[\"dataset_name\"]]"
+  },
+  {
+    "objectID": "exercises/exercise_7/create_teal_module.html#basic-structure-of-a-teal_module",
+    "href": "exercises/exercise_7/create_teal_module.html#basic-structure-of-a-teal_module",
+    "title": "Interactive Data Visualisation Using the Teal Framework",
+    "section": "Basic structure of a teal_module",
+    "text": "Basic structure of a teal_module\nmy_module_ui &lt;- function(id) {\n  ns &lt;- NS(id)\n  # Define UI elements with proper namespacing\n}\n\nmy_module_srv &lt;- function(id, data) {\n  moduleServer(id, function(input, output, session) {\n    # data parameter contains reactive teal_data object\n    # Access datasets: data()[[\"ADSL\"]], data()[[\"ADAE\"]], etc.\n  })\n}\n\n# Create the module from UI and server functions\nmy_module &lt;- teal::module(\n  label = \"Module Label\",\n  ui = my_module_ui,\n  server = my_module_srv\n)"
+  },
+  {
+    "objectID": "exercises/exercise_7/create_teal_module.html#base-functionality-of-our-custom-module",
+    "href": "exercises/exercise_7/create_teal_module.html#base-functionality-of-our-custom-module",
+    "title": "Interactive Data Visualisation Using the Teal Framework",
+    "section": "Base functionality of our custom module",
+    "text": "Base functionality of our custom module\nLet’s create a custom module that shows a simple histogram plot based on user selected columns.\n\nUI function should contain (wrapped in shiny::tags$div()):\n\nA variable selector (using shiny::selectInput())\nA plot output (using shiny::plotOutput())\n\nServer should:\n\nUpdate the variable selector choices based on numeric columns from the ADSL dataset\n\nUsing shiny::updateSelectInput() to set choices of data()[[\"ADSL\"]] numeric columns\nHelper snippet: data()[[\"ADSL\"]] |&gt; dplyr::select(where(is.numeric)) |&gt; names()\n\nCreate a histogram plot using ggplot2 based on the selected variable (Using ggplot2::geom_histogram())\n\nHelper snippet: ggplot(ADSL, aes(x = selected_variable)) + geom_histogram()\n\n\n\nℹ️ Good to know:\n\nUse teal.code::within() to create reproducible code inside reactive expression and return it at the end.\nteal_data code is not aware of shiny inputs\n\nUse named parameters in within() to pass shiny inputs"
+  },
+  {
+    "objectID": "exercises/exercise_7/create_teal_module.html#initial-teal-module-code",
+    "href": "exercises/exercise_7/create_teal_module.html#initial-teal-module-code",
+    "title": "Interactive Data Visualisation Using the Teal Framework",
+    "section": "Initial teal module code",
+    "text": "Initial teal module code\n\nSee folder exercice_7 for the code to start with\n\nlibrary(teal)\nlibrary(dplyr)\nlibrary(ggplot2)\n\nmy_custom_module_ui &lt;- function(id) {\n  ns &lt;- NS(id)\n  tags$div(\n    selectInput( # variable selector\n      inputId = ns(\"variable\"),\n      label = \"Select variable\",\n      choices = NULL # initialize empty - to be updated from within server\n    ),\n    plotOutput(ns(\"plot\")) # Output for the plot\n  )\n}\n\nmy_custom_module_srv &lt;- function(id, data) {\n  moduleServer(id, function(input, output, session) {\n\n    updateSelectInput( # update variable selector by names of data\n      inputId = \"variable\",\n      choices = data()[[\"ADSL\"]] |&gt; select(where(is.numeric)) |&gt; names()\n    )\n\n    # add plot call to qenv\n    result &lt;- reactive({\n      req(input$variable)\n      within(\n        data(),\n        {\n          plot &lt;- ggplot(ADSL, aes(x = input_var)) + geom_histogram()\n        },\n        input_var = as.name(input$variable) # Pass the selected variable as a symbol\n      )\n    })\n\n    # render to output the object from qenv\n    output$plot &lt;- renderPlot(result()[[\"plot\"]])\n\n    result\n  })\n}\n\nmy_custom_module &lt;- module(\n  label = \"My Custom Module\",\n  ui = my_custom_module_ui,\n  server = my_custom_module_srv\n)\n\ndata &lt;- teal_data()\ndata &lt;- within(data, {\n  ADSL &lt;- rADSL\n})\n\napp &lt;- init(\n  data = data,\n  modules = list(my_custom_module)\n)\n\nshinyApp(app$ui, app$server)"
+  },
+  {
+    "objectID": "exercises/exercise_7/create_teal_module.html#app-running",
+    "href": "exercises/exercise_7/create_teal_module.html#app-running",
+    "title": "Interactive Data Visualisation Using the Teal Framework",
+    "section": "App running",
+    "text": "App running\n\n\nYour browser does not support the video tag."
+  },
+  {
+    "objectID": "exercises/exercise_7/create_teal_module.html#exercise",
+    "href": "exercises/exercise_7/create_teal_module.html#exercise",
+    "title": "Interactive Data Visualisation Using the Teal Framework",
+    "section": "🛠️ Exercise",
+    "text": "🛠️ Exercise\nLet’s enhance the module:\n\nLet’s create a new parameter binwidth:\n\n\nadd a new widget to the UI\n\nthat widget should be created with shiny::sliderInput()\nmake reasonable values of min, max, step and initial value\n\nread and use that widget in server\n\npass this parameter value as binwidth argument to the geom_histogram() function\n\n\n\n\n\n\n\n\nTipAnswer\n\n\n\n\n\nmy_custom_module_ui &lt;- function(id) {\n  # ... existing code ...\n  tags$div(\n    # ... existing code ...,\n    sliderInput(\n      inputId = ns(\"binwidth\"),\n      label = \"binwidth\",\n      min = 1,\n      max = 10,\n      step = 1,\n      value = 3\n    ),\n    # ... existing code ...\n  )\n}\n\nmy_custom_module_srv &lt;- function(id, data) {\n  moduleServer(id, function(input, output, session) {\n\n    # ... existing code ...\n\n    # add plot call to qenv\n    result &lt;- reactive({\n      req(input$variable)\n      within(\n        data(),\n        {\n          plot &lt;- ggplot(ADSL, aes(x = input_var)) +\n            geom_histogram(binwidth = input_binwidth)\n          plot\n        },\n        input_var = as.name(input$variable),\n        input_binwidth = input$binwidth\n      )\n    })\n\n    # ... existing code ...\n\n  })\n}\n\n\n\n\nLet’s add more datasets\n\nextend data with ADAE = teal.data::rADAE\nadd a new widget in the UI\n\nthat widget should be created with shiny::selectInput()\ninitialize empty and update values in the same way as for input$variable\n\nread and use in the server\n\nmodify the variable selection - it has to be chosen from the currently selected dataset\n\nconvert to observeEvent() on input$dataset\nadd at the beggining: req(input$dataset) to assure non empty selection\nmodify to choices = names(data()[[input$dataset]])\n\nmodify the observer call\n\nadd req(input$dataset)\nadd req(input$variables %in% names(data()[[input$dataset]]))\n\nmodify ggplot call\n\nconvert the value to a symbol and use as a first argument of ggplot()\n\n\n\n\n\n\n\n\n\nTipAnswer\n\n\n\n\n\n\ndata &lt;- within(data, {\n  ADSL &lt;- rADSL\n  ADAE &lt;- teal.data::rADAE\n})\n\n\nmy_custom_module_ui &lt;- function(id) {\n  ns &lt;- NS(id)\n  tags$div(\n    # dataset selector\n    selectInput(\n      inputId = ns(\"dataset\"),\n      label = \"Select dataset\",\n      choices = NULL\n    ),\n    # ... existing code ...\n  )\n}\n\n\nmy_custom_module_srv &lt;- function(id, data) {\n  moduleServer(id, function(input, output, session) {\n\n    # ... existing code ...\n\n    updateSelectInput(\n      inputId = \"dataset\",\n      choices = names(data())\n    )\n\n    observeEvent(\n      input$dataset,\n      {\n        req(input$dataset)\n        updateSelectInput(\n          inputId = \"variable\",\n          choices = data()[[input$dataset]] |&gt; select(where(is.numeric)) |&gt; names()\n        )\n      }\n    )\n\n    # Update reactive and render function\n    result &lt;- reactive({\n      req(input$dataset)\n      req(input$variable)\n      within(\n        data(),\n        {\n          my_plot &lt;- ggplot(input_dataset, aes(x = input_var)) +\n            geom_histogram()\n          my_plot\n        },\n        input_dataset = as.name(input$dataset),\n        input_var = as.name(input$variable)\n      )\n    })\n\n    output$plot &lt;- renderPlot({\n      result()[[\"my_plot\"]]\n    })\n\n  })\n}"
+  },
+  {
+    "objectID": "exercises/exercise_7/create_teal_module.html#what-did-we-learn",
+    "href": "exercises/exercise_7/create_teal_module.html#what-did-we-learn",
+    "title": "Interactive Data Visualisation Using the Teal Framework",
+    "section": "📚 What did we learn?",
+    "text": "📚 What did we learn?\n\nHow to create a custom teal module\nHow to interact with teal_data object in the module server\nHow to enable reproducible code and reporting features"
+  },
+  {
+    "objectID": "exercises/exercise_7/create_teal_module.html#references",
+    "href": "exercises/exercise_7/create_teal_module.html#references",
+    "title": "Interactive Data Visualisation Using the Teal Framework",
+    "section": "🌐 References",
+    "text": "🌐 References\n\nteal::module()\n“Creating Custom Modules” vignette\n\"qenv\" article on how to interact with internal qenv object - in particular: teal.code::within() function"
+  },
+  {
     "objectID": "presentation.html#foreword",
     "href": "presentation.html#foreword",
     "title": "Interactive Data Visualisation Using the Teal Framework",
