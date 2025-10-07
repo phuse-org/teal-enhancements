@@ -3,11 +3,11 @@ title: "Interactive Data Visualisation Using the Teal Framework"
 author: ""
 date: Wednesday, 19 November 2025
 engine: knitr
-format: 
+format:
   live-revealjs:
     smaller: true
     scrollable: true
-    include-in-header: 
+    include-in-header:
       text: |
         <style>
         .reveal .slides section.fs-50 { font-size: .5em; }
@@ -44,7 +44,7 @@ Welcome to the **Interactive Data Visualisation Using the Teal Framework** works
 By the end of this workshop, you will be able to:
 
 - **Understand** what `teal` is and why it's valuable for data analysis
-- **Install and configure** the `teal` framework and its dependencies  
+- **Install and configure** the `teal` framework and its dependencies
 - **Create** basic `teal` applications from scratch
 - **Recognize** the key components and structure of `teal` applications
 - **Launch and customize** pre-built modules from `teal.modules.general` and `teal.modules.clinical`
@@ -151,7 +151,7 @@ test_app <- teal::init(
   data = test_data,
   modules = teal::modules(
     tm_data_table(
-      label = "Data Explorer", 
+      label = "Data Explorer",
       dataname = "IRIS"
     )
   ),
@@ -185,7 +185,7 @@ demo_data <- teal_data()
 demo_data <- within(demo_data, {
   # Add the ADSL dataset
   ADSL <- adsl
-  
+
   # Basic data preprocessing
   ADSL$ARM <- as.factor(ADSL$ARM)
   ADSL$SEX <- as.factor(ADSL$SEX)
@@ -203,10 +203,10 @@ app_modules <- teal::modules(
     label = "📋 Subject Data",
     dataname = "ADSL"
   ),
-  
+
   # Visualization modules
   tm_g_distribution(
-    label = "📊 Age Distribution", 
+    label = "📊 Age Distribution",
     dataname = "ADSL",
     dist_var = data_extract_spec(
       dataname = "ADSL",
@@ -216,14 +216,14 @@ app_modules <- teal::modules(
       )
     ),
     strata_var = data_extract_spec(
-      dataname = "ADSL", 
+      dataname = "ADSL",
       select = select_spec(
         choices = variable_choices("ADSL", "ARM"),
         selected = "ARM"
       )
     )
   ),
-  
+
   # Summary analysis module
   tm_t_summary(
     label = "📈 Demographics Summary",
@@ -261,7 +261,7 @@ clinical_app <- teal::init(
 
 cat("🎯 Complete teal application created!\n")
 cat("📱 Application includes:\n")
-cat("   - Data table for subject-level exploration\n") 
+cat("   - Data table for subject-level exploration\n")
 cat("   - Age distribution visualization by treatment\n")
 cat("   - Demographics summary table\n")
 cat("   - Interactive filtering capabilities\n")
@@ -306,7 +306,7 @@ cat("================================\n\n")
 
 cat("1️⃣  DATA LAYER (teal.data)\n")
 cat("   └── teal_data() objects\n")
-cat("   └── Dataset relationships (join_keys)\n") 
+cat("   └── Dataset relationships (join_keys)\n")
 cat("   └── Data preprocessing and validation\n")
 cat("   └── Reproducible data transformations\n\n")
 
@@ -348,12 +348,12 @@ clinical_data <- within(clinical_data, {
   ADSL <- adsl
   ADSL$ARM <- as.factor(ADSL$ARM)
   ADSL$SEX <- as.factor(ADSL$SEX)
-  
-  # Adverse events data  
+
+  # Adverse events data
   ADAE <- adae
   ADAE$AESEV <- as.factor(ADAE$AESEV)
   ADAE$AEREL <- as.factor(ADAE$AEREL)
-  
+
   # Create a summary dataset
   DEMO_SUMMARY <- ADSL %>%
     group_by(ARM, SEX) %>%
@@ -366,7 +366,7 @@ clinical_data <- within(clinical_data, {
 
 cat("📊 Data Structure:\n")
 cat("   - ADSL: Subject-level data (", nrow(adsl), " subjects)\n")
-cat("   - ADAE: Adverse events (", nrow(adae), " events)\n") 
+cat("   - ADAE: Adverse events (", nrow(adae), " events)\n")
 cat("   - DEMO_SUMMARY: Demographics summary\n")
 cat("   - Automatic join keys detected for data relationships\n")
 ```
@@ -387,7 +387,7 @@ data_modules <- teal::modules(
     dataname = "ADSL"
   ),
   tm_variable_browser(
-    label = "Variable Explorer", 
+    label = "Variable Explorer",
     dataname = "ADSL"
   )
 )
@@ -406,7 +406,7 @@ viz_modules <- teal::modules(
       )
     ),
     y = data_extract_spec(
-      dataname = "ADSL", 
+      dataname = "ADSL",
       select = select_spec(
         choices = variable_choices("ADSL", "BMIBL"),
         selected = "BMIBL"
@@ -428,7 +428,7 @@ viz_modules <- teal::modules(
 
 cat("🧩 Module Categories:\n")
 cat("   📊 Data Exploration: Browse and understand your data\n")
-cat("   📈 Visualizations: Create interactive plots and charts\n") 
+cat("   📈 Visualizations: Create interactive plots and charts\n")
 cat("   🔬 Statistical Analysis: Perform statistical computations\n")
 cat("   📋 Clinical Modules: Specialized pharmaceutical analyses\n")
 ```
@@ -442,13 +442,13 @@ The initialization layer brings everything together:
 complete_app <- teal::init(
   # Data foundation
   data = clinical_data,
-  
+
   # Modular structure
   modules = teal::modules(
     data_modules,
     viz_modules
   ),
-  
+
   # Application configuration
   title = "Clinical Data Analysis Platform",
   header = "Comprehensive Clinical Trial Data Explorer",
@@ -476,6 +476,54 @@ This architectural overview demonstrates how `teal` provides a comprehensive, pr
   * encoding panel
   * filter panel
   * Show R Code button
+
+### What is `teal.modules.clinical`?
+
+`teal.modules.clinical` is an R package developed in an open-source manner by Roche. It extends
+`teal` by exporting `teal` modules dedicated to interactive data visualisation of clinical data.
+
+### Launching a simple `teal.modules.clinical` module
+
+```{r}
+library(teal.modules.clinical)
+library(pharmaverseadam)
+
+data <- teal.data::cdisc_data(
+  ADSL = pharmaverseadam::adsl,
+  ADAE = pharmaverseadam::adae,
+  code = "
+    ADSL <- pharmaverseadam::adsl
+    ADAE <- pharmaverseadam::adae
+  "
+)
+
+ADSL <- data[["ADSL"]]
+ADAE <- data[["ADAE"]]
+
+app <- teal::init(
+  data = data,
+  modules = teal::modules(
+    teal.modules.clinical::tm_t_events(
+      label = "Adverse Event Table",
+      dataname = "ADAE",
+      arm_var = teal.modules.clinical::choices_selected(c("ARM", "ARMCD"), "ARM"),
+      llt = teal.transform::choices_selected(
+        choices = teal.transform::variable_choices(ADAE, c("AETERM", "AEDECOD")),
+        selected = c("AEDECOD")
+      ),
+      hlt = teal.modules.clinical::choices_selected(
+        choices = teal.transform::variable_choices(ADAE, c("AEBODSYS", "AESOC")),
+        selected = "AEBODSYS"
+      ),
+      add_total = TRUE,
+      event_type = "adverse event"
+    )
+  )
+)
+if (interactive()) {
+  shiny::shinyApp(app$ui, app$server)
+}
+```
 
 ## Topic 5: Deeper dive into how to provide and pre-process data in `teal.modules.clinical` { .fs-50}
 
