@@ -1,0 +1,54 @@
+## Installation & Setup
+
+### Quick Walkthrough to Get Started
+
+### **Step 1: Install Core Packages**
+
+```{R}
+# Install the main teal package
+install.packages("teal")
+
+# Install commonly used module packages
+install.packages(c(
+  "teal.modules.general",    # General-purpose analysis modules
+  "teal.modules.clinical",   # Clinical trial specific modules
+  "teal.data",              # Data management utilities
+  "teal.reporter"           # Report generation capabilities
+))
+```
+
+### **Step 2: Load Required Libraries**
+
+```{R}
+# Load core teal framework
+library(teal)
+library(teal.modules.general)
+library(teal.data)
+
+# For demonstration data
+library(pharmaverseadam)
+```
+
+### **Step 3: Verify Installation with Example**
+
+```{R}
+# Create a simple test application
+test_data <- teal_data()
+test_data <- within(test_data, {
+  IRIS <- iris
+  MTCARS <- mtcars
+})
+
+# Simple test app
+test_app <- teal::init(
+  data = test_data,
+  modules = teal::modules(
+    teal.modules.general::tm_data_table(
+      label = "Data Explorer",
+      dataname = "IRIS"
+    )
+  ),
+  title = "Installation Verification"
+)
+
+```
