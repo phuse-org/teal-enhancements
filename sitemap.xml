@@ -2,18 +2,42 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://phuse-org.github.io/teal-enhancements/README.html</loc>
-    <lastmod>2025-11-04T10:04:25.407Z</lastmod>
+    <lastmod>2025-11-11T14:39:46.490Z</lastmod>
   </url>
   <url>
     <loc>https://phuse-org.github.io/teal-enhancements/index.html</loc>
-    <lastmod>2025-11-04T10:04:25.419Z</lastmod>
+    <lastmod>2025-11-11T14:39:46.497Z</lastmod>
   </url>
   <url>
-    <loc>https://phuse-org.github.io/teal-enhancements/exercises/exercise_7/create_teal_module.html</loc>
-    <lastmod>2025-11-04T10:04:25.419Z</lastmod>
+    <loc>https://phuse-org.github.io/teal-enhancements/exercises/topic_6/choices_selected.html</loc>
+    <lastmod>2025-11-11T14:39:46.497Z</lastmod>
+  </url>
+  <url>
+    <loc>https://phuse-org.github.io/teal-enhancements/exercises/topic_4/launching_tmc_modules.html</loc>
+    <lastmod>2025-11-11T14:39:46.496Z</lastmod>
+  </url>
+  <url>
+    <loc>https://phuse-org.github.io/teal-enhancements/exercises/topic_2/how_to_install.html</loc>
+    <lastmod>2025-11-11T14:39:46.496Z</lastmod>
+  </url>
+  <url>
+    <loc>https://phuse-org.github.io/teal-enhancements/exercises/topic_1/foreward.html</loc>
+    <lastmod>2025-11-11T14:39:46.496Z</lastmod>
+  </url>
+  <url>
+    <loc>https://phuse-org.github.io/teal-enhancements/exercises/topic_3/basic_app.html</loc>
+    <lastmod>2025-11-11T14:39:46.496Z</lastmod>
+  </url>
+  <url>
+    <loc>https://phuse-org.github.io/teal-enhancements/exercises/topic_5/data_in_teal.html</loc>
+    <lastmod>2025-11-11T14:39:46.496Z</lastmod>
+  </url>
+  <url>
+    <loc>https://phuse-org.github.io/teal-enhancements/exercises/topic_7/create_teal_module.html</loc>
+    <lastmod>2025-11-11T14:39:46.497Z</lastmod>
   </url>
   <url>
     <loc>https://phuse-org.github.io/teal-enhancements/presentation.html</loc>
-    <lastmod>2025-11-04T10:04:25.419Z</lastmod>
+    <lastmod>2025-11-11T14:39:46.497Z</lastmod>
   </url>
 </urlset>

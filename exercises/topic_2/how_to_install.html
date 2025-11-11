@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Interactive Data Visualisation Using the Teal Framework</title>
+<title>how_to_install – Interactive Data Visualisation Using the Teal Framework</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -20,29 +20,64 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
-<script src="site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="site_libs/quarto-nav/headroom.min.js"></script>
-<script src="site_libs/clipboard/clipboard.min.js"></script>
-<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="site_libs/quarto-search/fuse.min.js"></script>
-<script src="site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="./">
-<script src="site_libs/quarto-html/quarto.js" type="module"></script>
-<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
-<script src="site_libs/quarto-html/axe/axe-check.js" type="module"></script>
-<script src="site_libs/quarto-html/popper.min.js"></script>
-<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="site_libs/quarto-html/anchor.min.js"></script>
-<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-7b89279ff1a6dce999919e0e67d4d9ec.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-c30451789a0a2bcd5e941535c675cd30.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
-<script src="site_libs/quarto-contrib/live-runtime/live-runtime.js" type="module"></script>
-<link href="site_libs/quarto-contrib/live-runtime/live-runtime.css" rel="stylesheet">
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-7b89279ff1a6dce999919e0e67d4d9ec.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap-c30451789a0a2bcd5e941535c675cd30.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script src="../../site_libs/quarto-contrib/live-runtime/live-runtime.js" type="module"></script>
+<link href="../../site_libs/quarto-contrib/live-runtime/live-runtime.css" rel="stylesheet">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -70,14 +105,14 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "Search"
   }
 }</script>
-<script type="module" src="site_libs/quarto-ojs/quarto-ojs-runtime.js"></script>
-<link href="site_libs/quarto-ojs/quarto-ojs.css" rel="stylesheet">
+<script type="module" src="../../site_libs/quarto-ojs/quarto-ojs-runtime.js"></script>
+<link href="../../site_libs/quarto-ojs/quarto-ojs.css" rel="stylesheet">
 
 
-<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="../../style.css">
 </head>
 
-<body class="nav-sidebar docked fullcontent quarto-light">
+<body class="nav-sidebar docked quarto-light">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -86,7 +121,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./index.html">Home</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -100,7 +135,7 @@ ul.task-list li input[type="checkbox"] {
 <!-- sidebar -->
   <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
     <div class="pt-lg-2 mt-2 text-left sidebar-header">
-      <a href="./index.html" class="sidebar-logo-link">
+      <a href="../../index.html" class="sidebar-logo-link">
       </a>
       <div class="sidebar-tools-main">
     <a href="https://github.com/phuse-org/teal-enhancements" title="" class="quarto-navigation-tool px-1" aria-label=""><i class="bi bi-github"></i></a>
@@ -115,7 +150,7 @@ ul.task-list li input[type="checkbox"] {
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./index.html" class="sidebar-item-text sidebar-link active">
+  <a href="../../index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Home</span></a>
   </div>
 </li>
@@ -124,73 +159,31 @@ ul.task-list li input[type="checkbox"] {
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#how-to-install-the-teal-framework" id="toc-how-to-install-the-teal-framework" class="nav-link active" data-scroll-target="#how-to-install-the-teal-framework">How to install the <code>teal</code> framework?</a></li>
+  </ul>
+</nav>
+    </div>
 <!-- main -->
 <main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block"></header>
 
 
 
 
-<section id="interactive-data-visualisation-using-the-teal-framework" class="level1">
-<h1>Interactive Data Visualisation Using the Teal Framework</h1>
-<blockquote class="blockquote">
-<p>A hands-on workshop at Phuse EU 2025 sponsored by Appsilon</p>
-</blockquote>
-<p>Presented by <a href="https://www.linkedin.com/in/peyman-eshghi/">Peyman Eshghi</a>, <a href="https://www.linkedin.com/in/konrad-pagacz-3703a324/">Konrad Pagacz</a> and <a href="https://www.linkedin.com/in/afsverissimo/">André Veríssimo</a></p>
-<p>Find out more at <a href="https://www.phuse-events.org/attend/frontend/reg/tOtherPage.csp?pageID=47137&amp;ef_sel_menu=5140&amp;eventID=74">Phuse EU Connect 2025 webpage</a></p>
-<section id="description" class="level2">
-<h2 class="anchored" data-anchor-id="description">Description</h2>
-<p>Participants will engage in collaborative activities aimed at enhancing their understanding of the Teal framework. The workshop will be structured based on valuable feedback gathered from leaders during cross-industry discussions in forums such as the PHUSE Working Groups.</p>
-<p>With increasing interest from regulatory agencies in promoting data transparency and accessibility, this workshop will provide a platform to showcase practical applications of the Teal framework while ensuring alignment with regulatory expectations. Our presentation at the PHUSE CSS in May highlights the relevance of this topic in ongoing industry conversations.</p>
-<p>We welcome participants from various industry backgrounds to join us at the PHUSE EU Connect for this engaging workshop. Attendees will be guided through both beginner and advanced examples of creating interactive visualisations using Teal. They will learn how to build a Teal app with integrated modules and develop customised modules to address more complex scenarios.</p>
-<p>Moreover, the workshop will review the Teal roadmap and discuss the prioritisation of future features. If time allows, we will host a mini-hackathon, where attendees can actively contribute to Teal’s development by enhancing documentation or adding new modules to existing Teal packages.</p>
-<p>This interactive experience promises to foster learning and collaboration while advancing skills in data visualisation.</p>
-</section>
-<section id="requirements-for-the-workshop" class="level2">
-<h2 class="anchored" data-anchor-id="requirements-for-the-workshop">Requirements for the workshop</h2>
-<ul>
-<li>A laptop with a modern web browser installed</li>
-<li>Familiarity with R and Shiny, including:
-<ul>
-<li>Reactivity concepts - see <a href="https://mastering-shiny.org/basic-reactivity.html">Basic Reactivity</a> and <a href="https://shiny.posit.co/r/articles/build/reactivity-overview/">An Overview</a></li>
-<li>Using modules in Shiny apps - see <a href="https://shiny.posit.co/r/articles/improve/modules/">Modularizing Shiny app code</a> and <a href="https://mastering-shiny.org/scaling-modules.html?q=modules#scaling-modules">Shiny Modules</a></li>
-</ul></li>
-</ul>
-</section>
-<section id="agenda" class="level2">
-<h2 class="anchored" data-anchor-id="agenda">📋 Agenda</h2>
-<section id="topic-1-introduction-to-teal-15-minutes" class="level3">
-<h3 class="anchored" data-anchor-id="topic-1-introduction-to-teal-15-minutes"><em>Topic 1:</em> Introduction to teal <em>(15 minutes)</em></h3>
-<ul>
-<li>Overview &amp; Objectives</li>
-<li>Introduction to teal: What is teal? Why use it?</li>
-<li>Installation &amp; Setup: Quick walkthrough to get started</li>
-<li>Code Sample: Demonstration of a simple teal app</li>
-<li>Anatomy of a teal App: Key components &amp; structure</li>
-</ul>
-</section>
-<section id="topic-2-mastering-teal-for-pharma-data-analysis-hands-on-40-minutes" class="level3">
-<h3 class="anchored" data-anchor-id="topic-2-mastering-teal-for-pharma-data-analysis-hands-on-40-minutes"><em>Topic 2:</em> Mastering teal for Pharma Data Analysis <em>(hands-on 40 minutes)</em></h3>
-<ul>
-<li>Introduction to teal.modules.clinical and anatomy of a module (15 minutes)</li>
-<li>Deeper dive into how to provide and pre-process data in teal.modules.clinical (15 minutes)</li>
-<li>Deeper dive into customizing the parameters of teal.modules.clinical modules (10 minutes)</li>
-</ul>
-</section>
-<section id="topic-3-creating-custom-teal-modules-20-minutes" class="level3">
-<h3 class="anchored" data-anchor-id="topic-3-creating-custom-teal-modules-20-minutes"><em>Topic 3:</em> Creating custom teal modules <em>(20 minutes)</em></h3>
-<ul>
-<li>Step-by-step Development: Building your own teal modules</li>
-<li>Best Practices: Tips for effective customization</li>
-<li>Data Integration: Incorporating custom data processing inside modules</li>
-</ul>
-</section>
-<section id="topic-4-teal-roadmap-discussion-15-minutes" class="level3">
-<h3 class="anchored" data-anchor-id="topic-4-teal-roadmap-discussion-15-minutes"><em>Topic 4:</em> teal roadmap &amp; Discussion <em>(15 minutes)</em></h3>
-<ul>
-<li>Future Directions: Upcoming features and plans for teal</li>
-<li>Discussion &amp; Q&amp;A: Open floor for questions, insights, and sharing experiences</li>
-</ul>
+<section id="how-to-install-the-teal-framework" class="level2">
+<h2 class="anchored" data-anchor-id="how-to-install-the-teal-framework">How to install the <code>teal</code> framework?</h2>
+<p>You should have all the packages already preinstalled during these workshops on the remote workbenches we have prepared.</p>
+<p>When you are starting from scratch (or just reinstalled your R version):</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="fu">install.packages</span>(<span class="fu">c</span>(</span>
+<span id="cb1-2"><a href="#cb1-2"></a>    <span class="st">"teal"</span>,</span>
+<span id="cb1-3"><a href="#cb1-3"></a>    <span class="st">"teal.modules.clinical"</span>,</span>
+<span id="cb1-4"><a href="#cb1-4"></a>    <span class="st">"teal.modules.general"</span>,</span>
+<span id="cb1-5"><a href="#cb1-5"></a>    <span class="st">"pharmaverseadam"</span></span>
+<span id="cb1-6"><a href="#cb1-6"></a>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 
 
 <script type="ojs-module-contents">
@@ -208,8 +201,6 @@ eyJjb250ZW50cyI6W119
 W10=
 </script>
 </section>
-</section>
-</section>
 
 </main> <!-- /main -->
 <script type="ojs-module-contents">
@@ -217,9 +208,9 @@ eyJjb250ZW50cyI6W119
 </script>
 <script type="module">
 if (window.location.protocol === "file:") { alert("The OJS runtime does not work with file:// URLs. Please use a web server to view this document."); }
-window._ojs.paths.runtimeToDoc = "../..";
+window._ojs.paths.runtimeToDoc = "../../exercises/topic_2";
 window._ojs.paths.runtimeToRoot = "../..";
-window._ojs.paths.docToRoot = "";
+window._ojs.paths.docToRoot = "../..";
 window._ojs.selfContained = false;
 window._ojs.runtime.interpretFromScriptTags();
 </script>
