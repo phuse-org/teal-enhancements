@@ -22,7 +22,10 @@ Every `teal` application follows this fundamental pattern:
 
 ## Code example: Simplest `teal` application
 
-```{.r}
+```{shinylive-r}
+#| components: [editor, viewer]
+#| standalone: true
+#| viewerHeight: 680
 library(teal)
 
 # Create the simplest possible teal application
@@ -58,7 +61,7 @@ The `data` argument is where you specify all the datasets your application will 
 
 ### Option 1: Using `teal_data()`
 
-```{web-r}
+```{.r}
 # Create data using teal_data()
 my_data <- teal_data(
   ADSL = adsl_data,
@@ -74,7 +77,7 @@ app <- init(
 
 ### Option 2: Using `cdisc_data()` for clinical data
 
-```{web-r}
+```{.r}
 # For CDISC/ADaM data with relationships
 my_data <- cdisc_data(
   ADSL = adsl_data,
@@ -103,7 +106,7 @@ The `modules` argument defines what your application can do. It accepts a `modul
 
 ## Single module example
 
-```{webr}
+```{.r}
 library(teal.modules.general)
 
 app <- teal::init(
@@ -124,7 +127,7 @@ if (interactive()) {
 
 ## Multiple modules example
 
-```{webr}
+```{.r}
 library(teal.modules.general)
 
 app <- teal::init(
