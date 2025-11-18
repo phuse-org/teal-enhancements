@@ -125,9 +125,7 @@ app <- teal::init(
 )
 
 # Launch the application
-if (interactive()) {
-  shiny::shinyApp(app$ui, app$server)
-}
+shiny::shinyApp(app$ui, app$server)
 ```
 
 ## Multiple modules example
@@ -170,9 +168,7 @@ app <- teal::init(
 )
 
 # Launch the application
-if (interactive()) {
-  shiny::shinyApp(app$ui, app$server)
-}
+shiny::shinyApp(app$ui, app$server)
 ```
 
 ## 🛠️ Exercise (a warm up really)
