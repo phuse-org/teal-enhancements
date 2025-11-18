@@ -12,3 +12,9 @@ install.packages(c(
     "pharmaverseadam"
 ))
 ```
+
+## Cloud environment for the workshop
+
+Link: [workbench.teal.sandbox.aws.appsilon.com](https://workbench.teal.sandbox.aws.appsilon.com/){style="font-size:1.5em;"}
+
+<img src="workbench.png" width="50%"/>
