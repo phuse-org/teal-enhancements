@@ -3,6 +3,6 @@
 .quarto/
 .Rhistory
 /README_files/
-
+/docs/
 **/*.quarto_ipynb
 **/.DS_Store
