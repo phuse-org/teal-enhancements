@@ -141,68 +141,37 @@ Let's enhance the module:
     }
     ```
     :::
+- Let's see how we can add a heading to the reporter
+    - Use `teal.reporter::teal_card` to get and modify the reporter card
+            - `teal.reporter::teal_card(x)` accesses the current card
+            - `teal.reporter::teal_card(x) <- c(...)` modifies the current card
+              - inside `c(...)` you can merge existing card content with new elements
+    - Add a title to the card using using a markdown string
+    - Evaluate the code that generates the histogram
 
--   Let's add reporter functionality to module
+  ::: {.callout-tip collapse="true"}
+  ## Answer
 
-    -   Add UI elements to UI function with `teal.reporter::simple_reporter_ui(id)`,
-    -   Add arguments called `reporter` and `filter_panel_api` to server function
-        -   Flag `teal` that module supports reporter
-    -   Create reporter in server function
-
-        ```{.r}
-        with_filter <- !rlang::is_missing(filter_panel_api) && inherits(filter_panel_api, "FilterPanelApi")
-        card_fun <- function(card = teal.reporter::ReportCard$new(), comment) {
-          card$set_name("My custom module")
-          card$append_text(filter_panel_api$get_filter_state(), "verbatim")
-          card$append_text(paste("Selected var:", input$variable))
-          card$append_text(paste("Selected binwidth:", input$binwidth))
-          card$append_plot(result()$plot)
-        }
-        ```
-
-    ::: {.callout-tip collapse="true"}
-    ## Answer
-
-    ```{.r code-line-numbers="1-9"}
-    my_custom_module_ui <- function(id) {
-      # ... existing code ...
-      tags$div(
-        # ... existing code ...,
-        teal.reporter::simple_reporter_ui(ns("reporter")),
-        # ... existing code ...
+    ```{.r}
+    reactivd({
+      q <- data()
+      teal.reporter::teal_card(q) <- c(
+        teal.reporter::teal_card(q),
+        "### Histogram of Selected Variable"
       )
-    }
+      within(
+        q,
+        {
+          plot <- ggplot(ADSL, aes(x = input_var)) + geom_histogram()
+          plot
+        },
+        input_var = as.name(input$variable) # Pass the selected variable as a symbol
+      )
+    })
     ```
+  :::
 
-    ```{r, eval = FALSE}
-    my_custom_module_srv <- function(id, data) {
-      moduleServer(id, function(input, output, session) {
-
-        # ... existing code ...
-
-        # add plot call to qenv
-        result <- reactive({
-          req(input$variable)
-          within(
-            data(),
-            {
-              plot <- ggplot(ADSL, aes(x = input_var)) +
-                geom_histogram(binwidth = input_binwidth)
-              plot
-            },
-            input_var = as.name(input$variable),
-            input_binwidth = input$binwidth
-          )
-        })
-
-        # ... existing code ...
-
-      })
-    }
-    ```
-    :::
-
-## 🛠️ Bonus Exercise (add more datasets)
+## 🛠️ Bonus Exercise _(add more datasets)_
 
 -   Let's add more datasets
 
@@ -222,6 +191,7 @@ Let's enhance the module:
             -   convert the value to a symbol and use as a first argument of `ggplot()`
 
     ::: {.callout-tip collapse="true"}
+
     ## Answer
 
     ```{r, eval = FALSE}
