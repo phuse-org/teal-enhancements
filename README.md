@@ -1,6 +1,6 @@
 # Interactive Data Visualisation Using the Teal Framework
 
-> A hands-on workshop at Phuse EU 2025 sponsored by Appsilon
+> A hands-on workshop at Phuse EU 2025 on the teal framework
 
 Presented by
 [Peyman Eshghi](https://www.linkedin.com/in/peyman-eshghi/),
@@ -8,6 +8,10 @@ Presented by
 and [André Veríssimo](https://www.linkedin.com/in/afsverissimo/)
 
 Find out more at [Phuse EU Connect 2025 webpage](https://www.phuse-events.org/attend/frontend/reg/tOtherPage.csp?pageID=47137&ef_sel_menu=5140&eventID=74)
+
+Sponsored by [Appsilon](https://appsilon.com/)
+
+<img src="https://cdn.prod.website-files.com/6525256482c9e9a06c7a9d3c/6539655f4ca172cfc5deaad8_Appsilon_logo.svg" alt="Appsilon logo" width="50%"/>
 
 ## Description
 
