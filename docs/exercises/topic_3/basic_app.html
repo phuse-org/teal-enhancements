@@ -183,6 +183,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#the-modules-argument---your-applications-functionality" id="toc-the-modules-argument---your-applications-functionality" class="nav-link" data-scroll-target="#the-modules-argument---your-applications-functionality">The <code>modules</code> argument - your application’s functionality</a></li>
   <li><a href="#single-module-example" id="toc-single-module-example" class="nav-link" data-scroll-target="#single-module-example">Single module example</a></li>
   <li><a href="#multiple-modules-example" id="toc-multiple-modules-example" class="nav-link" data-scroll-target="#multiple-modules-example">Multiple modules example</a></li>
+  <li><a href="#exercise-a-warm-up-really" id="toc-exercise-a-warm-up-really" class="nav-link" data-scroll-target="#exercise-a-warm-up-really">🛠️ Exercise (a warm up really)</a></li>
+  <li><a href="#exercise" id="toc-exercise" class="nav-link" data-scroll-target="#exercise">🛠️ Exercise</a></li>
+  <li><a href="#exercise-1" id="toc-exercise-1" class="nav-link" data-scroll-target="#exercise-1">🛠️ Exercise</a></li>
   </ul>
 </nav>
     </div>
@@ -266,19 +269,19 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="option-2-using-cdisc_data-for-clinical-data" class="level3">
 <h3 class="anchored" data-anchor-id="option-2-using-cdisc_data-for-clinical-data">Option 2: Using <code>cdisc_data()</code> for clinical data</h3>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode numberSource {web-r} number-lines code-with-copy"><code class="sourceCode"><span id="cb3-1"><a href="#cb3-1"></a># For CDISC/ADaM data with relationships</span>
-<span id="cb3-2"><a href="#cb3-2"></a>my_data &lt;- cdisc_data(</span>
-<span id="cb3-3"><a href="#cb3-3"></a>  ADSL = adsl_data,</span>
-<span id="cb3-4"><a href="#cb3-4"></a>  ADAE = adae_data,</span>
-<span id="cb3-5"><a href="#cb3-5"></a>  code = c(</span>
-<span id="cb3-6"><a href="#cb3-6"></a>    "ADSL &lt;- adsl_data",</span>
-<span id="cb3-7"><a href="#cb3-7"></a>    "ADAE &lt;- adae_data"</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a><span class="co"># For CDISC/ADaM data with relationships</span></span>
+<span id="cb3-2"><a href="#cb3-2"></a>my_data <span class="ot">&lt;-</span> <span class="fu">cdisc_data</span>(</span>
+<span id="cb3-3"><a href="#cb3-3"></a>  <span class="at">ADSL =</span> adsl_data,</span>
+<span id="cb3-4"><a href="#cb3-4"></a>  <span class="at">ADAE =</span> adae_data,</span>
+<span id="cb3-5"><a href="#cb3-5"></a>  <span class="at">code =</span> <span class="fu">c</span>(</span>
+<span id="cb3-6"><a href="#cb3-6"></a>    <span class="st">"ADSL &lt;- adsl_data"</span>,</span>
+<span id="cb3-7"><a href="#cb3-7"></a>    <span class="st">"ADAE &lt;- adae_data"</span></span>
 <span id="cb3-8"><a href="#cb3-8"></a>  )</span>
 <span id="cb3-9"><a href="#cb3-9"></a>)</span>
 <span id="cb3-10"><a href="#cb3-10"></a></span>
-<span id="cb3-11"><a href="#cb3-11"></a>app &lt;- init(</span>
-<span id="cb3-12"><a href="#cb3-12"></a>  data = my_data,</span>
-<span id="cb3-13"><a href="#cb3-13"></a>  modules = modules(...)</span>
+<span id="cb3-11"><a href="#cb3-11"></a>app <span class="ot">&lt;-</span> <span class="fu">init</span>(</span>
+<span id="cb3-12"><a href="#cb3-12"></a>  <span class="at">data =</span> my_data,</span>
+<span id="cb3-13"><a href="#cb3-13"></a>  <span class="at">modules =</span> <span class="fu">modules</span>(...)</span>
 <span id="cb3-14"><a href="#cb3-14"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 <section id="what-the-data-argument-controls" class="level3">
@@ -317,6 +320,109 @@ eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoibGlicmFyeSh0ZWFsLm1vZHVs
 <script type="webr-2-contents">
 eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoibGlicmFyeSh0ZWFsLm1vZHVsZXMuZ2VuZXJhbClcblxuYXBwIDwtIHRlYWw6OmluaXQoXG4gIGRhdGEgPSB0ZWFsLmRhdGE6OnRlYWxfZGF0YShJUklTID0gaXJpcywgTVRDQVJTID0gbXRjYXJzLCBjb2RlID0gXCJJUklTIDwtIGlyaXM7IE1UQ0FSUyA8LSBtdGNhcnNcIiksXG4gIG1vZHVsZXMgPSB0ZWFsOjptb2R1bGVzKFxuICAgIHRlYWwubW9kdWxlcy5nZW5lcmFsOjp0bV9kYXRhX3RhYmxlKFxuICAgICAgbGFiZWwgPSBcIkRhdGEgVGFibGVzXCIsXG4gICAgICBkYXRhbmFtZSA9IFwiSVJJU1wiXG4gICAgKSxcbiAgICB0ZWFsLm1vZHVsZXMuZ2VuZXJhbDo6dG1fdmFyaWFibGVfYnJvd3NlcihcbiAgICAgIGxhYmVsID0gXCJWYXJpYWJsZSBCcm93c2VyXCIsXG4gICAgICBkYXRhbmFtZSA9IFwiSVJJU1wiXG4gICAgKSxcbiAgICB0ZWFsLm1vZHVsZXMuZ2VuZXJhbDo6dG1fZ19zY2F0dGVycGxvdChcbiAgICAgIGxhYmVsID0gXCJTY2F0dGVyIFBsb3RcIixcbiAgICAgIHggPSB0ZWFsLnRyYW5zZm9ybTo6ZGF0YV9leHRyYWN0X3NwZWMoXG4gICAgICAgIGRhdGFuYW1lID0gXCJJUklTXCIsXG4gICAgICAgIHNlbGVjdCA9IHRlYWwudHJhbnNmb3JtOjpzZWxlY3Rfc3BlYyhcbiAgICAgICAgICBjaG9pY2VzID0gdGVhbC50cmFuc2Zvcm06OnZhcmlhYmxlX2Nob2ljZXMoXCJJUklTXCIsIGMoXCJTZXBhbC5MZW5ndGhcIiwgXCJTZXBhbC5XaWR0aFwiKSksXG4gICAgICAgICAgc2VsZWN0ZWQgPSBcIlNlcGFsLkxlbmd0aFwiXG4gICAgICAgIClcbiAgICAgICksXG4gICAgICB5ID0gdGVhbC50cmFuc2Zvcm06OmRhdGFfZXh0cmFjdF9zcGVjKFxuICAgICAgICBkYXRhbmFtZSA9IFwiSVJJU1wiLFxuICAgICAgICBzZWxlY3QgPSB0ZWFsLnRyYW5zZm9ybTo6c2VsZWN0X3NwZWMoXG4gICAgICAgICAgY2hvaWNlcyA9IHRlYWwudHJhbnNmb3JtOjp2YXJpYWJsZV9jaG9pY2VzKFwiSVJJU1wiLCBjKFwiUGV0YWwuTGVuZ3RoXCIsIFwiUGV0YWwuV2lkdGhcIikpLFxuICAgICAgICAgIHNlbGVjdGVkID0gXCJQZXRhbC5MZW5ndGhcIlxuICAgICAgICApXG4gICAgICApXG4gICAgKVxuICApXG4pXG5cbiMgTGF1bmNoIHRoZSBhcHBsaWNhdGlvblxuaWYgKGludGVyYWN0aXZlKCkpIHtcbiAgc2hpbnk6OnNoaW55QXBwKGFwcCR1aSwgYXBwJHNlcnZlcilcbn0ifQ==
 </script>
+</div>
+</div>
+</section>
+<section id="exercise-a-warm-up-really" class="level2">
+<h2 class="anchored" data-anchor-id="exercise-a-warm-up-really">🛠️ Exercise (a warm up really)</h2>
+<ul>
+<li>Try launching this application in your environment.</li>
+</ul>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a><span class="fu">library</span>(teal)</span>
+<span id="cb4-2"><a href="#cb4-2"></a></span>
+<span id="cb4-3"><a href="#cb4-3"></a>app <span class="ot">&lt;-</span> teal<span class="sc">::</span><span class="fu">init</span>(</span>
+<span id="cb4-4"><a href="#cb4-4"></a>  <span class="at">data =</span> teal.data<span class="sc">::</span><span class="fu">teal_data</span>(<span class="at">iris =</span> iris),</span>
+<span id="cb4-5"><a href="#cb4-5"></a>  <span class="at">modules =</span> teal<span class="sc">::</span><span class="fu">example_module</span>(</span>
+<span id="cb4-6"><a href="#cb4-6"></a>    <span class="at">label =</span> <span class="st">"example teal module"</span>,</span>
+<span id="cb4-7"><a href="#cb4-7"></a>    <span class="at">datanames =</span> <span class="st">"all"</span>,</span>
+<span id="cb4-8"><a href="#cb4-8"></a>    <span class="at">transformators =</span> <span class="fu">list</span>(),</span>
+<span id="cb4-9"><a href="#cb4-9"></a>    <span class="at">decorators =</span> <span class="fu">list</span>()</span>
+<span id="cb4-10"><a href="#cb4-10"></a>  )</span>
+<span id="cb4-11"><a href="#cb4-11"></a>)</span>
+<span id="cb4-12"><a href="#cb4-12"></a></span>
+<span id="cb4-13"><a href="#cb4-13"></a><span class="co"># Launch the application</span></span>
+<span id="cb4-14"><a href="#cb4-14"></a><span class="cf">if</span> (<span class="fu">interactive</span>()) {</span>
+<span id="cb4-15"><a href="#cb4-15"></a>  shiny<span class="sc">::</span><span class="fu">shinyApp</span>(app<span class="sc">$</span>ui, app<span class="sc">$</span>server)</span>
+<span id="cb4-16"><a href="#cb4-16"></a>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="exercise" class="level2">
+<h2 class="anchored" data-anchor-id="exercise">🛠️ Exercise</h2>
+<ol type="1">
+<li>Add another dataset to the application - <code>mtcars</code></li>
+<li>Launch the application and check if the dataset is available in the application</li>
+</ol>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Answer
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-1" class="callout-1-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a><span class="fu">library</span>(teal)</span>
+<span id="cb5-2"><a href="#cb5-2"></a></span>
+<span id="cb5-3"><a href="#cb5-3"></a>app <span class="ot">&lt;-</span> teal<span class="sc">::</span><span class="fu">init</span>(</span>
+<span id="cb5-4"><a href="#cb5-4"></a>  <span class="at">data =</span> teal.data<span class="sc">::</span><span class="fu">teal_data</span>(<span class="at">iris =</span> iris, <span class="at">mtcars =</span> mtcars),</span>
+<span id="cb5-5"><a href="#cb5-5"></a>  <span class="at">modules =</span> teal<span class="sc">::</span><span class="fu">example_module</span>(</span>
+<span id="cb5-6"><a href="#cb5-6"></a>    <span class="at">label =</span> <span class="st">"example teal module"</span>,</span>
+<span id="cb5-7"><a href="#cb5-7"></a>    <span class="at">datanames =</span> <span class="st">"all"</span>,</span>
+<span id="cb5-8"><a href="#cb5-8"></a>    <span class="at">transformators =</span> <span class="fu">list</span>(),</span>
+<span id="cb5-9"><a href="#cb5-9"></a>    <span class="at">decorators =</span> <span class="fu">list</span>()</span>
+<span id="cb5-10"><a href="#cb5-10"></a>  )</span>
+<span id="cb5-11"><a href="#cb5-11"></a>)</span>
+<span id="cb5-12"><a href="#cb5-12"></a></span>
+<span id="cb5-13"><a href="#cb5-13"></a><span class="co"># Launch the application</span></span>
+<span id="cb5-14"><a href="#cb5-14"></a><span class="cf">if</span> (<span class="fu">interactive</span>()) {</span>
+<span id="cb5-15"><a href="#cb5-15"></a>  shiny<span class="sc">::</span><span class="fu">shinyApp</span>(app<span class="sc">$</span>ui, app<span class="sc">$</span>server)</span>
+<span id="cb5-16"><a href="#cb5-16"></a>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div>
+</div>
+</section>
+<section id="exercise-1" class="level2">
+<h2 class="anchored" data-anchor-id="exercise-1">🛠️ Exercise</h2>
+<ol type="1">
+<li>Add a new module to the application - <code>teal.modules.general::tm_data_table()</code>.</li>
+<li>Launch the application and check if the module is available in the application</li>
+</ol>
+<p>Hint: you will need to load the <code>teal.modules.general</code> package to use the module. via <code>library(teal.modules.general)</code>. If you feel lost, please check out the manual at: https://insightsengineering.github.io/teal.modules.general/latest-tag/reference/tm_data_table.html</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Answer
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-2" class="callout-2-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a><span class="fu">library</span>(teal)</span>
+<span id="cb6-2"><a href="#cb6-2"></a><span class="fu">library</span>(teal.modules.general) <span class="co"># &lt;- new library call</span></span>
+<span id="cb6-3"><a href="#cb6-3"></a></span>
+<span id="cb6-4"><a href="#cb6-4"></a>app <span class="ot">&lt;-</span> teal<span class="sc">::</span><span class="fu">init</span>(</span>
+<span id="cb6-5"><a href="#cb6-5"></a>  <span class="at">data =</span> teal.data<span class="sc">::</span><span class="fu">teal_data</span>(<span class="at">iris =</span> iris, <span class="at">mtcars =</span> mtcars),</span>
+<span id="cb6-6"><a href="#cb6-6"></a>  <span class="at">modules =</span> teal<span class="sc">::</span><span class="fu">modules</span>(</span>
+<span id="cb6-7"><a href="#cb6-7"></a>    teal<span class="sc">::</span><span class="fu">example_module</span>(</span>
+<span id="cb6-8"><a href="#cb6-8"></a>      <span class="at">label =</span> <span class="st">"example teal module"</span>,</span>
+<span id="cb6-9"><a href="#cb6-9"></a>      <span class="at">datanames =</span> <span class="st">"all"</span>,</span>
+<span id="cb6-10"><a href="#cb6-10"></a>      <span class="at">transformators =</span> <span class="fu">list</span>(),</span>
+<span id="cb6-11"><a href="#cb6-11"></a>      <span class="at">decorators =</span> <span class="fu">list</span>()</span>
+<span id="cb6-12"><a href="#cb6-12"></a>    ),</span>
+<span id="cb6-13"><a href="#cb6-13"></a>    teal.modules.general<span class="sc">::</span><span class="fu">tm_data_table</span>()</span>
+<span id="cb6-14"><a href="#cb6-14"></a>  )</span>
+<span id="cb6-15"><a href="#cb6-15"></a>)</span>
+<span id="cb6-16"><a href="#cb6-16"></a></span>
+<span id="cb6-17"><a href="#cb6-17"></a><span class="co"># Launch the application</span></span>
+<span id="cb6-18"><a href="#cb6-18"></a><span class="cf">if</span> (<span class="fu">interactive</span>()) {</span>
+<span id="cb6-19"><a href="#cb6-19"></a>  shiny<span class="sc">::</span><span class="fu">shinyApp</span>(app<span class="sc">$</span>ui, app<span class="sc">$</span>server)</span>
+<span id="cb6-20"><a href="#cb6-20"></a>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
 </div>
 </div>
 

@@ -78,3 +78,122 @@ When you launch a `teal.modules.clinical` application, you'll observe:
 3. **Main Output (Center)**: Displays the module's primary analytical output
    - Module-specific visualizations or tables
    - Interactive elements for exploration
+
+## 🛠️ Exercise
+
+* create a `cdisc_data` object using `ADSL` and `ADAE` from `pharmaverseadam`
+* use `join_keys(created_data)` to ensure that your data has correct `join_keys`
+
+::: {.callout-tip collapse="true"}
+## Answer
+```{.r}
+library(teal.data)
+library(pharmaverseadam)
+
+my_data <- cdisc_data(ADSL = pharmaverseadam::adsl, ADAE = pharmaverseadam::adae)
+print(join_keys(my_data))
+```
+:::
+
+## 🛠️ Exercise
+
+* using documentation of `teal.modules.clinical` - https://insightsengineering.github.io/teal.modules.clinical/latest-tag/reference/tm_t_events.html
+  create a `teal` application including the `tm_t_events` module
+* change the default sort criterium to alphanumeric
+* add a title to the module's output using `pre_output`
+
+::: {.callout-tip collapse="true"}
+## Answer
+```{.r}
+library(teal.data)
+library(teal)
+library(pharmaverseadam)
+library(teal.modules.clinical)
+
+ADSL <- pharmaverseadam::adsl
+ADSL$ARM <- as.factor(ADSL$ARM)
+ADSL$ARMCD <- as.factor(ADSL$ARMCD)
+my_data <- cdisc_data(ADSL = ADSL, ADAE = pharmaverseadam::adae, code = "
+    ADAE <- pharmaverseadam::adae
+    ADSL <- pharmaverseadam::adsl
+    ADSL$ARM <- as.factor(ADSL$ARM)
+    ADSL$ARMCD <- as.factor(ADSL$ARMCD)
+")
+
+app <- init(
+  data = my_data,
+  modules = modules(
+    tm_t_events(
+      label = "Adverse Event Table",
+      dataname = "ADAE",
+      arm_var = choices_selected(c("ARM", "ARMCD"), "ARM"),
+      llt = choices_selected(
+        choices = variable_choices("ADAE", c("AETERM", "AEDECOD")),
+        selected = c("AEDECOD")
+      ),
+      hlt = choices_selected(
+        choices = variable_choices("ADAE", c("AEBODSYS", "AESOC")),
+        selected = "AEBODSYS"
+      ),
+      add_total = TRUE,
+      event_type = "adverse event",
+      sort_criteria = "alpha",
+      pre_output = shiny::div("Who won the most at the poker last night?")
+    )
+  )
+)
+
+shinyApp(app$ui, app$server)
+```
+:::
+
+## 🛠️ Exercise (for all the early finishers)
+
+* using documentation - https://insightsengineering.github.io/teal.modules.clinical/latest-tag/reference/tm_t_events_summary.html
+  create a `teal` application including the `tm_t_events_summary` module.
+
+::: {.callout-tip collapse="true"}
+## Answer
+```{.r}
+library(dplyr)
+library(teal.modules.clinical)
+
+data <- teal_data()
+data <- within(data, {
+  ADSL <- pharmaverseadam::adsl %>%
+    mutate(
+      DTHFL = case_when(
+        !is.na(DTHDT) ~ "Y",
+        TRUE ~ ""
+      ) %>% with_label("Subject Death Flag")
+    )
+  ADSL$DCSREAS <- NA_character_
+  ADSL$ARM <- as.factor(ADSL$ARM)
+  ADSL$ARMCD <- as.factor(ADSL$ARMCD)
+  ADAE <- pharmaverseadam::adae
+  ADAE$ARM <- as.factor(ADAE$ARM)
+  ADAE$ARMCD <- as.factor(ADAE$ARMCD)
+  ADAE$DCSREAS <- NA_character_
+  levels(ADAE$ARM) <- levels(ADSL$ARM)
+})
+print(data)
+print(names(data[["ADAE"]]))
+join_keys(data) <- default_cdisc_join_keys[names(data)]
+
+app <- init(
+  data = data,
+  modules = modules(
+    tm_t_events_summary(
+      label = "Adverse Events Summary",
+      dataname = "ADAE",
+      arm_var = choices_selected(
+        choices = variable_choices("ADSL", c("ARM", "ARMCD")),
+        selected = "ARM"
+      ),
+      add_total = TRUE
+    )
+  )
+)
+shinyApp(app$ui, app$server)
+```
+:::

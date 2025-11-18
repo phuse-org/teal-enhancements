@@ -174,14 +174,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#option-3-using-cdisc_data-for-clinical-data" id="toc-option-3-using-cdisc_data-for-clinical-data" class="nav-link" data-scroll-target="#option-3-using-cdisc_data-for-clinical-data">Option 3: Using <code>cdisc_data()</code> for clinical data</a></li>
   <li><a href="#introduction-to-teal.data-in-the-context-of-the-cdisc-data-standard" id="toc-introduction-to-teal.data-in-the-context-of-the-cdisc-data-standard" class="nav-link" data-scroll-target="#introduction-to-teal.data-in-the-context-of-the-cdisc-data-standard">Introduction to <code>teal.data</code> in the context of the CDISC data standard</a></li>
   <li><a href="#creating-cdisc_data-objects-with-explicit-code" id="toc-creating-cdisc_data-objects-with-explicit-code" class="nav-link" data-scroll-target="#creating-cdisc_data-objects-with-explicit-code">Creating <code>cdisc_data</code> objects with explicit code</a></li>
-  <li><a href="#complete-cdisc-example-with-adsl-adae-relationships" id="toc-complete-cdisc-example-with-adsl-adae-relationships" class="nav-link" data-scroll-target="#complete-cdisc-example-with-adsl-adae-relationships">Complete CDISC example with ADSL-ADAE relationships</a></li>
   <li><a href="#introduction-to-the-concept-of-keys-in-teal.data" id="toc-introduction-to-the-concept-of-keys-in-teal.data" class="nav-link" data-scroll-target="#introduction-to-the-concept-of-keys-in-teal.data">Introduction to the concept of keys in <code>teal.data</code></a></li>
-  <li><a href="#what-is-the-purpose-of-join_keys" id="toc-what-is-the-purpose-of-join_keys" class="nav-link" data-scroll-target="#what-is-the-purpose-of-join_keys">What is the purpose of <code>join_keys</code>?</a></li>
   <li><a href="#automatic-join-key-detection-with-cdisc_data" id="toc-automatic-join-key-detection-with-cdisc_data" class="nav-link" data-scroll-target="#automatic-join-key-detection-with-cdisc_data">Automatic join key detection with <code>cdisc_data()</code></a></li>
   <li><a href="#understanding-join-key-output" id="toc-understanding-join-key-output" class="nav-link" data-scroll-target="#understanding-join-key-output">Understanding join key output</a></li>
   <li><a href="#creating-a-custom-teal.data-object-with-custom-user-defined-keys---code-samples" id="toc-creating-a-custom-teal.data-object-with-custom-user-defined-keys---code-samples" class="nav-link" data-scroll-target="#creating-a-custom-teal.data-object-with-custom-user-defined-keys---code-samples">Creating a custom <code>teal.data</code> object with custom user-defined keys - code samples</a></li>
   <li><a href="#manual-join-keys-creation" id="toc-manual-join-keys-creation" class="nav-link" data-scroll-target="#manual-join-keys-creation">Manual join keys creation</a></li>
   <li><a href="#overwriting-automatic-join-keys-in-cdisc_data" id="toc-overwriting-automatic-join-keys-in-cdisc_data" class="nav-link" data-scroll-target="#overwriting-automatic-join-keys-in-cdisc_data">Overwriting automatic join keys in <code>cdisc_data</code></a></li>
+  <li><a href="#exercise" id="toc-exercise" class="nav-link" data-scroll-target="#exercise">🛠️ Exercise</a></li>
+  <li><a href="#exercise-1" id="toc-exercise-1" class="nav-link" data-scroll-target="#exercise-1">🛠️ Exercise</a></li>
+  <li><a href="#exercise-2" id="toc-exercise-2" class="nav-link" data-scroll-target="#exercise-2">🛠️ Exercise</a></li>
+  <li><a href="#exercise-3" id="toc-exercise-3" class="nav-link" data-scroll-target="#exercise-3">🛠️ Exercise</a></li>
   </ul>
 </nav>
     </div>
@@ -217,7 +219,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-10"><a href="#cb1-10"></a><span class="fu">print</span>(my_data)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>✖ code unverified
-&lt;environment: 0x12bcc81c8&gt; 🔒 
+&lt;environment: 0x12de9b4e8&gt; 🔒 
 Parent: &lt;environment: package:teal.data&gt; 
 Bindings:
 - IRIS: [data.frame]
@@ -261,254 +263,159 @@ MTCARS$gear &lt;- as.factor(MTCARS$gear)</code></pre>
 <p>For clinical trial data following CDISC standards, <code>teal.data</code> provides the specialized <code>cdisc_data()</code> function that automatically handles common clinical data relationships.</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a><span class="fu">library</span>(teal.data)</span>
-<span id="cb5-2"><a href="#cb5-2"></a></span>
-<span id="cb5-3"><a href="#cb5-3"></a><span class="co"># Create sample ADSL data</span></span>
-<span id="cb5-4"><a href="#cb5-4"></a>adsl <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
-<span id="cb5-5"><a href="#cb5-5"></a>  <span class="at">STUDYID =</span> <span class="fu">rep</span>(<span class="st">"STUDY001"</span>, <span class="dv">50</span>),</span>
-<span id="cb5-6"><a href="#cb5-6"></a>  <span class="at">USUBJID =</span> <span class="fu">paste0</span>(<span class="st">"SUBJ"</span>, <span class="fu">sprintf</span>(<span class="st">"%03d"</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">50</span>)),</span>
-<span id="cb5-7"><a href="#cb5-7"></a>  <span class="at">AGE =</span> <span class="fu">sample</span>(<span class="dv">18</span><span class="sc">:</span><span class="dv">80</span>, <span class="dv">50</span>, <span class="at">replace =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb5-8"><a href="#cb5-8"></a>  <span class="at">SEX =</span> <span class="fu">sample</span>(<span class="fu">c</span>(<span class="st">"M"</span>, <span class="st">"F"</span>), <span class="dv">50</span>, <span class="at">replace =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb5-9"><a href="#cb5-9"></a>  <span class="at">ARM =</span> <span class="fu">sample</span>(<span class="fu">c</span>(<span class="st">"Placebo"</span>, <span class="st">"Treatment"</span>), <span class="dv">50</span>, <span class="at">replace =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb5-10"><a href="#cb5-10"></a>  <span class="at">SAFFL =</span> <span class="st">"Y"</span>,</span>
-<span id="cb5-11"><a href="#cb5-11"></a>  <span class="at">stringsAsFactors =</span> <span class="cn">FALSE</span></span>
-<span id="cb5-12"><a href="#cb5-12"></a>)</span>
-<span id="cb5-13"><a href="#cb5-13"></a></span>
-<span id="cb5-14"><a href="#cb5-14"></a><span class="co"># Create sample ADAE data (adverse events)</span></span>
-<span id="cb5-15"><a href="#cb5-15"></a>adae <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
-<span id="cb5-16"><a href="#cb5-16"></a>  <span class="at">STUDYID =</span> <span class="fu">rep</span>(<span class="st">"STUDY001"</span>, <span class="dv">150</span>),</span>
-<span id="cb5-17"><a href="#cb5-17"></a>  <span class="at">USUBJID =</span> <span class="fu">rep</span>(<span class="fu">paste0</span>(<span class="st">"SUBJ"</span>, <span class="fu">sprintf</span>(<span class="st">"%03d"</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">50</span>)), <span class="at">each =</span> <span class="dv">3</span>),</span>
-<span id="cb5-18"><a href="#cb5-18"></a>  <span class="at">AESEQ =</span> <span class="fu">rep</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>, <span class="dv">50</span>),</span>
-<span id="cb5-19"><a href="#cb5-19"></a>  <span class="at">AEDECOD =</span> <span class="fu">sample</span>(<span class="fu">c</span>(<span class="st">"Headache"</span>, <span class="st">"Nausea"</span>, <span class="st">"Fatigue"</span>, <span class="st">"Dizziness"</span>), <span class="dv">150</span>, <span class="at">replace =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb5-20"><a href="#cb5-20"></a>  <span class="at">AESEV =</span> <span class="fu">sample</span>(<span class="fu">c</span>(<span class="st">"MILD"</span>, <span class="st">"MODERATE"</span>, <span class="st">"SEVERE"</span>), <span class="dv">150</span>, <span class="at">replace =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb5-21"><a href="#cb5-21"></a>  <span class="at">AESER =</span> <span class="fu">sample</span>(<span class="fu">c</span>(<span class="st">"Y"</span>, <span class="st">"N"</span>), <span class="dv">150</span>, <span class="at">replace =</span> <span class="cn">TRUE</span>, <span class="at">prob =</span> <span class="fu">c</span>(<span class="fl">0.1</span>, <span class="fl">0.9</span>)),</span>
-<span id="cb5-22"><a href="#cb5-22"></a>  <span class="at">stringsAsFactors =</span> <span class="cn">FALSE</span></span>
-<span id="cb5-23"><a href="#cb5-23"></a>)</span>
-<span id="cb5-24"><a href="#cb5-24"></a></span>
-<span id="cb5-25"><a href="#cb5-25"></a><span class="co"># Create cdisc_data object</span></span>
-<span id="cb5-26"><a href="#cb5-26"></a>clinical_data <span class="ot">&lt;-</span> <span class="fu">cdisc_data</span>(</span>
-<span id="cb5-27"><a href="#cb5-27"></a>  <span class="at">ADSL =</span> adsl,</span>
-<span id="cb5-28"><a href="#cb5-28"></a>  <span class="at">ADAE =</span> adae,</span>
-<span id="cb5-29"><a href="#cb5-29"></a>  <span class="at">code =</span> <span class="fu">c</span>(</span>
-<span id="cb5-30"><a href="#cb5-30"></a>    <span class="st">"ADSL &lt;- adsl_data_creation_code()"</span>,</span>
-<span id="cb5-31"><a href="#cb5-31"></a>    <span class="st">"ADAE &lt;- adae_data_creation_code()"</span></span>
-<span id="cb5-32"><a href="#cb5-32"></a>  )</span>
-<span id="cb5-33"><a href="#cb5-33"></a>)</span>
-<span id="cb5-34"><a href="#cb5-34"></a></span>
-<span id="cb5-35"><a href="#cb5-35"></a><span class="fu">print</span>(clinical_data)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb5-2"><a href="#cb5-2"></a><span class="fu">library</span>(pharmaverseadam)</span>
+<span id="cb5-3"><a href="#cb5-3"></a></span>
+<span id="cb5-4"><a href="#cb5-4"></a>adsl <span class="ot">&lt;-</span> pharmaverseadam<span class="sc">::</span>adsl</span>
+<span id="cb5-5"><a href="#cb5-5"></a>adae <span class="ot">&lt;-</span> pharmaverseadam<span class="sc">::</span>adae</span>
+<span id="cb5-6"><a href="#cb5-6"></a></span>
+<span id="cb5-7"><a href="#cb5-7"></a><span class="co"># Create cdisc_data object</span></span>
+<span id="cb5-8"><a href="#cb5-8"></a>clinical_data <span class="ot">&lt;-</span> <span class="fu">cdisc_data</span>(</span>
+<span id="cb5-9"><a href="#cb5-9"></a>  <span class="at">ADSL =</span> adsl,</span>
+<span id="cb5-10"><a href="#cb5-10"></a>  <span class="at">ADAE =</span> adae,</span>
+<span id="cb5-11"><a href="#cb5-11"></a>  <span class="at">code =</span> <span class="fu">c</span>(</span>
+<span id="cb5-12"><a href="#cb5-12"></a>    <span class="st">"adsl &lt;- pharmaverseadam::adsl"</span>,</span>
+<span id="cb5-13"><a href="#cb5-13"></a>    <span class="st">"adae &lt;- pharmaverseadam::adae"</span></span>
+<span id="cb5-14"><a href="#cb5-14"></a>  )</span>
+<span id="cb5-15"><a href="#cb5-15"></a>)</span>
+<span id="cb5-16"><a href="#cb5-16"></a></span>
+<span id="cb5-17"><a href="#cb5-17"></a><span class="fu">print</span>(clinical_data)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>✖ code unverified
-&lt;environment: 0x10cfbae80&gt; 🔒 
-Parent: &lt;environment: package:teal.data&gt; 
+&lt;environment: 0x10b459698&gt; 🔒 
+Parent: &lt;environment: package:pharmaverseadam&gt; 
 Bindings:
-- ADAE: [data.frame]
-- ADSL: [data.frame]</code></pre>
+- ADAE: [tbl_df]
+- ADSL: [tbl_df]</code></pre>
 </div>
 </div>
 </section>
 <section id="introduction-to-teal.data-in-the-context-of-the-cdisc-data-standard" class="level2">
 <h2 class="anchored" data-anchor-id="introduction-to-teal.data-in-the-context-of-the-cdisc-data-standard">Introduction to <code>teal.data</code> in the context of the CDISC data standard</h2>
-<p>The <code>teal.data</code> package serves as the foundation for all data operations in <code>teal</code>. It provides a structured way to: - Store multiple datasets in a single object - Track the code used to create or modify data - Define relationships between datasets</p>
-<p>When you create a <code>teal_data</code> object, <code>teal</code> does several things behind the scenes: 1. <strong>Data storage</strong> - Your datasets are stored within the object 2. <strong>Code tracking</strong> - The creation process is recorded for reproducibility 3. <strong>Metadata creation</strong> - Information about datasets and their relationships is stored</p>
+<p>The <code>teal.data</code> package serves as the foundation for all data operations in <code>teal</code>. It provides a structured way to:</p>
+<ul>
+<li>Store multiple datasets in a single object</li>
+<li>Track the code used to create or modify data</li>
+<li>Define relationships between datasets</li>
+</ul>
+<p>When you create a <code>teal_data</code> object, <code>teal</code> does several things behind the scenes:</p>
+<ol type="1">
+<li><strong>Data storage</strong> - Your datasets are stored within the object</li>
+<li><strong>Code tracking</strong> - The creation process is recorded for reproducibility</li>
+<li><strong>Metadata creation</strong> - Information about datasets and their relationships is stored</li>
+</ol>
 </section>
 <section id="creating-cdisc_data-objects-with-explicit-code" class="level2">
 <h2 class="anchored" data-anchor-id="creating-cdisc_data-objects-with-explicit-code">Creating <code>cdisc_data</code> objects with explicit code</h2>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a><span class="co"># More explicit approach with within()</span></span>
-<span id="cb7-2"><a href="#cb7-2"></a>clinical_data <span class="ot">&lt;-</span> <span class="fu">cdisc_data</span>()</span>
-<span id="cb7-3"><a href="#cb7-3"></a></span>
-<span id="cb7-4"><a href="#cb7-4"></a>clinical_data <span class="ot">&lt;-</span> <span class="fu">within</span>(clinical_data, {</span>
-<span id="cb7-5"><a href="#cb7-5"></a>  <span class="co"># Create ADSL</span></span>
-<span id="cb7-6"><a href="#cb7-6"></a>  ADSL <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
-<span id="cb7-7"><a href="#cb7-7"></a>    <span class="at">STUDYID =</span> <span class="fu">rep</span>(<span class="st">"STUDY001"</span>, <span class="dv">100</span>),</span>
-<span id="cb7-8"><a href="#cb7-8"></a>    <span class="at">USUBJID =</span> <span class="fu">paste0</span>(<span class="st">"SUBJ"</span>, <span class="fu">sprintf</span>(<span class="st">"%03d"</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">100</span>)),</span>
-<span id="cb7-9"><a href="#cb7-9"></a>    <span class="at">AGE =</span> <span class="fu">sample</span>(<span class="dv">18</span><span class="sc">:</span><span class="dv">80</span>, <span class="dv">100</span>, <span class="at">replace =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb7-10"><a href="#cb7-10"></a>    <span class="at">SEX =</span> <span class="fu">as.factor</span>(<span class="fu">sample</span>(<span class="fu">c</span>(<span class="st">"M"</span>, <span class="st">"F"</span>), <span class="dv">100</span>, <span class="at">replace =</span> <span class="cn">TRUE</span>)),</span>
-<span id="cb7-11"><a href="#cb7-11"></a>    <span class="at">ARM =</span> <span class="fu">as.factor</span>(<span class="fu">sample</span>(<span class="fu">c</span>(<span class="st">"Placebo"</span>, <span class="st">"Treatment"</span>), <span class="dv">100</span>, <span class="at">replace =</span> <span class="cn">TRUE</span>)),</span>
-<span id="cb7-12"><a href="#cb7-12"></a>    <span class="at">SAFFL =</span> <span class="st">"Y"</span></span>
-<span id="cb7-13"><a href="#cb7-13"></a>  )</span>
-<span id="cb7-14"><a href="#cb7-14"></a></span>
-<span id="cb7-15"><a href="#cb7-15"></a>  <span class="co"># Create ADAE based on ADSL</span></span>
-<span id="cb7-16"><a href="#cb7-16"></a>  n_events <span class="ot">&lt;-</span> <span class="dv">300</span></span>
-<span id="cb7-17"><a href="#cb7-17"></a>  ADAE <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
-<span id="cb7-18"><a href="#cb7-18"></a>    <span class="at">STUDYID =</span> <span class="st">"STUDY001"</span>,</span>
-<span id="cb7-19"><a href="#cb7-19"></a>    <span class="at">USUBJID =</span> <span class="fu">sample</span>(ADSL<span class="sc">$</span>USUBJID, n_events, <span class="at">replace =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb7-20"><a href="#cb7-20"></a>    <span class="at">AESEQ =</span> <span class="fu">sequence</span>(<span class="fu">table</span>(<span class="fu">sample</span>(ADSL<span class="sc">$</span>USUBJID, n_events, <span class="at">replace =</span> <span class="cn">TRUE</span>))),</span>
-<span id="cb7-21"><a href="#cb7-21"></a>    <span class="at">AEDECOD =</span> <span class="fu">sample</span>(<span class="fu">c</span>(<span class="st">"Headache"</span>, <span class="st">"Nausea"</span>, <span class="st">"Fatigue"</span>), n_events, <span class="at">replace =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb7-22"><a href="#cb7-22"></a>    <span class="at">AESEV =</span> <span class="fu">as.factor</span>(<span class="fu">sample</span>(<span class="fu">c</span>(<span class="st">"MILD"</span>, <span class="st">"MODERATE"</span>, <span class="st">"SEVERE"</span>), n_events, <span class="at">replace =</span> <span class="cn">TRUE</span>))</span>
-<span id="cb7-23"><a href="#cb7-23"></a>  )</span>
-<span id="cb7-24"><a href="#cb7-24"></a>})</span>
-<span id="cb7-25"><a href="#cb7-25"></a></span>
-<span id="cb7-26"><a href="#cb7-26"></a><span class="co"># View the structure and join keys</span></span>
-<span id="cb7-27"><a href="#cb7-27"></a><span class="fu">print</span>(clinical_data)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>✅︎ code verified
-&lt;environment: 0x10c63dba0&gt; 🔒 
-Parent: &lt;environment: package:teal.data&gt; 
-Bindings:
-- ADAE: [data.frame]
-- ADSL: [data.frame]
-- n_events: [numeric]</code></pre>
-</div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a><span class="fu">join_keys</span>(clinical_data)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>An empty join_keys object. </code></pre>
-</div>
-</div>
-</section>
-<section id="complete-cdisc-example-with-adsl-adae-relationships" class="level2">
-<h2 class="anchored" data-anchor-id="complete-cdisc-example-with-adsl-adae-relationships">Complete CDISC example with ADSL-ADAE relationships</h2>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1"></a><span class="co"># Step 1: Create the datasets</span></span>
-<span id="cb11-2"><a href="#cb11-2"></a>cdisc_example <span class="ot">&lt;-</span> <span class="fu">teal_data</span>()</span>
-<span id="cb11-3"><a href="#cb11-3"></a></span>
-<span id="cb11-4"><a href="#cb11-4"></a>cdisc_example <span class="ot">&lt;-</span> <span class="fu">within</span>(cdisc_example, {</span>
-<span id="cb11-5"><a href="#cb11-5"></a>  <span class="co"># ADSL: Subject-Level Analysis Dataset</span></span>
-<span id="cb11-6"><a href="#cb11-6"></a>  ADSL <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
-<span id="cb11-7"><a href="#cb11-7"></a>    <span class="at">STUDYID =</span> <span class="fu">rep</span>(<span class="st">"STUDY001"</span>, <span class="dv">100</span>),</span>
-<span id="cb11-8"><a href="#cb11-8"></a>    <span class="at">USUBJID =</span> <span class="fu">paste0</span>(<span class="st">"SUBJ"</span>, <span class="fu">sprintf</span>(<span class="st">"%03d"</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">100</span>)),</span>
-<span id="cb11-9"><a href="#cb11-9"></a>    <span class="at">SUBJID =</span> <span class="fu">sprintf</span>(<span class="st">"%03d"</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">100</span>),</span>
-<span id="cb11-10"><a href="#cb11-10"></a>    <span class="at">SITEID =</span> <span class="fu">sample</span>(<span class="fu">paste0</span>(<span class="st">"SITE"</span>, <span class="fu">sprintf</span>(<span class="st">"%02d"</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>)), <span class="dv">100</span>, <span class="at">replace =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb11-11"><a href="#cb11-11"></a>    <span class="at">AGE =</span> <span class="fu">sample</span>(<span class="dv">18</span><span class="sc">:</span><span class="dv">80</span>, <span class="dv">100</span>, <span class="at">replace =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb11-12"><a href="#cb11-12"></a>    <span class="at">AGEGR1 =</span> <span class="fu">cut</span>(<span class="fu">sample</span>(<span class="dv">18</span><span class="sc">:</span><span class="dv">80</span>, <span class="dv">100</span>, <span class="at">replace =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb11-13"><a href="#cb11-13"></a>                 <span class="at">breaks =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">30</span>, <span class="dv">50</span>, <span class="dv">65</span>, <span class="dv">100</span>),</span>
-<span id="cb11-14"><a href="#cb11-14"></a>                 <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"&lt;30"</span>, <span class="st">"30-50"</span>, <span class="st">"50-65"</span>, <span class="st">"&gt;65"</span>)),</span>
-<span id="cb11-15"><a href="#cb11-15"></a>    <span class="at">SEX =</span> <span class="fu">as.factor</span>(<span class="fu">sample</span>(<span class="fu">c</span>(<span class="st">"M"</span>, <span class="st">"F"</span>), <span class="dv">100</span>, <span class="at">replace =</span> <span class="cn">TRUE</span>)),</span>
-<span id="cb11-16"><a href="#cb11-16"></a>    <span class="at">RACE =</span> <span class="fu">as.factor</span>(<span class="fu">sample</span>(<span class="fu">c</span>(<span class="st">"WHITE"</span>, <span class="st">"BLACK"</span>, <span class="st">"ASIAN"</span>, <span class="st">"OTHER"</span>), <span class="dv">100</span>, <span class="at">replace =</span> <span class="cn">TRUE</span>)),</span>
-<span id="cb11-17"><a href="#cb11-17"></a>    <span class="at">ARM =</span> <span class="fu">as.factor</span>(<span class="fu">sample</span>(<span class="fu">c</span>(<span class="st">"Placebo"</span>, <span class="st">"Treatment A"</span>, <span class="st">"Treatment B"</span>), <span class="dv">100</span>, <span class="at">replace =</span> <span class="cn">TRUE</span>)),</span>
-<span id="cb11-18"><a href="#cb11-18"></a>    <span class="at">ACTARM =</span> <span class="fu">as.factor</span>(<span class="fu">sample</span>(<span class="fu">c</span>(<span class="st">"Placebo"</span>, <span class="st">"Treatment A"</span>, <span class="st">"Treatment B"</span>), <span class="dv">100</span>, <span class="at">replace =</span> <span class="cn">TRUE</span>)),</span>
-<span id="cb11-19"><a href="#cb11-19"></a>    <span class="at">SAFFL =</span> <span class="st">"Y"</span>,</span>
-<span id="cb11-20"><a href="#cb11-20"></a>    <span class="at">ITTFL =</span> <span class="st">"Y"</span></span>
-<span id="cb11-21"><a href="#cb11-21"></a>  )</span>
-<span id="cb11-22"><a href="#cb11-22"></a></span>
-<span id="cb11-23"><a href="#cb11-23"></a>  <span class="co"># ADAE: Adverse Event Analysis Dataset</span></span>
-<span id="cb11-24"><a href="#cb11-24"></a>  <span class="co"># Generate realistic number of AEs per subject</span></span>
-<span id="cb11-25"><a href="#cb11-25"></a>  ae_counts <span class="ot">&lt;-</span> <span class="fu">rpois</span>(<span class="dv">100</span>, <span class="fl">2.5</span>)  <span class="co"># Average 2.5 AEs per subject</span></span>
-<span id="cb11-26"><a href="#cb11-26"></a>  total_aes <span class="ot">&lt;-</span> <span class="fu">sum</span>(ae_counts)</span>
-<span id="cb11-27"><a href="#cb11-27"></a></span>
-<span id="cb11-28"><a href="#cb11-28"></a>  ADAE <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
-<span id="cb11-29"><a href="#cb11-29"></a>    <span class="at">STUDYID =</span> <span class="fu">rep</span>(<span class="st">"STUDY001"</span>, total_aes),</span>
-<span id="cb11-30"><a href="#cb11-30"></a>    <span class="at">USUBJID =</span> <span class="fu">rep</span>(ADSL<span class="sc">$</span>USUBJID, ae_counts),</span>
-<span id="cb11-31"><a href="#cb11-31"></a>    <span class="at">SUBJID =</span> <span class="fu">rep</span>(ADSL<span class="sc">$</span>SUBJID, ae_counts),</span>
-<span id="cb11-32"><a href="#cb11-32"></a>    <span class="at">SITEID =</span> <span class="fu">rep</span>(ADSL<span class="sc">$</span>SITEID, ae_counts),</span>
-<span id="cb11-33"><a href="#cb11-33"></a>    <span class="at">AESEQ =</span> <span class="fu">sequence</span>(ae_counts),</span>
-<span id="cb11-34"><a href="#cb11-34"></a>    <span class="at">AEDECOD =</span> <span class="fu">sample</span>(<span class="fu">c</span>(<span class="st">"Headache"</span>, <span class="st">"Nausea"</span>, <span class="st">"Fatigue"</span>, <span class="st">"Dizziness"</span>, <span class="st">"Insomnia"</span>,</span>
-<span id="cb11-35"><a href="#cb11-35"></a>                       <span class="st">"Diarrhea"</span>, <span class="st">"Constipation"</span>, <span class="st">"Rash"</span>, <span class="st">"Cough"</span>, <span class="st">"Fever"</span>),</span>
-<span id="cb11-36"><a href="#cb11-36"></a>                     total_aes, <span class="at">replace =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb11-37"><a href="#cb11-37"></a>    <span class="at">AEBODSYS =</span> <span class="fu">sample</span>(<span class="fu">c</span>(<span class="st">"Nervous system disorders"</span>, <span class="st">"Gastrointestinal disorders"</span>,</span>
-<span id="cb11-38"><a href="#cb11-38"></a>                        <span class="st">"General disorders"</span>, <span class="st">"Skin and subcutaneous tissue disorders"</span>,</span>
-<span id="cb11-39"><a href="#cb11-39"></a>                        <span class="st">"Respiratory disorders"</span>), total_aes, <span class="at">replace =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb11-40"><a href="#cb11-40"></a>    <span class="at">AESEV =</span> <span class="fu">as.factor</span>(<span class="fu">sample</span>(<span class="fu">c</span>(<span class="st">"MILD"</span>, <span class="st">"MODERATE"</span>, <span class="st">"SEVERE"</span>), total_aes,</span>
-<span id="cb11-41"><a href="#cb11-41"></a>                            <span class="at">replace =</span> <span class="cn">TRUE</span>, <span class="at">prob =</span> <span class="fu">c</span>(<span class="fl">0.6</span>, <span class="fl">0.3</span>, <span class="fl">0.1</span>))),</span>
-<span id="cb11-42"><a href="#cb11-42"></a>    <span class="at">AESER =</span> <span class="fu">as.factor</span>(<span class="fu">sample</span>(<span class="fu">c</span>(<span class="st">"Y"</span>, <span class="st">"N"</span>), total_aes, <span class="at">replace =</span> <span class="cn">TRUE</span>, <span class="at">prob =</span> <span class="fu">c</span>(<span class="fl">0.05</span>, <span class="fl">0.95</span>))),</span>
-<span id="cb11-43"><a href="#cb11-43"></a>    <span class="at">AEREL =</span> <span class="fu">as.factor</span>(<span class="fu">sample</span>(<span class="fu">c</span>(<span class="st">"RELATED"</span>, <span class="st">"NOT RELATED"</span>, <span class="st">"POSSIBLY RELATED"</span>),</span>
-<span id="cb11-44"><a href="#cb11-44"></a>                            total_aes, <span class="at">replace =</span> <span class="cn">TRUE</span>, <span class="at">prob =</span> <span class="fu">c</span>(<span class="fl">0.2</span>, <span class="fl">0.6</span>, <span class="fl">0.2</span>))),</span>
-<span id="cb11-45"><a href="#cb11-45"></a>    <span class="at">AEACN =</span> <span class="fu">as.factor</span>(<span class="fu">sample</span>(<span class="fu">c</span>(<span class="st">"NONE"</span>, <span class="st">"DOSE REDUCED"</span>, <span class="st">"DRUG WITHDRAWN"</span>),</span>
-<span id="cb11-46"><a href="#cb11-46"></a>                            total_aes, <span class="at">replace =</span> <span class="cn">TRUE</span>, <span class="at">prob =</span> <span class="fu">c</span>(<span class="fl">0.8</span>, <span class="fl">0.15</span>, <span class="fl">0.05</span>))),</span>
-<span id="cb11-47"><a href="#cb11-47"></a>    <span class="at">AESTDY =</span> <span class="fu">sample</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">365</span>, total_aes, <span class="at">replace =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb11-48"><a href="#cb11-48"></a>    <span class="at">SAFFL =</span> <span class="st">"Y"</span></span>
-<span id="cb11-49"><a href="#cb11-49"></a>  )</span>
-<span id="cb11-50"><a href="#cb11-50"></a>})</span>
-<span id="cb11-51"><a href="#cb11-51"></a></span>
-<span id="cb11-52"><a href="#cb11-52"></a><span class="co"># Step 2: Understand the automatic join keys</span></span>
-<span id="cb11-53"><a href="#cb11-53"></a><span class="fu">cat</span>(<span class="st">"Automatic CDISC join keys:</span><span class="sc">\n</span><span class="st">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>Automatic CDISC join keys:</code></pre>
-</div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1"></a><span class="fu">print</span>(<span class="fu">join_keys</span>(cdisc_example))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>An empty join_keys object. </code></pre>
-</div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1"></a><span class="co"># Step 3: Verify the relationships work</span></span>
-<span id="cb15-2"><a href="#cb15-2"></a><span class="fu">cat</span>(<span class="st">"</span><span class="sc">\n</span><span class="st">Testing the relationship:</span><span class="sc">\n</span><span class="st">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>
-Testing the relationship:</code></pre>
-</div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1"></a><span class="fu">cat</span>(<span class="st">"ADSL subjects:"</span>, <span class="fu">length</span>(<span class="fu">unique</span>(cdisc_example[[<span class="st">"ADSL"</span>]]<span class="sc">$</span>USUBJID)), <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>ADSL subjects: 100 </code></pre>
-</div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1"></a><span class="fu">cat</span>(<span class="st">"ADAE subjects:"</span>, <span class="fu">length</span>(<span class="fu">unique</span>(cdisc_example[[<span class="st">"ADAE"</span>]]<span class="sc">$</span>USUBJID)), <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>ADAE subjects: 96 </code></pre>
-</div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1"></a><span class="fu">cat</span>(<span class="st">"ADAE events:"</span>, <span class="fu">nrow</span>(cdisc_example[[<span class="st">"ADAE"</span>]]), <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>ADAE events: 234 </code></pre>
-</div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1"></a><span class="co"># Step 4: Manual verification of join key validity</span></span>
-<span id="cb23-2"><a href="#cb23-2"></a>adsl_keys <span class="ot">&lt;-</span> <span class="fu">unique</span>(cdisc_example[[<span class="st">"ADSL"</span>]][<span class="fu">c</span>(<span class="st">"STUDYID"</span>, <span class="st">"USUBJID"</span>)])</span>
-<span id="cb23-3"><a href="#cb23-3"></a>adae_keys <span class="ot">&lt;-</span> <span class="fu">unique</span>(cdisc_example[[<span class="st">"ADAE"</span>]][<span class="fu">c</span>(<span class="st">"STUDYID"</span>, <span class="st">"USUBJID"</span>)])</span>
-<span id="cb23-4"><a href="#cb23-4"></a><span class="fu">cat</span>(<span class="st">"All ADAE subjects exist in ADSL:"</span>, <span class="fu">all</span>(adae_keys<span class="sc">$</span>USUBJID <span class="sc">%in%</span> adsl_keys<span class="sc">$</span>USUBJID), <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>All ADAE subjects exist in ADSL: TRUE </code></pre>
-</div>
-</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a><span class="co"># More explicit approach with within()</span></span>
+<span id="cb7-2"><a href="#cb7-2"></a><span class="fu">library</span>(teal.data)</span>
+<span id="cb7-3"><a href="#cb7-3"></a><span class="fu">library</span>(teal)</span>
+<span id="cb7-4"><a href="#cb7-4"></a><span class="fu">library</span>(pharmaverseadam)</span>
+<span id="cb7-5"><a href="#cb7-5"></a></span>
+<span id="cb7-6"><a href="#cb7-6"></a>clinical_data <span class="ot">&lt;-</span> <span class="fu">cdisc_data</span>()</span>
+<span id="cb7-7"><a href="#cb7-7"></a>clinical_data <span class="ot">&lt;-</span> <span class="fu">within</span>(clinical_data, {</span>
+<span id="cb7-8"><a href="#cb7-8"></a>  adsl <span class="ot">&lt;-</span> pharmaverseadam<span class="sc">::</span>adsl</span>
+<span id="cb7-9"><a href="#cb7-9"></a>  adae <span class="ot">&lt;-</span> pharmaverseadam<span class="sc">::</span>adae</span>
+<span id="cb7-10"><a href="#cb7-10"></a>})</span>
+<span id="cb7-11"><a href="#cb7-11"></a><span class="fu">join_keys</span>(clinical_data) <span class="ot">&lt;-</span> teal.data<span class="sc">::</span>default_cdisc_join_keys[<span class="fu">c</span>(<span class="st">"ADSL"</span>, <span class="st">"ADAE"</span>)]</span>
+<span id="cb7-12"><a href="#cb7-12"></a></span>
+<span id="cb7-13"><a href="#cb7-13"></a><span class="co"># View the structure and join keys</span></span>
+<span id="cb7-14"><a href="#cb7-14"></a><span class="fu">print</span>(clinical_data)</span>
+<span id="cb7-15"><a href="#cb7-15"></a><span class="fu">print</span>(<span class="fu">join_keys</span>(clinical_data))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 <section id="introduction-to-the-concept-of-keys-in-teal.data" class="level2">
 <h2 class="anchored" data-anchor-id="introduction-to-the-concept-of-keys-in-teal.data">Introduction to the concept of keys in <code>teal.data</code></h2>
 <p><code>join_keys</code> define how datasets relate to each other, which is crucial for: - Proper filtering across related datasets (filtering on the parent dataset filters entries in the child dataset as well) - Correct data merging in modules (<code>join_key</code> are used by the modules to merge datasets together)</p>
 </section>
-<section id="what-is-the-purpose-of-join_keys" class="level2">
-<h2 class="anchored" data-anchor-id="what-is-the-purpose-of-join_keys">What is the purpose of <code>join_keys</code>?</h2>
-<p><code>join_keys</code> serve several critical functions: 1. <strong>Data Relationships</strong> - Define how datasets connect (parent-child relationships) 2. <strong>Filter Propagation</strong> - Ensure filters apply correctly across related datasets 3. <strong>Module Integration</strong> - Help modules understand how to merge data correctly</p>
-</section>
 <section id="automatic-join-key-detection-with-cdisc_data" class="level2">
 <h2 class="anchored" data-anchor-id="automatic-join-key-detection-with-cdisc_data">Automatic join key detection with <code>cdisc_data()</code></h2>
 <p>One of the key advantages of <code>cdisc_data()</code> is automatic join key detection:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb25"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1"></a><span class="co"># View the automatically detected join keys</span></span>
-<span id="cb25-2"><a href="#cb25-2"></a><span class="fu">join_keys</span>(clinical_data)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a><span class="fu">library</span>(pharmaverseadam)</span>
+<span id="cb8-2"><a href="#cb8-2"></a><span class="fu">library</span>(teal)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Loading required package: shiny</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Loading required package: teal.slice</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Registered S3 method overwritten by 'teal':
+  method        from      
+  c.teal_slices teal.slice</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+You are using teal version 1.1.0</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Attaching package: 'teal'</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>The following objects are masked from 'package:teal.slice':
+
+    as.teal_slices, teal_slices</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1"></a><span class="fu">library</span>(teal.data)</span>
+<span id="cb15-2"><a href="#cb15-2"></a></span>
+<span id="cb15-3"><a href="#cb15-3"></a>adsl <span class="ot">&lt;-</span> pharmaverseadam<span class="sc">::</span>adsl</span>
+<span id="cb15-4"><a href="#cb15-4"></a>clinical_data_1 <span class="ot">&lt;-</span> teal.data<span class="sc">::</span><span class="fu">cdisc_data</span>(<span class="at">ADSL =</span> adsl, <span class="at">code =</span> <span class="st">"ADSL &lt;- pharmaverseadam::adsl"</span>)</span>
+<span id="cb15-5"><a href="#cb15-5"></a><span class="fu">print</span>(<span class="fu">join_keys</span>(clinical_data_1))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>A join_keys object containing foreign keys between 1 datasets:
+ADSL: [STUDYID, USUBJID] </code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1"></a>clinical_data_2 <span class="ot">&lt;-</span> teal.data<span class="sc">::</span><span class="fu">cdisc_data</span>()</span>
+<span id="cb17-2"><a href="#cb17-2"></a>clinical_data_2 <span class="ot">&lt;-</span> <span class="fu">within</span>(clinical_data_2, {</span>
+<span id="cb17-3"><a href="#cb17-3"></a>  ADSL <span class="ot">&lt;-</span> pharmaverseadam<span class="sc">::</span>adsl</span>
+<span id="cb17-4"><a href="#cb17-4"></a>})</span>
+<span id="cb17-5"><a href="#cb17-5"></a><span class="fu">print</span>(<span class="fu">join_keys</span>(clinical_data_2))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>An empty join_keys object. </code></pre>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb27"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1"></a><span class="co"># The output will show:</span></span>
-<span id="cb27-2"><a href="#cb27-2"></a><span class="co"># ADSL &lt;-&gt; ADAE: [STUDYID, USUBJID]</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
+<p>Notice the difference in the two above prints. When we pass a dataset directly to <code>cdisc_data</code> constructor, the constructor automatically adds the <code>join_keys</code> object. Whereas in the second example, we used <code>within</code> and our object did not automatically receive correct <code>join_keys</code>.</p>
 </section>
 <section id="understanding-join-key-output" class="level2">
 <h2 class="anchored" data-anchor-id="understanding-join-key-output">Understanding join key output</h2>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb28"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1"></a><span class="co"># Create example with multiple relationships</span></span>
-<span id="cb28-2"><a href="#cb28-2"></a>complex_data <span class="ot">&lt;-</span> <span class="fu">cdisc_data</span>()</span>
-<span id="cb28-3"><a href="#cb28-3"></a></span>
-<span id="cb28-4"><a href="#cb28-4"></a>complex_data <span class="ot">&lt;-</span> <span class="fu">within</span>(complex_data, {</span>
-<span id="cb28-5"><a href="#cb28-5"></a>  ADSL <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
-<span id="cb28-6"><a href="#cb28-6"></a>    <span class="at">STUDYID =</span> <span class="fu">rep</span>(<span class="st">"STUDY001"</span>, <span class="dv">30</span>),</span>
-<span id="cb28-7"><a href="#cb28-7"></a>    <span class="at">USUBJID =</span> <span class="fu">paste0</span>(<span class="st">"SUBJ"</span>, <span class="fu">sprintf</span>(<span class="st">"%03d"</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">30</span>)),</span>
-<span id="cb28-8"><a href="#cb28-8"></a>    <span class="at">SITEID =</span> <span class="fu">sample</span>(<span class="fu">paste0</span>(<span class="st">"SITE"</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>), <span class="dv">30</span>, <span class="at">replace =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb28-9"><a href="#cb28-9"></a>    <span class="at">AGE =</span> <span class="fu">sample</span>(<span class="dv">18</span><span class="sc">:</span><span class="dv">80</span>, <span class="dv">30</span>, <span class="at">replace =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb28-10"><a href="#cb28-10"></a>  )</span>
-<span id="cb28-11"><a href="#cb28-11"></a></span>
-<span id="cb28-12"><a href="#cb28-12"></a>  ADAE <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
-<span id="cb28-13"><a href="#cb28-13"></a>    <span class="at">STUDYID =</span> <span class="st">"STUDY001"</span>,</span>
-<span id="cb28-14"><a href="#cb28-14"></a>    <span class="at">USUBJID =</span> <span class="fu">sample</span>(ADSL<span class="sc">$</span>USUBJID, <span class="dv">90</span>, <span class="at">replace =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb28-15"><a href="#cb28-15"></a>    <span class="at">AESEQ =</span> <span class="fu">sequence</span>(<span class="fu">table</span>(<span class="fu">sample</span>(ADSL<span class="sc">$</span>USUBJID, <span class="dv">90</span>, <span class="at">replace =</span> <span class="cn">TRUE</span>))),</span>
-<span id="cb28-16"><a href="#cb28-16"></a>    <span class="at">AEDECOD =</span> <span class="fu">sample</span>(<span class="fu">c</span>(<span class="st">"Headache"</span>, <span class="st">"Nausea"</span>), <span class="dv">90</span>, <span class="at">replace =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb28-17"><a href="#cb28-17"></a>  )</span>
-<span id="cb28-18"><a href="#cb28-18"></a></span>
-<span id="cb28-19"><a href="#cb28-19"></a>  ADLB <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
-<span id="cb28-20"><a href="#cb28-20"></a>    <span class="at">STUDYID =</span> <span class="st">"STUDY001"</span>,</span>
-<span id="cb28-21"><a href="#cb28-21"></a>    <span class="at">USUBJID =</span> <span class="fu">sample</span>(ADSL<span class="sc">$</span>USUBJID, <span class="dv">120</span>, <span class="at">replace =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb28-22"><a href="#cb28-22"></a>    <span class="at">PARAMCD =</span> <span class="fu">sample</span>(<span class="fu">c</span>(<span class="st">"ALT"</span>, <span class="st">"AST"</span>, <span class="st">"BILI"</span>), <span class="dv">120</span>, <span class="at">replace =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb28-23"><a href="#cb28-23"></a>    <span class="at">AVAL =</span> <span class="fu">rnorm</span>(<span class="dv">120</span>, <span class="dv">50</span>, <span class="dv">10</span>)</span>
-<span id="cb28-24"><a href="#cb28-24"></a>  )</span>
-<span id="cb28-25"><a href="#cb28-25"></a>})</span>
-<span id="cb28-26"><a href="#cb28-26"></a></span>
-<span id="cb28-27"><a href="#cb28-27"></a><span class="co"># Print and interpret join keys</span></span>
-<span id="cb28-28"><a href="#cb28-28"></a><span class="fu">cat</span>(<span class="st">"Join Keys Structure:</span><span class="sc">\n</span><span class="st">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1"></a><span class="fu">library</span>(pharmaverseadam)</span>
+<span id="cb19-2"><a href="#cb19-2"></a><span class="fu">library</span>(teal.data)</span>
+<span id="cb19-3"><a href="#cb19-3"></a><span class="fu">library</span>(teal)</span>
+<span id="cb19-4"><a href="#cb19-4"></a><span class="co"># Create example with multiple relationships</span></span>
+<span id="cb19-5"><a href="#cb19-5"></a>complex_data <span class="ot">&lt;-</span> <span class="fu">cdisc_data</span>(</span>
+<span id="cb19-6"><a href="#cb19-6"></a>  <span class="at">ADSL =</span> pharmaverseadam<span class="sc">::</span>adsl,</span>
+<span id="cb19-7"><a href="#cb19-7"></a>  <span class="at">ADAE =</span> pharmaverseadam<span class="sc">::</span>adae,</span>
+<span id="cb19-8"><a href="#cb19-8"></a>  <span class="at">ADEX =</span> pharmaverseadam<span class="sc">::</span>adex</span>
+<span id="cb19-9"><a href="#cb19-9"></a>)</span>
+<span id="cb19-10"><a href="#cb19-10"></a><span class="fu">join_keys</span>(complex_data) <span class="ot">&lt;-</span> teal.data<span class="sc">::</span>default_cdisc_join_keys[<span class="fu">c</span>(<span class="st">"ADSL"</span>, <span class="st">"ADAE"</span>, <span class="st">"ADEX"</span>)]</span>
+<span id="cb19-11"><a href="#cb19-11"></a></span>
+<span id="cb19-12"><a href="#cb19-12"></a><span class="co"># Understanding the output:</span></span>
+<span id="cb19-13"><a href="#cb19-13"></a><span class="co"># - Each line shows a relationship between two datasets</span></span>
+<span id="cb19-14"><a href="#cb19-14"></a><span class="co"># - The arrow (-&gt;) indicates the direction (parent -&gt; child)</span></span>
+<span id="cb19-15"><a href="#cb19-15"></a><span class="co"># - Variables in brackets show the joining columns</span></span>
+<span id="cb19-16"><a href="#cb19-16"></a><span class="co"># - ADSL is typically the parent (subject-level data)</span></span>
+<span id="cb19-17"><a href="#cb19-17"></a><span class="co"># - the implicit join keys are created automatically when</span></span>
+<span id="cb19-18"><a href="#cb19-18"></a><span class="co">#   teal.data detects a possible join through a "middleman" dataset</span></span>
+<span id="cb19-19"><a href="#cb19-19"></a></span>
+<span id="cb19-20"><a href="#cb19-20"></a><span class="co"># Print and interpret join keys</span></span>
+<span id="cb19-21"><a href="#cb19-21"></a><span class="fu">cat</span>(<span class="st">"Join Keys Structure:</span><span class="sc">\n</span><span class="st">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Join Keys Structure:</code></pre>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb30"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1"></a><span class="fu">print</span>(<span class="fu">join_keys</span>(complex_data))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1"></a><span class="fu">print</span>(<span class="fu">join_keys</span>(complex_data))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>An empty join_keys object. </code></pre>
+<pre><code>A join_keys object containing foreign keys between 3 datasets:
+ADSL: [STUDYID, USUBJID]
+  &lt;-- ADAE: [STUDYID, USUBJID]
+  &lt;-- ADEX: [STUDYID, USUBJID]
+ADAE: [STUDYID, USUBJID, ASTDTM, AETERM, AESEQ]
+  --&gt; ADSL: [STUDYID, USUBJID]
+  --* (implicit via parent with): ADEX
+ADEX: [STUDYID, USUBJID, PARCAT1, PARAMCD, AVISITN, ASTDTM, EXSEQ]
+  --&gt; ADSL: [STUDYID, USUBJID]
+  --* (implicit via parent with): ADAE </code></pre>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb32"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1"></a><span class="co"># Understanding the output:</span></span>
-<span id="cb32-2"><a href="#cb32-2"></a><span class="co"># - Each line shows a relationship between two datasets</span></span>
-<span id="cb32-3"><a href="#cb32-3"></a><span class="co"># - The arrow (-&gt;) indicates the direction (parent -&gt; child)</span></span>
-<span id="cb32-4"><a href="#cb32-4"></a><span class="co"># - Variables in brackets show the joining columns</span></span>
-<span id="cb32-5"><a href="#cb32-5"></a><span class="co"># - ADSL is typically the parent (subject-level data)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
 <section id="creating-a-custom-teal.data-object-with-custom-user-defined-keys---code-samples" class="level2">
@@ -518,38 +425,38 @@ Testing the relationship:</code></pre>
 <section id="manual-join-keys-creation" class="level2">
 <h2 class="anchored" data-anchor-id="manual-join-keys-creation">Manual join keys creation</h2>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb33"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1"></a><span class="co"># Create a teal_data object without automatic join detection</span></span>
-<span id="cb33-2"><a href="#cb33-2"></a>my_data <span class="ot">&lt;-</span> <span class="fu">teal_data</span>(</span>
-<span id="cb33-3"><a href="#cb33-3"></a>  <span class="at">PATIENTS =</span> <span class="fu">data.frame</span>(</span>
-<span id="cb33-4"><a href="#cb33-4"></a>    <span class="at">patient_id =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">100</span>,</span>
-<span id="cb33-5"><a href="#cb33-5"></a>    <span class="at">age =</span> <span class="fu">sample</span>(<span class="dv">18</span><span class="sc">:</span><span class="dv">80</span>, <span class="dv">100</span>, <span class="at">replace =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb33-6"><a href="#cb33-6"></a>    <span class="at">treatment =</span> <span class="fu">sample</span>(<span class="fu">c</span>(<span class="st">"A"</span>, <span class="st">"B"</span>), <span class="dv">100</span>, <span class="at">replace =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb33-7"><a href="#cb33-7"></a>  ),</span>
-<span id="cb33-8"><a href="#cb33-8"></a>  <span class="at">VISITS =</span> <span class="fu">data.frame</span>(</span>
-<span id="cb33-9"><a href="#cb33-9"></a>    <span class="at">patient_id =</span> <span class="fu">rep</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">100</span>, <span class="at">each =</span> <span class="dv">4</span>),</span>
-<span id="cb33-10"><a href="#cb33-10"></a>    <span class="at">visit_num =</span> <span class="fu">rep</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>, <span class="dv">100</span>),</span>
-<span id="cb33-11"><a href="#cb33-11"></a>    <span class="at">visit_date =</span> <span class="fu">seq.Date</span>(<span class="fu">as.Date</span>(<span class="st">"2024-01-01"</span>), <span class="at">by =</span> <span class="st">"week"</span>, <span class="at">length.out =</span> <span class="dv">400</span>),</span>
-<span id="cb33-12"><a href="#cb33-12"></a>    <span class="at">measurement =</span> <span class="fu">rnorm</span>(<span class="dv">400</span>, <span class="dv">100</span>, <span class="dv">15</span>)</span>
-<span id="cb33-13"><a href="#cb33-13"></a>  ),</span>
-<span id="cb33-14"><a href="#cb33-14"></a>  <span class="at">EVENTS =</span> <span class="fu">data.frame</span>(</span>
-<span id="cb33-15"><a href="#cb33-15"></a>    <span class="at">patient_id =</span> <span class="fu">sample</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">100</span>, <span class="dv">200</span>, <span class="at">replace =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb33-16"><a href="#cb33-16"></a>    <span class="at">event_type =</span> <span class="fu">sample</span>(<span class="fu">c</span>(<span class="st">"AE"</span>, <span class="st">"CM"</span>, <span class="st">"EX"</span>), <span class="dv">200</span>, <span class="at">replace =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb33-17"><a href="#cb33-17"></a>    <span class="at">event_date =</span> <span class="fu">sample</span>(<span class="fu">seq.Date</span>(<span class="fu">as.Date</span>(<span class="st">"2024-01-01"</span>), <span class="fu">as.Date</span>(<span class="st">"2024-12-31"</span>), <span class="at">by =</span> <span class="st">"day"</span>), <span class="dv">200</span>)</span>
-<span id="cb33-18"><a href="#cb33-18"></a>  )</span>
-<span id="cb33-19"><a href="#cb33-19"></a>)</span>
-<span id="cb33-20"><a href="#cb33-20"></a></span>
-<span id="cb33-21"><a href="#cb33-21"></a><span class="co"># Manually define join keys</span></span>
-<span id="cb33-22"><a href="#cb33-22"></a><span class="fu">join_keys</span>(my_data) <span class="ot">&lt;-</span> <span class="fu">join_keys</span>(</span>
-<span id="cb33-23"><a href="#cb33-23"></a>  <span class="fu">join_key</span>(<span class="st">"PATIENTS"</span>, <span class="st">"VISITS"</span>, <span class="st">"patient_id"</span>),</span>
-<span id="cb33-24"><a href="#cb33-24"></a>  <span class="fu">join_key</span>(<span class="st">"PATIENTS"</span>, <span class="st">"EVENTS"</span>, <span class="st">"patient_id"</span>)</span>
-<span id="cb33-25"><a href="#cb33-25"></a>)</span>
-<span id="cb33-26"><a href="#cb33-26"></a></span>
-<span id="cb33-27"><a href="#cb33-27"></a><span class="co"># View the join keys</span></span>
-<span id="cb33-28"><a href="#cb33-28"></a><span class="fu">print</span>(<span class="st">"Manual join keys:"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1"></a><span class="co"># Create a teal_data object without automatic join detection</span></span>
+<span id="cb23-2"><a href="#cb23-2"></a>my_data <span class="ot">&lt;-</span> <span class="fu">teal_data</span>(</span>
+<span id="cb23-3"><a href="#cb23-3"></a>  <span class="at">PATIENTS =</span> <span class="fu">data.frame</span>(</span>
+<span id="cb23-4"><a href="#cb23-4"></a>    <span class="at">patient_id =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">100</span>,</span>
+<span id="cb23-5"><a href="#cb23-5"></a>    <span class="at">age =</span> <span class="fu">sample</span>(<span class="dv">18</span><span class="sc">:</span><span class="dv">80</span>, <span class="dv">100</span>, <span class="at">replace =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb23-6"><a href="#cb23-6"></a>    <span class="at">treatment =</span> <span class="fu">sample</span>(<span class="fu">c</span>(<span class="st">"A"</span>, <span class="st">"B"</span>), <span class="dv">100</span>, <span class="at">replace =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb23-7"><a href="#cb23-7"></a>  ),</span>
+<span id="cb23-8"><a href="#cb23-8"></a>  <span class="at">VISITS =</span> <span class="fu">data.frame</span>(</span>
+<span id="cb23-9"><a href="#cb23-9"></a>    <span class="at">patient_id =</span> <span class="fu">rep</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">100</span>, <span class="at">each =</span> <span class="dv">4</span>),</span>
+<span id="cb23-10"><a href="#cb23-10"></a>    <span class="at">visit_num =</span> <span class="fu">rep</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>, <span class="dv">100</span>),</span>
+<span id="cb23-11"><a href="#cb23-11"></a>    <span class="at">visit_date =</span> <span class="fu">seq.Date</span>(<span class="fu">as.Date</span>(<span class="st">"2024-01-01"</span>), <span class="at">by =</span> <span class="st">"week"</span>, <span class="at">length.out =</span> <span class="dv">400</span>),</span>
+<span id="cb23-12"><a href="#cb23-12"></a>    <span class="at">measurement =</span> <span class="fu">rnorm</span>(<span class="dv">400</span>, <span class="dv">100</span>, <span class="dv">15</span>)</span>
+<span id="cb23-13"><a href="#cb23-13"></a>  ),</span>
+<span id="cb23-14"><a href="#cb23-14"></a>  <span class="at">EVENTS =</span> <span class="fu">data.frame</span>(</span>
+<span id="cb23-15"><a href="#cb23-15"></a>    <span class="at">patient_id =</span> <span class="fu">sample</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">100</span>, <span class="dv">200</span>, <span class="at">replace =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb23-16"><a href="#cb23-16"></a>    <span class="at">event_type =</span> <span class="fu">sample</span>(<span class="fu">c</span>(<span class="st">"AE"</span>, <span class="st">"CM"</span>, <span class="st">"EX"</span>), <span class="dv">200</span>, <span class="at">replace =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb23-17"><a href="#cb23-17"></a>    <span class="at">event_date =</span> <span class="fu">sample</span>(<span class="fu">seq.Date</span>(<span class="fu">as.Date</span>(<span class="st">"2024-01-01"</span>), <span class="fu">as.Date</span>(<span class="st">"2024-12-31"</span>), <span class="at">by =</span> <span class="st">"day"</span>), <span class="dv">200</span>)</span>
+<span id="cb23-18"><a href="#cb23-18"></a>  )</span>
+<span id="cb23-19"><a href="#cb23-19"></a>)</span>
+<span id="cb23-20"><a href="#cb23-20"></a></span>
+<span id="cb23-21"><a href="#cb23-21"></a><span class="co"># Manually define join keys</span></span>
+<span id="cb23-22"><a href="#cb23-22"></a><span class="fu">join_keys</span>(my_data) <span class="ot">&lt;-</span> <span class="fu">join_keys</span>(</span>
+<span id="cb23-23"><a href="#cb23-23"></a>  <span class="fu">join_key</span>(<span class="st">"PATIENTS"</span>, <span class="st">"VISITS"</span>, <span class="st">"patient_id"</span>),</span>
+<span id="cb23-24"><a href="#cb23-24"></a>  <span class="fu">join_key</span>(<span class="st">"PATIENTS"</span>, <span class="st">"EVENTS"</span>, <span class="st">"patient_id"</span>)</span>
+<span id="cb23-25"><a href="#cb23-25"></a>)</span>
+<span id="cb23-26"><a href="#cb23-26"></a></span>
+<span id="cb23-27"><a href="#cb23-27"></a><span class="co"># View the join keys</span></span>
+<span id="cb23-28"><a href="#cb23-28"></a><span class="fu">print</span>(<span class="st">"Manual join keys:"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "Manual join keys:"</code></pre>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb35"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1"></a><span class="fu">print</span>(<span class="fu">join_keys</span>(my_data))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb25"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1"></a><span class="fu">print</span>(<span class="fu">join_keys</span>(my_data))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>A join_keys object containing foreign keys between 3 datasets:
 PATIENTS: [no primary keys]
@@ -568,142 +475,41 @@ EVENTS: [no primary keys]
 <h2 class="anchored" data-anchor-id="overwriting-automatic-join-keys-in-cdisc_data">Overwriting automatic join keys in <code>cdisc_data</code></h2>
 <p>Sometimes the automatic join key detection in <code>cdisc_data()</code> doesn’t match your specific needs. Here’s how to override the default behavior:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb37"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1"></a><span class="fu">library</span>(teal)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Loading required package: shiny</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Loading required package: teal.slice</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Registered S3 method overwritten by 'teal':
-  method        from      
-  c.teal_slices teal.slice</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>
-You are using teal version 1.0.0</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>
-Attaching package: 'teal'</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>The following objects are masked from 'package:teal.slice':
-
-    as.teal_slices, teal_slices</code></pre>
-</div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb44"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1"></a><span class="fu">library</span>(teal.modules.general)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Loading required package: ggplot2</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Loading required package: teal.transform</code></pre>
-</div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb47"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1"></a><span class="fu">library</span>(teal.data)</span>
-<span id="cb47-2"><a href="#cb47-2"></a></span>
-<span id="cb47-3"><a href="#cb47-3"></a><span class="co"># Step 1: Create datasets with CDISC structure</span></span>
-<span id="cb47-4"><a href="#cb47-4"></a>create_cdisc_datasets <span class="ot">&lt;-</span> <span class="cf">function</span>() {</span>
-<span id="cb47-5"><a href="#cb47-5"></a>  <span class="co"># ADSL with standard CDISC variables</span></span>
-<span id="cb47-6"><a href="#cb47-6"></a>  ADSL <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
-<span id="cb47-7"><a href="#cb47-7"></a>    <span class="at">STUDYID =</span> <span class="fu">rep</span>(<span class="st">"STUDY001"</span>, <span class="dv">30</span>),</span>
-<span id="cb47-8"><a href="#cb47-8"></a>    <span class="at">USUBJID =</span> <span class="fu">paste0</span>(<span class="st">"SUBJ"</span>, <span class="fu">sprintf</span>(<span class="st">"%03d"</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">30</span>)),</span>
-<span id="cb47-9"><a href="#cb47-9"></a>    <span class="at">SUBJID =</span> <span class="fu">sprintf</span>(<span class="st">"%03d"</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">30</span>),</span>
-<span id="cb47-10"><a href="#cb47-10"></a>    <span class="at">SITEID =</span> <span class="fu">sample</span>(<span class="fu">paste0</span>(<span class="st">"SITE"</span>, <span class="fu">sprintf</span>(<span class="st">"%02d"</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>)), <span class="dv">30</span>, <span class="at">replace =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb47-11"><a href="#cb47-11"></a>    <span class="at">AGE =</span> <span class="fu">sample</span>(<span class="dv">18</span><span class="sc">:</span><span class="dv">80</span>, <span class="dv">30</span>, <span class="at">replace =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb47-12"><a href="#cb47-12"></a>    <span class="at">SEX =</span> <span class="fu">as.factor</span>(<span class="fu">sample</span>(<span class="fu">c</span>(<span class="st">"M"</span>, <span class="st">"F"</span>), <span class="dv">30</span>, <span class="at">replace =</span> <span class="cn">TRUE</span>)),</span>
-<span id="cb47-13"><a href="#cb47-13"></a>    <span class="at">ARM =</span> <span class="fu">as.factor</span>(<span class="fu">sample</span>(<span class="fu">c</span>(<span class="st">"Placebo"</span>, <span class="st">"Treatment A"</span>, <span class="st">"Treatment B"</span>), <span class="dv">30</span>, <span class="at">replace =</span> <span class="cn">TRUE</span>)),</span>
-<span id="cb47-14"><a href="#cb47-14"></a>    <span class="at">SAFFL =</span> <span class="st">"Y"</span></span>
-<span id="cb47-15"><a href="#cb47-15"></a>  )</span>
-<span id="cb47-16"><a href="#cb47-16"></a></span>
-<span id="cb47-17"><a href="#cb47-17"></a>  <span class="co"># ADAE with additional sequence variable</span></span>
-<span id="cb47-18"><a href="#cb47-18"></a>  n_aes <span class="ot">&lt;-</span> <span class="dv">90</span></span>
-<span id="cb47-19"><a href="#cb47-19"></a>  ADAE <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
-<span id="cb47-20"><a href="#cb47-20"></a>    <span class="at">STUDYID =</span> <span class="fu">rep</span>(<span class="st">"STUDY001"</span>, n_aes),</span>
-<span id="cb47-21"><a href="#cb47-21"></a>    <span class="at">USUBJID =</span> <span class="fu">sample</span>(ADSL<span class="sc">$</span>USUBJID, n_aes, <span class="at">replace =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb47-22"><a href="#cb47-22"></a>    <span class="at">SUBJID =</span> <span class="fu">sample</span>(ADSL<span class="sc">$</span>SUBJID, n_aes, <span class="at">replace =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb47-23"><a href="#cb47-23"></a>    <span class="at">SITEID =</span> <span class="fu">sample</span>(ADSL<span class="sc">$</span>SITEID, n_aes, <span class="at">replace =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb47-24"><a href="#cb47-24"></a>    <span class="at">AESEQ =</span> <span class="fu">sequence</span>(<span class="fu">table</span>(<span class="fu">sample</span>(ADSL<span class="sc">$</span>USUBJID, n_aes, <span class="at">replace =</span> <span class="cn">TRUE</span>))),</span>
-<span id="cb47-25"><a href="#cb47-25"></a>    <span class="at">AEDECOD =</span> <span class="fu">sample</span>(<span class="fu">c</span>(<span class="st">"Headache"</span>, <span class="st">"Nausea"</span>, <span class="st">"Fatigue"</span>, <span class="st">"Dizziness"</span>), n_aes, <span class="at">replace =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb47-26"><a href="#cb47-26"></a>    <span class="at">AESEV =</span> <span class="fu">as.factor</span>(<span class="fu">sample</span>(<span class="fu">c</span>(<span class="st">"MILD"</span>, <span class="st">"MODERATE"</span>, <span class="st">"SEVERE"</span>), n_aes, <span class="at">replace =</span> <span class="cn">TRUE</span>)),</span>
-<span id="cb47-27"><a href="#cb47-27"></a>    <span class="at">SAFFL =</span> <span class="st">"Y"</span></span>
-<span id="cb47-28"><a href="#cb47-28"></a>  )</span>
-<span id="cb47-29"><a href="#cb47-29"></a></span>
-<span id="cb47-30"><a href="#cb47-30"></a>  <span class="co"># ADCM (Concomitant Medications) with different structure</span></span>
-<span id="cb47-31"><a href="#cb47-31"></a>  n_cms <span class="ot">&lt;-</span> <span class="dv">60</span></span>
-<span id="cb47-32"><a href="#cb47-32"></a>  ADCM <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
-<span id="cb47-33"><a href="#cb47-33"></a>    <span class="at">STUDYID =</span> <span class="fu">rep</span>(<span class="st">"STUDY001"</span>, n_cms),</span>
-<span id="cb47-34"><a href="#cb47-34"></a>    <span class="at">USUBJID =</span> <span class="fu">sample</span>(ADSL<span class="sc">$</span>USUBJID, n_cms, <span class="at">replace =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb47-35"><a href="#cb47-35"></a>    <span class="at">SUBJID =</span> <span class="fu">sample</span>(ADSL<span class="sc">$</span>SUBJID, n_cms, <span class="at">replace =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb47-36"><a href="#cb47-36"></a>    <span class="at">CMSEQ =</span> <span class="fu">sequence</span>(<span class="fu">table</span>(<span class="fu">sample</span>(ADSL<span class="sc">$</span>USUBJID, n_cms, <span class="at">replace =</span> <span class="cn">TRUE</span>))),</span>
-<span id="cb47-37"><a href="#cb47-37"></a>    <span class="at">CMDECOD =</span> <span class="fu">sample</span>(<span class="fu">c</span>(<span class="st">"Aspirin"</span>, <span class="st">"Ibuprofen"</span>, <span class="st">"Acetaminophen"</span>), n_cms, <span class="at">replace =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb47-38"><a href="#cb47-38"></a>    <span class="at">CMCLAS =</span> <span class="fu">sample</span>(<span class="fu">c</span>(<span class="st">"ANALGESICS"</span>, <span class="st">"ANTI-INFLAMMATORY"</span>), n_cms, <span class="at">replace =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb47-39"><a href="#cb47-39"></a>    <span class="at">SAFFL =</span> <span class="st">"Y"</span></span>
-<span id="cb47-40"><a href="#cb47-40"></a>  )</span>
-<span id="cb47-41"><a href="#cb47-41"></a></span>
-<span id="cb47-42"><a href="#cb47-42"></a>  <span class="fu">return</span>(<span class="fu">list</span>(<span class="at">ADSL =</span> ADSL, <span class="at">ADAE =</span> ADAE, <span class="at">ADCM =</span> ADCM))</span>
-<span id="cb47-43"><a href="#cb47-43"></a>}</span>
-<span id="cb47-44"><a href="#cb47-44"></a></span>
-<span id="cb47-45"><a href="#cb47-45"></a><span class="co"># Step 2: Create cdisc_data with automatic join keys</span></span>
-<span id="cb47-46"><a href="#cb47-46"></a>datasets <span class="ot">&lt;-</span> <span class="fu">create_cdisc_datasets</span>()</span>
-<span id="cb47-47"><a href="#cb47-47"></a>auto_data <span class="ot">&lt;-</span> <span class="fu">cdisc_data</span>(</span>
-<span id="cb47-48"><a href="#cb47-48"></a>  <span class="at">ADSL =</span> datasets<span class="sc">$</span>ADSL,</span>
-<span id="cb47-49"><a href="#cb47-49"></a>  <span class="at">ADAE =</span> datasets<span class="sc">$</span>ADAE,</span>
-<span id="cb47-50"><a href="#cb47-50"></a>  <span class="at">ADCM =</span> datasets<span class="sc">$</span>ADCM</span>
-<span id="cb47-51"><a href="#cb47-51"></a>)</span>
-<span id="cb47-52"><a href="#cb47-52"></a></span>
-<span id="cb47-53"><a href="#cb47-53"></a><span class="co"># View automatic join keys</span></span>
-<span id="cb47-54"><a href="#cb47-54"></a><span class="fu">cat</span>(<span class="st">"Automatic join keys:</span><span class="sc">\n</span><span class="st">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>Automatic join keys:</code></pre>
-</div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb49"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1"></a><span class="fu">print</span>(<span class="fu">join_keys</span>(auto_data))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>A join_keys object containing foreign keys between 3 datasets:
-ADSL: [STUDYID, USUBJID]
-  &lt;-- ADAE: [STUDYID, USUBJID]
-  &lt;-- ADCM: [STUDYID, USUBJID]
-ADAE: [STUDYID, USUBJID, ASTDTM, AETERM, AESEQ]
-  --&gt; ADSL: [STUDYID, USUBJID]
-  --* (implicit via parent with): ADCM
-ADCM: [STUDYID, USUBJID, ASTDTM, CMSEQ, ATC1CD, ATC2CD, ATC3CD, ATC4CD]
-  --&gt; ADSL: [STUDYID, USUBJID]
-  --* (implicit via parent with): ADAE </code></pre>
-</div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb51"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb51-1"><a href="#cb51-1"></a><span class="co"># Step 3: Define custom join keys</span></span>
-<span id="cb51-2"><a href="#cb51-2"></a><span class="co"># Let's say we want to use different joining variables or add additional relationships</span></span>
-<span id="cb51-3"><a href="#cb51-3"></a>custom_keys <span class="ot">&lt;-</span> <span class="fu">join_keys</span>(</span>
-<span id="cb51-4"><a href="#cb51-4"></a>  <span class="co"># Primary keys for each dataset</span></span>
-<span id="cb51-5"><a href="#cb51-5"></a>  <span class="fu">join_key</span>(<span class="st">"ADSL"</span>, <span class="st">"ADSL"</span>, <span class="fu">c</span>(<span class="st">"STUDYID"</span>, <span class="st">"USUBJID"</span>)),</span>
-<span id="cb51-6"><a href="#cb51-6"></a>  <span class="fu">join_key</span>(<span class="st">"ADAE"</span>, <span class="st">"ADAE"</span>, <span class="fu">c</span>(<span class="st">"STUDYID"</span>, <span class="st">"USUBJID"</span>, <span class="st">"AESEQ"</span>)),</span>
-<span id="cb51-7"><a href="#cb51-7"></a>  <span class="fu">join_key</span>(<span class="st">"ADCM"</span>, <span class="st">"ADCM"</span>, <span class="fu">c</span>(<span class="st">"STUDYID"</span>, <span class="st">"USUBJID"</span>, <span class="st">"CMSEQ"</span>)),</span>
-<span id="cb51-8"><a href="#cb51-8"></a></span>
-<span id="cb51-9"><a href="#cb51-9"></a>  <span class="co"># Relationships between datasets</span></span>
-<span id="cb51-10"><a href="#cb51-10"></a>  <span class="fu">join_key</span>(<span class="st">"ADSL"</span>, <span class="st">"ADAE"</span>, <span class="fu">c</span>(<span class="st">"STUDYID"</span>, <span class="st">"USUBJID"</span>)),</span>
-<span id="cb51-11"><a href="#cb51-11"></a>  <span class="fu">join_key</span>(<span class="st">"ADSL"</span>, <span class="st">"ADCM"</span>, <span class="fu">c</span>(<span class="st">"STUDYID"</span>, <span class="st">"USUBJID"</span>)),</span>
-<span id="cb51-12"><a href="#cb51-12"></a></span>
-<span id="cb51-13"><a href="#cb51-13"></a>  <span class="co"># Custom: Allow direct relationship between ADAE and ADCM</span></span>
-<span id="cb51-14"><a href="#cb51-14"></a>  <span class="co"># This might be useful for analyzing AEs and concomitant medications together</span></span>
-<span id="cb51-15"><a href="#cb51-15"></a>  <span class="fu">join_key</span>(<span class="st">"ADAE"</span>, <span class="st">"ADCM"</span>, <span class="fu">c</span>(<span class="st">"STUDYID"</span>, <span class="st">"USUBJID"</span>))</span>
-<span id="cb51-16"><a href="#cb51-16"></a>)</span>
-<span id="cb51-17"><a href="#cb51-17"></a></span>
-<span id="cb51-18"><a href="#cb51-18"></a><span class="co"># Step 4: Create cdisc_data with custom join keys</span></span>
-<span id="cb51-19"><a href="#cb51-19"></a>custom_data <span class="ot">&lt;-</span> <span class="fu">cdisc_data</span>(</span>
-<span id="cb51-20"><a href="#cb51-20"></a>  <span class="at">ADSL =</span> datasets<span class="sc">$</span>ADSL,</span>
-<span id="cb51-21"><a href="#cb51-21"></a>  <span class="at">ADAE =</span> datasets<span class="sc">$</span>ADAE,</span>
-<span id="cb51-22"><a href="#cb51-22"></a>  <span class="at">ADCM =</span> datasets<span class="sc">$</span>ADCM</span>
-<span id="cb51-23"><a href="#cb51-23"></a>)</span>
-<span id="cb51-24"><a href="#cb51-24"></a></span>
-<span id="cb51-25"><a href="#cb51-25"></a><span class="co"># Override the automatic join keys</span></span>
-<span id="cb51-26"><a href="#cb51-26"></a><span class="fu">join_keys</span>(custom_data) <span class="ot">&lt;-</span> custom_keys</span>
-<span id="cb51-27"><a href="#cb51-27"></a></span>
-<span id="cb51-28"><a href="#cb51-28"></a><span class="co"># View the custom join keys</span></span>
-<span id="cb51-29"><a href="#cb51-29"></a><span class="fu">cat</span>(<span class="st">"</span><span class="sc">\n</span><span class="st">Custom join keys:</span><span class="sc">\n</span><span class="st">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb27"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1"></a><span class="fu">library</span>(pharmaverseadam)</span>
+<span id="cb27-2"><a href="#cb27-2"></a><span class="fu">library</span>(teal)</span>
+<span id="cb27-3"><a href="#cb27-3"></a><span class="fu">library</span>(teal.data)</span>
+<span id="cb27-4"><a href="#cb27-4"></a></span>
+<span id="cb27-5"><a href="#cb27-5"></a>custom_keys <span class="ot">&lt;-</span> <span class="fu">join_keys</span>(</span>
+<span id="cb27-6"><a href="#cb27-6"></a>  <span class="co"># Primary keys for each dataset</span></span>
+<span id="cb27-7"><a href="#cb27-7"></a>  <span class="fu">join_key</span>(<span class="st">"ADSL"</span>, <span class="st">"ADSL"</span>, <span class="fu">c</span>(<span class="st">"STUDYID"</span>, <span class="st">"USUBJID"</span>)),</span>
+<span id="cb27-8"><a href="#cb27-8"></a>  <span class="fu">join_key</span>(<span class="st">"ADAE"</span>, <span class="st">"ADAE"</span>, <span class="fu">c</span>(<span class="st">"STUDYID"</span>, <span class="st">"USUBJID"</span>, <span class="st">"AESEQ"</span>)),</span>
+<span id="cb27-9"><a href="#cb27-9"></a>  <span class="fu">join_key</span>(<span class="st">"ADCM"</span>, <span class="st">"ADCM"</span>, <span class="fu">c</span>(<span class="st">"STUDYID"</span>, <span class="st">"USUBJID"</span>, <span class="st">"CMSEQ"</span>)),</span>
+<span id="cb27-10"><a href="#cb27-10"></a></span>
+<span id="cb27-11"><a href="#cb27-11"></a>  <span class="co"># Relationships between datasets</span></span>
+<span id="cb27-12"><a href="#cb27-12"></a>  <span class="fu">join_key</span>(<span class="st">"ADSL"</span>, <span class="st">"ADAE"</span>, <span class="fu">c</span>(<span class="st">"STUDYID"</span>, <span class="st">"USUBJID"</span>)),</span>
+<span id="cb27-13"><a href="#cb27-13"></a>  <span class="fu">join_key</span>(<span class="st">"ADSL"</span>, <span class="st">"ADCM"</span>, <span class="fu">c</span>(<span class="st">"STUDYID"</span>, <span class="st">"USUBJID"</span>)),</span>
+<span id="cb27-14"><a href="#cb27-14"></a></span>
+<span id="cb27-15"><a href="#cb27-15"></a>  <span class="co"># Custom: Allow direct relationship between ADAE and ADCM</span></span>
+<span id="cb27-16"><a href="#cb27-16"></a>  <span class="co"># This might be useful for analyzing AEs and concomitant medications together</span></span>
+<span id="cb27-17"><a href="#cb27-17"></a>  <span class="fu">join_key</span>(<span class="st">"ADAE"</span>, <span class="st">"ADCM"</span>, <span class="fu">c</span>(<span class="st">"STUDYID"</span>, <span class="st">"USUBJID"</span>))</span>
+<span id="cb27-18"><a href="#cb27-18"></a>)</span>
+<span id="cb27-19"><a href="#cb27-19"></a></span>
+<span id="cb27-20"><a href="#cb27-20"></a>custom_data <span class="ot">&lt;-</span> <span class="fu">cdisc_data</span>(</span>
+<span id="cb27-21"><a href="#cb27-21"></a>  <span class="at">ADSL =</span> pharmaverseadam<span class="sc">::</span>adsl,</span>
+<span id="cb27-22"><a href="#cb27-22"></a>  <span class="at">ADAE =</span> pharmaverseadam<span class="sc">::</span>adae,</span>
+<span id="cb27-23"><a href="#cb27-23"></a>  <span class="at">ADCM =</span> pharmaverseadam<span class="sc">::</span>adcm</span>
+<span id="cb27-24"><a href="#cb27-24"></a>)</span>
+<span id="cb27-25"><a href="#cb27-25"></a></span>
+<span id="cb27-26"><a href="#cb27-26"></a><span class="co"># Override the automatic join keys</span></span>
+<span id="cb27-27"><a href="#cb27-27"></a><span class="fu">join_keys</span>(custom_data) <span class="ot">&lt;-</span> custom_keys</span>
+<span id="cb27-28"><a href="#cb27-28"></a></span>
+<span id="cb27-29"><a href="#cb27-29"></a><span class="co"># View the custom join keys</span></span>
+<span id="cb27-30"><a href="#cb27-30"></a><span class="fu">cat</span>(<span class="st">"</span><span class="sc">\n</span><span class="st">Custom join keys:</span><span class="sc">\n</span><span class="st">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 Custom join keys:</code></pre>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb53"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb53-1"><a href="#cb53-1"></a><span class="fu">print</span>(<span class="fu">join_keys</span>(custom_data))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb29"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1"></a><span class="fu">print</span>(<span class="fu">join_keys</span>(custom_data))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>A join_keys object containing foreign keys between 3 datasets:
 ADSL: [STUDYID, USUBJID]
@@ -715,6 +521,175 @@ ADAE: [STUDYID, USUBJID, AESEQ]
 ADCM: [STUDYID, USUBJID, CMSEQ]
   &lt;-&gt; ADSL: [STUDYID, USUBJID]
   --&gt; ADAE: [STUDYID, USUBJID] </code></pre>
+</div>
+</div>
+</section>
+<section id="exercise" class="level2">
+<h2 class="anchored" data-anchor-id="exercise">🛠️ Exercise</h2>
+<ul>
+<li>load <code>teal.data</code></li>
+<li>create a <code>teal_data</code> object named <code>basic_data</code> that bundles the built-in <code>iris</code> and <code>mtcars</code> datasets</li>
+<li>print <code>teal_data</code> - notice the verification status printed in the console</li>
+<li>try to <a href="https://insightsengineering.github.io/teal.data/v0.5.0/reference/verify.html">verify</a> the code you provided to <code>teal_data</code> actually reproduces the data you stored inside the object</li>
+<li>inspect the resulting object with <code>print()</code> and <code>get_code()</code></li>
+</ul>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Answer
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-1" class="callout-1-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb31"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1"></a><span class="fu">library</span>(teal.data)</span>
+<span id="cb31-2"><a href="#cb31-2"></a></span>
+<span id="cb31-3"><a href="#cb31-3"></a>basic_data <span class="ot">&lt;-</span> <span class="fu">teal_data</span>(<span class="at">iris =</span> iris, <span class="at">mtcars =</span> mtcars, <span class="at">code =</span> <span class="st">"iris &lt;- iris; mtcars &lt;- mtcars"</span>)</span>
+<span id="cb31-4"><a href="#cb31-4"></a><span class="fu">print</span>(basic_data)</span>
+<span id="cb31-5"><a href="#cb31-5"></a><span class="fu">verify</span>(basic_data)</span>
+<span id="cb31-6"><a href="#cb31-6"></a><span class="fu">print</span>(basic_data)</span>
+<span id="cb31-7"><a href="#cb31-7"></a><span class="fu">cat</span>(<span class="fu">get_code</span>(basic_data))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div>
+</div>
+</section>
+<section id="exercise-1" class="level2">
+<h2 class="anchored" data-anchor-id="exercise-1">🛠️ Exercise</h2>
+<ul>
+<li>use <code>teal_data()</code> together with <code>within()</code> (or an equivalent approach) to construct an object named <code>tracked_data</code>.</li>
+<li>make at least one transformation to each dataset (e.g., convert a column to a factor, create a derived variable).</li>
+<li>confirm that <code>get_code(tracked_data)</code> records the transformation steps.</li>
+</ul>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Answer
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-2" class="callout-2-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb32"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1"></a><span class="fu">library</span>(teal.data)</span>
+<span id="cb32-2"><a href="#cb32-2"></a></span>
+<span id="cb32-3"><a href="#cb32-3"></a>tracked_data <span class="ot">&lt;-</span> <span class="fu">teal_data</span>(<span class="at">iris =</span> iris, <span class="at">mtcars =</span> mtcars, <span class="at">code =</span> <span class="st">"iris &lt;- iris; mtcars &lt;- mtcars"</span>)</span>
+<span id="cb32-4"><a href="#cb32-4"></a>tracked_data <span class="ot">&lt;-</span> <span class="fu">within</span>(tracked_data, {</span>
+<span id="cb32-5"><a href="#cb32-5"></a>  iris<span class="sc">$</span>Species <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(iris<span class="sc">$</span>Species)</span>
+<span id="cb32-6"><a href="#cb32-6"></a>  mtcars<span class="sc">$</span>new_column <span class="ot">&lt;-</span> <span class="dv">3</span></span>
+<span id="cb32-7"><a href="#cb32-7"></a>})</span>
+<span id="cb32-8"><a href="#cb32-8"></a><span class="fu">cat</span>(<span class="fu">get_code</span>(tracked_data))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div>
+</div>
+</section>
+<section id="exercise-2" class="level2">
+<h2 class="anchored" data-anchor-id="exercise-2">🛠️ Exercise</h2>
+<ul>
+<li>load the <code>pharmaverseadam</code> package and pull the datasets <code>adsl</code>, <code>adae</code>, and <code>adtte</code>.</li>
+<li>build a single <code>teal_data</code> object named <code>adam_manual</code> containing those three datasets.</li>
+<li>define custom join keys that mimic the automatic CDISC relationships:
+<ul>
+<li><code>ADSL</code> -&gt; <code>ADAE</code> on <code>c("STUDYID", "USUBJID")</code></li>
+<li><code>ADSL</code> -&gt; <code>ADTTE</code> on <code>c("STUDYID", "USUBJID")</code></li>
+<li>Optionally add subject-level self keys for each table.</li>
+</ul></li>
+<li>assign the custom keys with <code>join_keys(adam_manual) &lt;- ...</code>.</li>
+<li>confirm the structure by printing the join keys.</li>
+</ul>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Answer
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-3" class="callout-3-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb33"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1"></a><span class="fu">library</span>(pharmaverseadam)</span>
+<span id="cb33-2"><a href="#cb33-2"></a><span class="fu">library</span>(teal.data)</span>
+<span id="cb33-3"><a href="#cb33-3"></a><span class="fu">library</span>(teal)</span>
+<span id="cb33-4"><a href="#cb33-4"></a></span>
+<span id="cb33-5"><a href="#cb33-5"></a>adam_manual <span class="ot">&lt;-</span> <span class="fu">teal_data</span>(<span class="at">adsl =</span> adsl, <span class="at">adae =</span> adae, <span class="at">adtte =</span> adtte_onco)</span>
+<span id="cb33-6"><a href="#cb33-6"></a>custom_join_keys <span class="ot">&lt;-</span> <span class="fu">join_keys</span>(</span>
+<span id="cb33-7"><a href="#cb33-7"></a>  <span class="fu">join_key</span>(<span class="st">"ADSL"</span>, <span class="st">"ADAE"</span>, <span class="fu">c</span>(<span class="st">"STUDYID"</span>, <span class="st">"USUBJID"</span>)),</span>
+<span id="cb33-8"><a href="#cb33-8"></a>  <span class="fu">join_key</span>(<span class="st">"ADSL"</span>, <span class="st">"ADTTE"</span>, <span class="fu">c</span>(<span class="st">"STUDYID"</span>, <span class="st">"USUBJID"</span>))</span>
+<span id="cb33-9"><a href="#cb33-9"></a>)</span>
+<span id="cb33-10"><a href="#cb33-10"></a><span class="fu">join_keys</span>(adam_manual) <span class="ot">&lt;-</span> custom_join_keys</span>
+<span id="cb33-11"><a href="#cb33-11"></a><span class="fu">print</span>(<span class="fu">join_keys</span>(adam_manual))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div>
+</div>
+</section>
+<section id="exercise-3" class="level2">
+<h2 class="anchored" data-anchor-id="exercise-3">🛠️ Exercise</h2>
+<ul>
+<li>use one of the application defined by you in exercises or one of the applications shown as examples during workshops</li>
+<li>debug issues with join keys if any</li>
+<li>use the Show R Code button to verify the application returns code that you can use to reproduce the output</li>
+</ul>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Answer
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-4" class="callout-4-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb34"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1"></a><span class="fu">library</span>(pharmaverseadam)</span>
+<span id="cb34-2"><a href="#cb34-2"></a><span class="fu">library</span>(teal.data)</span>
+<span id="cb34-3"><a href="#cb34-3"></a><span class="fu">library</span>(teal)</span>
+<span id="cb34-4"><a href="#cb34-4"></a><span class="fu">library</span>(teal.modules.clinical)</span>
+<span id="cb34-5"><a href="#cb34-5"></a></span>
+<span id="cb34-6"><a href="#cb34-6"></a>adam_manual <span class="ot">&lt;-</span> <span class="fu">teal_data</span>(<span class="at">ADSL =</span> adsl, <span class="at">ADAE =</span> adae, <span class="at">ADTTE =</span> adtte_onco)</span>
+<span id="cb34-7"><a href="#cb34-7"></a>adam_manual <span class="ot">&lt;-</span> <span class="fu">within</span>(adam_manual, {</span>
+<span id="cb34-8"><a href="#cb34-8"></a>  ADSL<span class="sc">$</span>ARM <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(ADSL<span class="sc">$</span>ARM)</span>
+<span id="cb34-9"><a href="#cb34-9"></a>  ADSL<span class="sc">$</span>ARMCD <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(ADSL<span class="sc">$</span>ARMCD)</span>
+<span id="cb34-10"><a href="#cb34-10"></a>})</span>
+<span id="cb34-11"><a href="#cb34-11"></a>custom_join_keys <span class="ot">&lt;-</span> <span class="fu">join_keys</span>(</span>
+<span id="cb34-12"><a href="#cb34-12"></a>  <span class="fu">join_key</span>(<span class="st">"ADSL"</span>, <span class="st">"ADAE"</span>, <span class="fu">c</span>(<span class="st">"STUDYID"</span>, <span class="st">"USUBJID"</span>)),</span>
+<span id="cb34-13"><a href="#cb34-13"></a>  <span class="fu">join_key</span>(<span class="st">"ADSL"</span>, <span class="st">"ADTTE"</span>, <span class="fu">c</span>(<span class="st">"STUDYID"</span>, <span class="st">"USUBJID"</span>)),</span>
+<span id="cb34-14"><a href="#cb34-14"></a>  <span class="fu">join_key</span>(<span class="st">"ADSL"</span>, <span class="st">"ADSL"</span>, <span class="fu">c</span>(<span class="st">"STUDYID"</span>, <span class="st">"USUBJID"</span>))</span>
+<span id="cb34-15"><a href="#cb34-15"></a>)</span>
+<span id="cb34-16"><a href="#cb34-16"></a><span class="fu">join_keys</span>(adam_manual) <span class="ot">&lt;-</span> custom_join_keys</span>
+<span id="cb34-17"><a href="#cb34-17"></a><span class="fu">print</span>(<span class="fu">join_keys</span>(adam_manual))</span>
+<span id="cb34-18"><a href="#cb34-18"></a></span>
+<span id="cb34-19"><a href="#cb34-19"></a>app <span class="ot">&lt;-</span> <span class="fu">init</span>(</span>
+<span id="cb34-20"><a href="#cb34-20"></a>  <span class="at">data =</span> adam_manual,</span>
+<span id="cb34-21"><a href="#cb34-21"></a>  <span class="at">modules =</span> <span class="fu">modules</span>(</span>
+<span id="cb34-22"><a href="#cb34-22"></a>    <span class="fu">tm_t_events</span>(</span>
+<span id="cb34-23"><a href="#cb34-23"></a>      <span class="at">label =</span> <span class="st">"Adverse Event Table"</span>,</span>
+<span id="cb34-24"><a href="#cb34-24"></a>      <span class="at">dataname =</span> <span class="st">"ADAE"</span>,</span>
+<span id="cb34-25"><a href="#cb34-25"></a>      <span class="at">arm_var =</span> <span class="fu">choices_selected</span>(<span class="fu">c</span>(<span class="st">"ARM"</span>, <span class="st">"ARMCD"</span>), <span class="st">"ARM"</span>),</span>
+<span id="cb34-26"><a href="#cb34-26"></a>      <span class="at">llt =</span> <span class="fu">choices_selected</span>(</span>
+<span id="cb34-27"><a href="#cb34-27"></a>        <span class="at">choices =</span> <span class="fu">variable_choices</span>(<span class="st">"ADAE"</span>, <span class="fu">c</span>(<span class="st">"AETERM"</span>, <span class="st">"AEDECOD"</span>)),</span>
+<span id="cb34-28"><a href="#cb34-28"></a>        <span class="at">selected =</span> <span class="fu">c</span>(<span class="st">"AEDECOD"</span>)</span>
+<span id="cb34-29"><a href="#cb34-29"></a>      ),</span>
+<span id="cb34-30"><a href="#cb34-30"></a>      <span class="at">hlt =</span> <span class="fu">choices_selected</span>(</span>
+<span id="cb34-31"><a href="#cb34-31"></a>        <span class="at">choices =</span> <span class="fu">variable_choices</span>(<span class="st">"ADAE"</span>, <span class="fu">c</span>(<span class="st">"AEBODSYS"</span>, <span class="st">"AESOC"</span>)),</span>
+<span id="cb34-32"><a href="#cb34-32"></a>        <span class="at">selected =</span> <span class="st">"AEBODSYS"</span></span>
+<span id="cb34-33"><a href="#cb34-33"></a>      ),</span>
+<span id="cb34-34"><a href="#cb34-34"></a>      <span class="at">add_total =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb34-35"><a href="#cb34-35"></a>      <span class="at">event_type =</span> <span class="st">"adverse event"</span>,</span>
+<span id="cb34-36"><a href="#cb34-36"></a>      <span class="at">sort_criteria =</span> <span class="st">"alpha"</span>,</span>
+<span id="cb34-37"><a href="#cb34-37"></a>      <span class="at">pre_output =</span> shiny<span class="sc">::</span><span class="fu">div</span>(<span class="st">"Who won the most at the poker last night?"</span>)</span>
+<span id="cb34-38"><a href="#cb34-38"></a>    )</span>
+<span id="cb34-39"><a href="#cb34-39"></a>  )</span>
+<span id="cb34-40"><a href="#cb34-40"></a>)</span>
+<span id="cb34-41"><a href="#cb34-41"></a></span>
+<span id="cb34-42"><a href="#cb34-42"></a><span class="fu">shinyApp</span>(app<span class="sc">$</span>ui, app<span class="sc">$</span>server)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
 </div>
 </div>
 

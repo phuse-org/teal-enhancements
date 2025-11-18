@@ -27,10 +27,10 @@ website:
       #       href: exercises/topic_3/basic_app.qmd
       # - section: "`teal.modules.clinical`"
       #   contents:
-      #     - text: Introduction and anatomy of a module
-      #       href: exercises/topic_4/launching_tmc_modules.qmd
       #     - text: Pre-process data
       #       href: exercises/topic_5/data_in_teal.qmd
+      #     - text: Introduction and anatomy of a module
+      #       href: exercises/topic_4/launching_tmc_modules.qmd
       #     - text: Customizing the parameters
       #       href: exercises/topic_6/choices_selected.qmd
       # - text: Creating a custom module
@@ -58,4 +58,3 @@ engine: knitr
 
 filters:
   - shinylive
-

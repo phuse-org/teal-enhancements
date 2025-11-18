@@ -1,0 +1,476 @@
+[
+  {
+    "objectID": "README.html",
+    "href": "README.html",
+    "title": "Interactive Data Visualisation Using the Teal Framework",
+    "section": "",
+    "text": "A hands-on workshop at Phuse EU 2025 on the teal framework\n\nPresented by Peyman Eshghi, Konrad Pagacz and André Veríssimo\nFind out more at Phuse EU Connect 2025 webpage\nSponsored by Appsilon\n\n\n\nParticipants will engage in collaborative activities aimed at enhancing their understanding of the Teal framework. The workshop will be structured based on valuable feedback gathered from leaders during cross-industry discussions in forums such as the PHUSE Working Groups.\nWith increasing interest from regulatory agencies in promoting data transparency and accessibility, this workshop will provide a platform to showcase practical applications of the Teal framework while ensuring alignment with regulatory expectations. Our presentation at the PHUSE CSS in May highlights the relevance of this topic in ongoing industry conversations.\nWe welcome participants from various industry backgrounds to join us at the PHUSE EU Connect for this engaging workshop. Attendees will be guided through both beginner and advanced examples of creating interactive visualisations using Teal. They will learn how to build a Teal app with integrated modules and develop customised modules to address more complex scenarios.\nMoreover, the workshop will review the Teal roadmap and discuss the prioritisation of future features. If time allows, we will host a mini-hackathon, where attendees can actively contribute to Teal’s development by enhancing documentation or adding new modules to existing Teal packages.\nThis interactive experience promises to foster learning and collaboration while advancing skills in data visualisation.\n\n\n\n\nA laptop with a modern web browser installed\nFamiliarity with R and Shiny, including:\n\nReactivity concepts - see Basic Reactivity and An Overview\nUsing modules in Shiny apps - see Modularizing Shiny app code and Shiny Modules\n\n\n\n\n\n\n\n\nOverview & Objectives\nIntroduction to teal: What is teal? Why use it?\nInstallation & Setup: Quick walkthrough to get started\nCode Sample: Demonstration of a simple teal app\nAnatomy of a teal App: Key components & structure\n\n\n\n\n\nDeeper dive into how to provide and pre-process data in teal.modules.clinical (15 minutes)\nIntroduction to teal.modules.clinical and anatomy of a module (15 minutes)\nDeeper dive into customizing the parameters of teal.modules.clinical modules (10 minutes)\n\n\n\n\n\nStep-by-step Development: Building your own teal modules\nBest Practices: Tips for effective customization\nData Integration: Incorporating custom data processing inside modules\n\n\n\n\n\nFuture Directions: Upcoming features and plans for teal\nDiscussion & Q&A: Open floor for questions, insights, and sharing experiences"
+  },
+  {
+    "objectID": "README.html#description",
+    "href": "README.html#description",
+    "title": "Interactive Data Visualisation Using the Teal Framework",
+    "section": "",
+    "text": "Participants will engage in collaborative activities aimed at enhancing their understanding of the Teal framework. The workshop will be structured based on valuable feedback gathered from leaders during cross-industry discussions in forums such as the PHUSE Working Groups.\nWith increasing interest from regulatory agencies in promoting data transparency and accessibility, this workshop will provide a platform to showcase practical applications of the Teal framework while ensuring alignment with regulatory expectations. Our presentation at the PHUSE CSS in May highlights the relevance of this topic in ongoing industry conversations.\nWe welcome participants from various industry backgrounds to join us at the PHUSE EU Connect for this engaging workshop. Attendees will be guided through both beginner and advanced examples of creating interactive visualisations using Teal. They will learn how to build a Teal app with integrated modules and develop customised modules to address more complex scenarios.\nMoreover, the workshop will review the Teal roadmap and discuss the prioritisation of future features. If time allows, we will host a mini-hackathon, where attendees can actively contribute to Teal’s development by enhancing documentation or adding new modules to existing Teal packages.\nThis interactive experience promises to foster learning and collaboration while advancing skills in data visualisation."
+  },
+  {
+    "objectID": "README.html#requirements-for-the-workshop",
+    "href": "README.html#requirements-for-the-workshop",
+    "title": "Interactive Data Visualisation Using the Teal Framework",
+    "section": "",
+    "text": "A laptop with a modern web browser installed\nFamiliarity with R and Shiny, including:\n\nReactivity concepts - see Basic Reactivity and An Overview\nUsing modules in Shiny apps - see Modularizing Shiny app code and Shiny Modules"
+  },
+  {
+    "objectID": "README.html#agenda",
+    "href": "README.html#agenda",
+    "title": "Interactive Data Visualisation Using the Teal Framework",
+    "section": "",
+    "text": "Overview & Objectives\nIntroduction to teal: What is teal? Why use it?\nInstallation & Setup: Quick walkthrough to get started\nCode Sample: Demonstration of a simple teal app\nAnatomy of a teal App: Key components & structure\n\n\n\n\n\nDeeper dive into how to provide and pre-process data in teal.modules.clinical (15 minutes)\nIntroduction to teal.modules.clinical and anatomy of a module (15 minutes)\nDeeper dive into customizing the parameters of teal.modules.clinical modules (10 minutes)\n\n\n\n\n\nStep-by-step Development: Building your own teal modules\nBest Practices: Tips for effective customization\nData Integration: Incorporating custom data processing inside modules\n\n\n\n\n\nFuture Directions: Upcoming features and plans for teal\nDiscussion & Q&A: Open floor for questions, insights, and sharing experiences"
+  },
+  {
+    "objectID": "exercises/topic_7/create_teal_module.html",
+    "href": "exercises/topic_7/create_teal_module.html",
+    "title": "Interactive Data Visualisation Using the Teal Framework",
+    "section": "",
+    "text": "A teal module consists of two main components, similar to a Shiny module:\n\nUI function - defines the user interface\nServer function - contains the server logic\n\nThe key difference from a standard Shiny module is that the server function now has a data parameter:\n\nThis parameter is reactive and contains a teal_data object\nThe teal_data object holds all the datasets available in the teal application\nAccess datasets using data()[[\"dataset_name\"]]"
+  },
+  {
+    "objectID": "exercises/topic_7/create_teal_module.html#topic-7-creating-a-custom-teal-module-20-minutes",
+    "href": "exercises/topic_7/create_teal_module.html#topic-7-creating-a-custom-teal-module-20-minutes",
+    "title": "Interactive Data Visualisation Using the Teal Framework",
+    "section": "",
+    "text": "A teal module consists of two main components, similar to a Shiny module:\n\nUI function - defines the user interface\nServer function - contains the server logic\n\nThe key difference from a standard Shiny module is that the server function now has a data parameter:\n\nThis parameter is reactive and contains a teal_data object\nThe teal_data object holds all the datasets available in the teal application\nAccess datasets using data()[[\"dataset_name\"]]"
+  },
+  {
+    "objectID": "exercises/topic_7/create_teal_module.html#basic-structure-of-a-teal_module",
+    "href": "exercises/topic_7/create_teal_module.html#basic-structure-of-a-teal_module",
+    "title": "Interactive Data Visualisation Using the Teal Framework",
+    "section": "Basic structure of a teal_module",
+    "text": "Basic structure of a teal_module\nmy_module_ui &lt;- function(id) {\n  ns &lt;- NS(id)\n  # Define UI elements with proper namespacing\n}\n\nmy_module_srv &lt;- function(id, data) {\n  moduleServer(id, function(input, output, session) {\n    # data parameter contains reactive teal_data object\n    # Access datasets: data()[[\"ADSL\"]], data()[[\"ADAE\"]], etc.\n  })\n}\n\n# Create the module from UI and server functions\nmy_module &lt;- teal::module(\n  label = \"Module Label\",\n  ui = my_module_ui,\n  server = my_module_srv\n)"
+  },
+  {
+    "objectID": "exercises/topic_7/create_teal_module.html#base-functionality-of-our-custom-module",
+    "href": "exercises/topic_7/create_teal_module.html#base-functionality-of-our-custom-module",
+    "title": "Interactive Data Visualisation Using the Teal Framework",
+    "section": "Base functionality of our custom module",
+    "text": "Base functionality of our custom module\nLet’s create a custom module that shows a simple histogram plot based on user selected columns.\n\nUI function should contain (wrapped in shiny::tags$div()):\n\nA variable selector (using shiny::selectInput())\nA plot output (using shiny::plotOutput())\n\nServer should:\n\nUpdate the variable selector choices based on numeric columns from the ADSL dataset\n\nUsing shiny::updateSelectInput() to set choices of data()[[\"ADSL\"]] numeric columns\nHelper snippet: data()[[\"ADSL\"]] |&gt; dplyr::select(where(is.numeric)) |&gt; names()\n\nCreate a histogram plot using ggplot2 based on the selected variable (Using ggplot2::geom_histogram())\n\nHelper snippet: ggplot(ADSL, aes(x = selected_variable)) + geom_histogram()\n\n\n\nℹ️ Good to know:\n\nUse teal.code::within() to create reproducible code inside reactive expression and return it at the end.\nteal_data code is not aware of shiny inputs\n\nUse named parameters in within() to pass shiny inputs"
+  },
+  {
+    "objectID": "exercises/topic_7/create_teal_module.html#initial-teal-module-code",
+    "href": "exercises/topic_7/create_teal_module.html#initial-teal-module-code",
+    "title": "Interactive Data Visualisation Using the Teal Framework",
+    "section": "Initial teal module code",
+    "text": "Initial teal module code\n\nSee folder exercise_7 for the code to start with\n\nlibrary(teal)\nlibrary(dplyr)\nlibrary(ggplot2)\n\nmy_custom_module_ui &lt;- function(id) {\n  ns &lt;- NS(id)\n  tags$div(\n    selectInput( # variable selector\n      inputId = ns(\"variable\"),\n      label = \"Select variable\",\n      choices = NULL # initialize empty - to be updated from within server\n    ),\n    plotOutput(ns(\"plot\")) # Output for the plot\n  )\n}\n\nmy_custom_module_srv &lt;- function(id, data) {\n  moduleServer(id, function(input, output, session) {\n\n    updateSelectInput( # update variable selector by names of data\n      inputId = \"variable\",\n      choices = data()[[\"ADSL\"]] |&gt; select(where(is.numeric)) |&gt; names()\n    )\n\n    # add plot call to qenv\n    result &lt;- reactive({\n      req(input$variable)\n      within(\n        data(),\n        {\n          plot &lt;- ggplot(ADSL, aes(x = input_var)) + geom_histogram()\n        },\n        input_var = as.name(input$variable) # Pass the selected variable as a symbol\n      )\n    })\n\n    # render to output the object from qenv\n    output$plot &lt;- renderPlot(result()[[\"plot\"]])\n\n    result\n  })\n}\n\nmy_custom_module &lt;- module(\n  label = \"My Custom Module\",\n  ui = my_custom_module_ui,\n  server = my_custom_module_srv\n)\n\ndata &lt;- teal_data()\ndata &lt;- within(data, {\n  ADSL &lt;- pharmaverseadam::adsl\n})\n\napp &lt;- init(\n  data = data,\n  modules = list(my_custom_module)\n)\n\nshinyApp(app$ui, app$server)"
+  },
+  {
+    "objectID": "exercises/topic_7/create_teal_module.html#app-running",
+    "href": "exercises/topic_7/create_teal_module.html#app-running",
+    "title": "Interactive Data Visualisation Using the Teal Framework",
+    "section": "App running",
+    "text": "App running\n#| '!! shinylive warning !!': |\n#|   shinylive does not work in self-contained HTML documents.\n#|   Please set `embed-resources: false` in your metadata.\n#| standalone: true\n#| viewerHeight: 680\nlibrary(teal)\nlibrary(dplyr)\nlibrary(ggplot2)\n\nmy_custom_module_ui &lt;- function(id) {\n  ns &lt;- NS(id)\n  tags$div(\n    selectInput( # variable selector\n      inputId = ns(\"variable\"),\n      label = \"Select variable\",\n      choices = NULL # initialize empty - to be updated from within server\n    ),\n    plotOutput(ns(\"plot\")) # Output for the plot\n  )\n}\n\nmy_custom_module_srv &lt;- function(id, data) {\n  moduleServer(id, function(input, output, session) {\n\n    updateSelectInput( # update variable selector by names of data\n      inputId = \"variable\",\n      choices = data()[[\"ADSL\"]] |&gt; select(where(is.numeric)) |&gt; names()\n    )\n\n    # add plot call to qenv\n    result &lt;- reactive({\n      req(input$variable)\n      within(\n        data(),\n        {\n          plot &lt;- ggplot(ADSL, aes(x = input_var)) + geom_histogram()\n        },\n        input_var = as.name(input$variable) # Pass the selected variable as a symbol\n      )\n    })\n\n    # render to output the object from qenv\n    output$plot &lt;- renderPlot(result()[[\"plot\"]])\n\n    result\n  })\n}\n\nmy_custom_module &lt;- module(\n  label = \"My Custom Module\",\n  ui = my_custom_module_ui,\n  server = my_custom_module_srv\n)\n\ndata &lt;- teal_data()\ndata &lt;- within(data, {\n  ADSL &lt;- pharmaverseadam::adsl\n})\n\napp &lt;- init(\n  data = data,\n  modules = list(my_custom_module)\n)\n\nshinyApp(app$ui, app$server)"
+  },
+  {
+    "objectID": "exercises/topic_7/create_teal_module.html#exercise",
+    "href": "exercises/topic_7/create_teal_module.html#exercise",
+    "title": "Interactive Data Visualisation Using the Teal Framework",
+    "section": "🛠️ Exercise",
+    "text": "🛠️ Exercise\nLet’s enhance the module:\n\nLet’s create a new parameter binwidth:\n\n\nadd a new widget to the UI\n\nthat widget may be created with shiny::sliderInput()\nmake reasonable values of min, max, step and initial value\n\nread and use that widget in server\n\npass this parameter value as binwidth argument to the geom_histogram() function\n\n\n\n\n\n\n\n\nTipAnswer\n\n\n\n\n\nmy_custom_module_ui &lt;- function(id) {\n  # ... existing code ...\n  tags$div(\n    # ... existing code ...,\n    sliderInput(\n      inputId = ns(\"binwidth\"),\n      label = \"binwidth\",\n      min = 1,\n      max = 10,\n      step = 1,\n      value = 3\n    ),\n    # ... existing code ...\n  )\n}\nmy_custom_module_srv &lt;- function(id, data) {\n  moduleServer(id, function(input, output, session) {\n\n    # ... existing code ...\n\n    # add plot call to qenv\n    result &lt;- reactive({\n      req(input$variable)\n      within(\n        data(),\n        {\n          plot &lt;- ggplot(ADSL, aes(x = input_var)) +\n            geom_histogram(binwidth = input_binwidth)\n          plot\n        },\n        input_var = as.name(input$variable), # Pass the selected variable as a symbol\n        input_binwidth = input$binwidth\n      )\n    })\n\n    # ... existing code ...\n\n  })\n}\n\n\n\nLet’s see how we can add a heading to the reporter\n\nUse teal.reporter::teal_card to get and modify the reporter card - teal.reporter::teal_card(x) accesses the current card - teal.reporter::teal_card(x) &lt;- c(...) modifies the current card - inside c(...) you can merge existing card content with new elements\nAdd a title to the card using using a markdown string\nEvaluate the code that generates the histogram\n\n\n\n\n\n\n\nTipAnswer\n\n\n\n\n\nreactivd({\n  q &lt;- data()\n  teal.reporter::teal_card(q) &lt;- c(\n    teal.reporter::teal_card(q),\n    \"### Histogram of Selected Variable\"\n  )\n  within(\n    q,\n    {\n      plot &lt;- ggplot(ADSL, aes(x = input_var)) + geom_histogram()\n      plot\n    },\n    input_var = as.name(input$variable) # Pass the selected variable as a symbol\n  )\n})"
+  },
+  {
+    "objectID": "exercises/topic_7/create_teal_module.html#bonus-exercise-add-more-datasets",
+    "href": "exercises/topic_7/create_teal_module.html#bonus-exercise-add-more-datasets",
+    "title": "Interactive Data Visualisation Using the Teal Framework",
+    "section": "🛠️ Bonus Exercise (add more datasets)",
+    "text": "🛠️ Bonus Exercise (add more datasets)\n\nLet’s add more datasets\n\nextend data with ADAE = teal.pharmaverse::adae\nadd a new widget in the UI\n\nthat widget should be created with shiny::selectInput()\ninitialize empty and update values in the same way as for input$variable\n\nread and use in the server\n\nmodify the variable selection - it has to be chosen from the currently selected dataset\n\nconvert to observeEvent() on input$dataset\nadd at the beggining: req(input$dataset) to assure non empty selection\nmodify to choices = names(data()[[input$dataset]])\n\nmodify the observer call\n\nadd req(input$dataset)\nadd req(input$variables %in% names(data()[[input$dataset]]))\n\nmodify ggplot call\n\nconvert the value to a symbol and use as a first argument of ggplot()\n\n\n\n\n\n\n\n\n\nTipAnswer\n\n\n\n\n\n\ndata &lt;- within(data, {\n  ADSL &lt;- pharmaverseadam::adsl\n  ADAE &lt;- pharmaverseadam::adae\n})\n\n\nmy_custom_module_ui &lt;- function(id) {\n  ns &lt;- NS(id)\n  tags$div(\n    # dataset selector\n    selectInput(\n      inputId = ns(\"dataset\"),\n      label = \"Select dataset\",\n      choices = NULL\n    ),\n    # ... existing code ...\n  )\n}\n\n\nmy_custom_module_srv &lt;- function(id, data) {\n  moduleServer(id, function(input, output, session) {\n\n    # ... existing code ...\n\n    updateSelectInput(\n      inputId = \"dataset\",\n      choices = names(data())\n    )\n\n    observeEvent(\n      input$dataset,\n      {\n        req(input$dataset)\n        updateSelectInput(\n          inputId = \"variable\",\n          choices = data()[[input$dataset]] |&gt; select(where(is.numeric)) |&gt; names()\n        )\n      }\n    )\n\n    # Update reactive and render function\n    result &lt;- reactive({\n      req(input$dataset)\n      req(input$variable)\n      within(\n        data(),\n        {\n          my_plot &lt;- ggplot(input_dataset, aes(x = input_var)) +\n            geom_histogram()\n          my_plot\n        },\n        input_dataset = as.name(input$dataset),\n        input_var = as.name(input$variable)\n      )\n    })\n\n    output$plot &lt;- renderPlot({\n      result()[[\"my_plot\"]]\n    })\n\n  })\n}"
+  },
+  {
+    "objectID": "exercises/topic_7/create_teal_module.html#what-did-we-learn",
+    "href": "exercises/topic_7/create_teal_module.html#what-did-we-learn",
+    "title": "Interactive Data Visualisation Using the Teal Framework",
+    "section": "📚 What did we learn?",
+    "text": "📚 What did we learn?\n\nHow to create a custom teal module\nHow to interact with teal_data object in the module server\nHow to enable reproducible code and reporting features"
+  },
+  {
+    "objectID": "exercises/topic_7/create_teal_module.html#references",
+    "href": "exercises/topic_7/create_teal_module.html#references",
+    "title": "Interactive Data Visualisation Using the Teal Framework",
+    "section": "🌐 References",
+    "text": "🌐 References\n\nteal::module()\n“Creating Custom Modules” vignette\n\"qenv\" article on how to interact with internal qenv object - in particular: teal.code::within() function"
+  },
+  {
+    "objectID": "exercises/topic_5/data_in_teal.html#how-to-provide-data-to-a-teal-application---code-samples",
+    "href": "exercises/topic_5/data_in_teal.html#how-to-provide-data-to-a-teal-application---code-samples",
+    "title": "Interactive Data Visualisation Using the Teal Framework",
+    "section": "How to provide data to a teal application? - code samples",
+    "text": "How to provide data to a teal application? - code samples\nThe data argument in teal::init() is where you specify all the datasets your application will use. There are several ways to provide data to teal:\n\nusing teal_data()\nusing cdisc_data() for clinical data"
+  },
+  {
+    "objectID": "exercises/topic_5/data_in_teal.html#option-1-using-teal_data",
+    "href": "exercises/topic_5/data_in_teal.html#option-1-using-teal_data",
+    "title": "Interactive Data Visualisation Using the Teal Framework",
+    "section": "Option 1: Using teal_data()",
+    "text": "Option 1: Using teal_data()\n\nlibrary(teal.data)\n\n# Create a basic teal_data object\nmy_data &lt;- teal_data(\n  IRIS = iris,\n  MTCARS = mtcars\n)\n\n# View the structure\nprint(my_data)\n\n✖ code unverified\n&lt;environment: 0x12de9b4e8&gt; 🔒 \nParent: &lt;environment: package:teal.data&gt; \nBindings:\n- IRIS: [data.frame]\n- MTCARS: [data.frame]"
+  },
+  {
+    "objectID": "exercises/topic_5/data_in_teal.html#option-2-adding-code-for-reproducibility",
+    "href": "exercises/topic_5/data_in_teal.html#option-2-adding-code-for-reproducibility",
+    "title": "Interactive Data Visualisation Using the Teal Framework",
+    "section": "Option 2: Adding code for reproducibility",
+    "text": "Option 2: Adding code for reproducibility\nOne of the key features of teal.data is its ability to track the code used to generate data:\n\n# Create teal_data with explicit code tracking\nmy_data &lt;- teal_data()\n\n# Add datasets with code\nmy_data &lt;- within(my_data, {\n  # Load and prepare iris data\n  IRIS &lt;- iris\n  IRIS$Species &lt;- as.factor(IRIS$Species)\n\n  # Load and prepare mtcars data\n  MTCARS &lt;- mtcars\n  MTCARS$cyl &lt;- as.factor(MTCARS$cyl)\n  MTCARS$gear &lt;- as.factor(MTCARS$gear)\n})\n\n# View the tracked code\nget_code(my_data) |&gt;\n  cat()\n\nIRIS &lt;- iris\nIRIS$Species &lt;- as.factor(IRIS$Species)\nMTCARS &lt;- mtcars\nMTCARS$cyl &lt;- as.factor(MTCARS$cyl)\nMTCARS$gear &lt;- as.factor(MTCARS$gear)"
+  },
+  {
+    "objectID": "exercises/topic_5/data_in_teal.html#option-3-using-cdisc_data-for-clinical-data",
+    "href": "exercises/topic_5/data_in_teal.html#option-3-using-cdisc_data-for-clinical-data",
+    "title": "Interactive Data Visualisation Using the Teal Framework",
+    "section": "Option 3: Using cdisc_data() for clinical data",
+    "text": "Option 3: Using cdisc_data() for clinical data\nFor clinical trial data following CDISC standards, teal.data provides the specialized cdisc_data() function that automatically handles common clinical data relationships.\n\nlibrary(teal.data)\nlibrary(pharmaverseadam)\n\nadsl &lt;- pharmaverseadam::adsl\nadae &lt;- pharmaverseadam::adae\n\n# Create cdisc_data object\nclinical_data &lt;- cdisc_data(\n  ADSL = adsl,\n  ADAE = adae,\n  code = c(\n    \"adsl &lt;- pharmaverseadam::adsl\",\n    \"adae &lt;- pharmaverseadam::adae\"\n  )\n)\n\nprint(clinical_data)\n\n✖ code unverified\n&lt;environment: 0x10b459698&gt; 🔒 \nParent: &lt;environment: package:pharmaverseadam&gt; \nBindings:\n- ADAE: [tbl_df]\n- ADSL: [tbl_df]"
+  },
+  {
+    "objectID": "exercises/topic_5/data_in_teal.html#introduction-to-teal.data-in-the-context-of-the-cdisc-data-standard",
+    "href": "exercises/topic_5/data_in_teal.html#introduction-to-teal.data-in-the-context-of-the-cdisc-data-standard",
+    "title": "Interactive Data Visualisation Using the Teal Framework",
+    "section": "Introduction to teal.data in the context of the CDISC data standard",
+    "text": "Introduction to teal.data in the context of the CDISC data standard\nThe teal.data package serves as the foundation for all data operations in teal. It provides a structured way to:\n\nStore multiple datasets in a single object\nTrack the code used to create or modify data\nDefine relationships between datasets\n\nWhen you create a teal_data object, teal does several things behind the scenes:\n\nData storage - Your datasets are stored within the object\nCode tracking - The creation process is recorded for reproducibility\nMetadata creation - Information about datasets and their relationships is stored"
+  },
+  {
+    "objectID": "exercises/topic_5/data_in_teal.html#creating-cdisc_data-objects-with-explicit-code",
+    "href": "exercises/topic_5/data_in_teal.html#creating-cdisc_data-objects-with-explicit-code",
+    "title": "Interactive Data Visualisation Using the Teal Framework",
+    "section": "Creating cdisc_data objects with explicit code",
+    "text": "Creating cdisc_data objects with explicit code\n# More explicit approach with within()\nlibrary(teal.data)\nlibrary(teal)\nlibrary(pharmaverseadam)\n\nclinical_data &lt;- cdisc_data()\nclinical_data &lt;- within(clinical_data, {\n  adsl &lt;- pharmaverseadam::adsl\n  adae &lt;- pharmaverseadam::adae\n})\njoin_keys(clinical_data) &lt;- teal.data::default_cdisc_join_keys[c(\"ADSL\", \"ADAE\")]\n\n# View the structure and join keys\nprint(clinical_data)\nprint(join_keys(clinical_data))"
+  },
+  {
+    "objectID": "exercises/topic_5/data_in_teal.html#introduction-to-the-concept-of-keys-in-teal.data",
+    "href": "exercises/topic_5/data_in_teal.html#introduction-to-the-concept-of-keys-in-teal.data",
+    "title": "Interactive Data Visualisation Using the Teal Framework",
+    "section": "Introduction to the concept of keys in teal.data",
+    "text": "Introduction to the concept of keys in teal.data\njoin_keys define how datasets relate to each other, which is crucial for: - Proper filtering across related datasets (filtering on the parent dataset filters entries in the child dataset as well) - Correct data merging in modules (join_key are used by the modules to merge datasets together)"
+  },
+  {
+    "objectID": "exercises/topic_5/data_in_teal.html#automatic-join-key-detection-with-cdisc_data",
+    "href": "exercises/topic_5/data_in_teal.html#automatic-join-key-detection-with-cdisc_data",
+    "title": "Interactive Data Visualisation Using the Teal Framework",
+    "section": "Automatic join key detection with cdisc_data()",
+    "text": "Automatic join key detection with cdisc_data()\nOne of the key advantages of cdisc_data() is automatic join key detection:\n\nlibrary(pharmaverseadam)\nlibrary(teal)\n\nLoading required package: shiny\n\n\nLoading required package: teal.slice\n\n\nRegistered S3 method overwritten by 'teal':\n  method        from      \n  c.teal_slices teal.slice\n\n\n\nYou are using teal version 1.1.0\n\n\n\nAttaching package: 'teal'\n\n\nThe following objects are masked from 'package:teal.slice':\n\n    as.teal_slices, teal_slices\n\nlibrary(teal.data)\n\nadsl &lt;- pharmaverseadam::adsl\nclinical_data_1 &lt;- teal.data::cdisc_data(ADSL = adsl, code = \"ADSL &lt;- pharmaverseadam::adsl\")\nprint(join_keys(clinical_data_1))\n\nA join_keys object containing foreign keys between 1 datasets:\nADSL: [STUDYID, USUBJID] \n\nclinical_data_2 &lt;- teal.data::cdisc_data()\nclinical_data_2 &lt;- within(clinical_data_2, {\n  ADSL &lt;- pharmaverseadam::adsl\n})\nprint(join_keys(clinical_data_2))\n\nAn empty join_keys object. \n\n\nNotice the difference in the two above prints. When we pass a dataset directly to cdisc_data constructor, the constructor automatically adds the join_keys object. Whereas in the second example, we used within and our object did not automatically receive correct join_keys."
+  },
+  {
+    "objectID": "exercises/topic_5/data_in_teal.html#understanding-join-key-output",
+    "href": "exercises/topic_5/data_in_teal.html#understanding-join-key-output",
+    "title": "Interactive Data Visualisation Using the Teal Framework",
+    "section": "Understanding join key output",
+    "text": "Understanding join key output\n\nlibrary(pharmaverseadam)\nlibrary(teal.data)\nlibrary(teal)\n# Create example with multiple relationships\ncomplex_data &lt;- cdisc_data(\n  ADSL = pharmaverseadam::adsl,\n  ADAE = pharmaverseadam::adae,\n  ADEX = pharmaverseadam::adex\n)\njoin_keys(complex_data) &lt;- teal.data::default_cdisc_join_keys[c(\"ADSL\", \"ADAE\", \"ADEX\")]\n\n# Understanding the output:\n# - Each line shows a relationship between two datasets\n# - The arrow (-&gt;) indicates the direction (parent -&gt; child)\n# - Variables in brackets show the joining columns\n# - ADSL is typically the parent (subject-level data)\n# - the implicit join keys are created automatically when\n#   teal.data detects a possible join through a \"middleman\" dataset\n\n# Print and interpret join keys\ncat(\"Join Keys Structure:\\n\")\n\nJoin Keys Structure:\n\nprint(join_keys(complex_data))\n\nA join_keys object containing foreign keys between 3 datasets:\nADSL: [STUDYID, USUBJID]\n  &lt;-- ADAE: [STUDYID, USUBJID]\n  &lt;-- ADEX: [STUDYID, USUBJID]\nADAE: [STUDYID, USUBJID, ASTDTM, AETERM, AESEQ]\n  --&gt; ADSL: [STUDYID, USUBJID]\n  --* (implicit via parent with): ADEX\nADEX: [STUDYID, USUBJID, PARCAT1, PARAMCD, AVISITN, ASTDTM, EXSEQ]\n  --&gt; ADSL: [STUDYID, USUBJID]\n  --* (implicit via parent with): ADAE"
+  },
+  {
+    "objectID": "exercises/topic_5/data_in_teal.html#creating-a-custom-teal.data-object-with-custom-user-defined-keys---code-samples",
+    "href": "exercises/topic_5/data_in_teal.html#creating-a-custom-teal.data-object-with-custom-user-defined-keys---code-samples",
+    "title": "Interactive Data Visualisation Using the Teal Framework",
+    "section": "Creating a custom teal.data object with custom user-defined keys - code samples",
+    "text": "Creating a custom teal.data object with custom user-defined keys - code samples\nSometimes you need to create or modify join keys manually, especially when working with non-standard data structures or when you need custom relationships."
+  },
+  {
+    "objectID": "exercises/topic_5/data_in_teal.html#manual-join-keys-creation",
+    "href": "exercises/topic_5/data_in_teal.html#manual-join-keys-creation",
+    "title": "Interactive Data Visualisation Using the Teal Framework",
+    "section": "Manual join keys creation",
+    "text": "Manual join keys creation\n\n# Create a teal_data object without automatic join detection\nmy_data &lt;- teal_data(\n  PATIENTS = data.frame(\n    patient_id = 1:100,\n    age = sample(18:80, 100, replace = TRUE),\n    treatment = sample(c(\"A\", \"B\"), 100, replace = TRUE)\n  ),\n  VISITS = data.frame(\n    patient_id = rep(1:100, each = 4),\n    visit_num = rep(1:4, 100),\n    visit_date = seq.Date(as.Date(\"2024-01-01\"), by = \"week\", length.out = 400),\n    measurement = rnorm(400, 100, 15)\n  ),\n  EVENTS = data.frame(\n    patient_id = sample(1:100, 200, replace = TRUE),\n    event_type = sample(c(\"AE\", \"CM\", \"EX\"), 200, replace = TRUE),\n    event_date = sample(seq.Date(as.Date(\"2024-01-01\"), as.Date(\"2024-12-31\"), by = \"day\"), 200)\n  )\n)\n\n# Manually define join keys\njoin_keys(my_data) &lt;- join_keys(\n  join_key(\"PATIENTS\", \"VISITS\", \"patient_id\"),\n  join_key(\"PATIENTS\", \"EVENTS\", \"patient_id\")\n)\n\n# View the join keys\nprint(\"Manual join keys:\")\n\n[1] \"Manual join keys:\"\n\nprint(join_keys(my_data))\n\nA join_keys object containing foreign keys between 3 datasets:\nPATIENTS: [no primary keys]\n  &lt;-- VISITS: [patient_id]\n  &lt;-- EVENTS: [patient_id]\nVISITS: [no primary keys]\n  --&gt; PATIENTS: [patient_id]\n  --* (implicit via parent with): EVENTS\nEVENTS: [no primary keys]\n  --&gt; PATIENTS: [patient_id]\n  --* (implicit via parent with): VISITS"
+  },
+  {
+    "objectID": "exercises/topic_5/data_in_teal.html#overwriting-automatic-join-keys-in-cdisc_data",
+    "href": "exercises/topic_5/data_in_teal.html#overwriting-automatic-join-keys-in-cdisc_data",
+    "title": "Interactive Data Visualisation Using the Teal Framework",
+    "section": "Overwriting automatic join keys in cdisc_data",
+    "text": "Overwriting automatic join keys in cdisc_data\nSometimes the automatic join key detection in cdisc_data() doesn’t match your specific needs. Here’s how to override the default behavior:\n\nlibrary(pharmaverseadam)\nlibrary(teal)\nlibrary(teal.data)\n\ncustom_keys &lt;- join_keys(\n  # Primary keys for each dataset\n  join_key(\"ADSL\", \"ADSL\", c(\"STUDYID\", \"USUBJID\")),\n  join_key(\"ADAE\", \"ADAE\", c(\"STUDYID\", \"USUBJID\", \"AESEQ\")),\n  join_key(\"ADCM\", \"ADCM\", c(\"STUDYID\", \"USUBJID\", \"CMSEQ\")),\n\n  # Relationships between datasets\n  join_key(\"ADSL\", \"ADAE\", c(\"STUDYID\", \"USUBJID\")),\n  join_key(\"ADSL\", \"ADCM\", c(\"STUDYID\", \"USUBJID\")),\n\n  # Custom: Allow direct relationship between ADAE and ADCM\n  # This might be useful for analyzing AEs and concomitant medications together\n  join_key(\"ADAE\", \"ADCM\", c(\"STUDYID\", \"USUBJID\"))\n)\n\ncustom_data &lt;- cdisc_data(\n  ADSL = pharmaverseadam::adsl,\n  ADAE = pharmaverseadam::adae,\n  ADCM = pharmaverseadam::adcm\n)\n\n# Override the automatic join keys\njoin_keys(custom_data) &lt;- custom_keys\n\n# View the custom join keys\ncat(\"\\nCustom join keys:\\n\")\n\n\nCustom join keys:\n\nprint(join_keys(custom_data))\n\nA join_keys object containing foreign keys between 3 datasets:\nADSL: [STUDYID, USUBJID]\n  &lt;-- ADAE: [STUDYID, USUBJID]\n  &lt;-&gt; ADCM: [STUDYID, USUBJID]\nADAE: [STUDYID, USUBJID, AESEQ]\n  --&gt; ADSL: [STUDYID, USUBJID]\n  &lt;-- ADCM: [STUDYID, USUBJID]\nADCM: [STUDYID, USUBJID, CMSEQ]\n  &lt;-&gt; ADSL: [STUDYID, USUBJID]\n  --&gt; ADAE: [STUDYID, USUBJID]"
+  },
+  {
+    "objectID": "exercises/topic_5/data_in_teal.html#exercise",
+    "href": "exercises/topic_5/data_in_teal.html#exercise",
+    "title": "Interactive Data Visualisation Using the Teal Framework",
+    "section": "🛠️ Exercise",
+    "text": "🛠️ Exercise\n\nload teal.data\ncreate a teal_data object named basic_data that bundles the built-in iris and mtcars datasets\nprint teal_data - notice the verification status printed in the console\ntry to verify the code you provided to teal_data actually reproduces the data you stored inside the object\ninspect the resulting object with print() and get_code()\n\n\n\n\n\n\n\nTipAnswer\n\n\n\n\n\nlibrary(teal.data)\n\nbasic_data &lt;- teal_data(iris = iris, mtcars = mtcars, code = \"iris &lt;- iris; mtcars &lt;- mtcars\")\nprint(basic_data)\nverify(basic_data)\nprint(basic_data)\ncat(get_code(basic_data))"
+  },
+  {
+    "objectID": "exercises/topic_5/data_in_teal.html#exercise-1",
+    "href": "exercises/topic_5/data_in_teal.html#exercise-1",
+    "title": "Interactive Data Visualisation Using the Teal Framework",
+    "section": "🛠️ Exercise",
+    "text": "🛠️ Exercise\n\nuse teal_data() together with within() (or an equivalent approach) to construct an object named tracked_data.\nmake at least one transformation to each dataset (e.g., convert a column to a factor, create a derived variable).\nconfirm that get_code(tracked_data) records the transformation steps.\n\n\n\n\n\n\n\nTipAnswer\n\n\n\n\n\nlibrary(teal.data)\n\ntracked_data &lt;- teal_data(iris = iris, mtcars = mtcars, code = \"iris &lt;- iris; mtcars &lt;- mtcars\")\ntracked_data &lt;- within(tracked_data, {\n  iris$Species &lt;- as.factor(iris$Species)\n  mtcars$new_column &lt;- 3\n})\ncat(get_code(tracked_data))"
+  },
+  {
+    "objectID": "exercises/topic_5/data_in_teal.html#exercise-2",
+    "href": "exercises/topic_5/data_in_teal.html#exercise-2",
+    "title": "Interactive Data Visualisation Using the Teal Framework",
+    "section": "🛠️ Exercise",
+    "text": "🛠️ Exercise\n\nload the pharmaverseadam package and pull the datasets adsl, adae, and adtte.\nbuild a single teal_data object named adam_manual containing those three datasets.\ndefine custom join keys that mimic the automatic CDISC relationships:\n\nADSL -&gt; ADAE on c(\"STUDYID\", \"USUBJID\")\nADSL -&gt; ADTTE on c(\"STUDYID\", \"USUBJID\")\nOptionally add subject-level self keys for each table.\n\nassign the custom keys with join_keys(adam_manual) &lt;- ....\nconfirm the structure by printing the join keys.\n\n\n\n\n\n\n\nTipAnswer\n\n\n\n\n\nlibrary(pharmaverseadam)\nlibrary(teal.data)\nlibrary(teal)\n\nadam_manual &lt;- teal_data(adsl = adsl, adae = adae, adtte = adtte_onco)\ncustom_join_keys &lt;- join_keys(\n  join_key(\"ADSL\", \"ADAE\", c(\"STUDYID\", \"USUBJID\")),\n  join_key(\"ADSL\", \"ADTTE\", c(\"STUDYID\", \"USUBJID\"))\n)\njoin_keys(adam_manual) &lt;- custom_join_keys\nprint(join_keys(adam_manual))"
+  },
+  {
+    "objectID": "exercises/topic_5/data_in_teal.html#exercise-3",
+    "href": "exercises/topic_5/data_in_teal.html#exercise-3",
+    "title": "Interactive Data Visualisation Using the Teal Framework",
+    "section": "🛠️ Exercise",
+    "text": "🛠️ Exercise\n\nuse one of the application defined by you in exercises or one of the applications shown as examples during workshops\ndebug issues with join keys if any\nuse the Show R Code button to verify the application returns code that you can use to reproduce the output\n\n\n\n\n\n\n\nTipAnswer\n\n\n\n\n\nlibrary(pharmaverseadam)\nlibrary(teal.data)\nlibrary(teal)\nlibrary(teal.modules.clinical)\n\nadam_manual &lt;- teal_data(ADSL = adsl, ADAE = adae, ADTTE = adtte_onco)\nadam_manual &lt;- within(adam_manual, {\n  ADSL$ARM &lt;- as.factor(ADSL$ARM)\n  ADSL$ARMCD &lt;- as.factor(ADSL$ARMCD)\n})\ncustom_join_keys &lt;- join_keys(\n  join_key(\"ADSL\", \"ADAE\", c(\"STUDYID\", \"USUBJID\")),\n  join_key(\"ADSL\", \"ADTTE\", c(\"STUDYID\", \"USUBJID\")),\n  join_key(\"ADSL\", \"ADSL\", c(\"STUDYID\", \"USUBJID\"))\n)\njoin_keys(adam_manual) &lt;- custom_join_keys\nprint(join_keys(adam_manual))\n\napp &lt;- init(\n  data = adam_manual,\n  modules = modules(\n    tm_t_events(\n      label = \"Adverse Event Table\",\n      dataname = \"ADAE\",\n      arm_var = choices_selected(c(\"ARM\", \"ARMCD\"), \"ARM\"),\n      llt = choices_selected(\n        choices = variable_choices(\"ADAE\", c(\"AETERM\", \"AEDECOD\")),\n        selected = c(\"AEDECOD\")\n      ),\n      hlt = choices_selected(\n        choices = variable_choices(\"ADAE\", c(\"AEBODSYS\", \"AESOC\")),\n        selected = \"AEBODSYS\"\n      ),\n      add_total = TRUE,\n      event_type = \"adverse event\",\n      sort_criteria = \"alpha\",\n      pre_output = shiny::div(\"Who won the most at the poker last night?\")\n    )\n  )\n)\n\nshinyApp(app$ui, app$server)"
+  },
+  {
+    "objectID": "exercises/topic_3/basic_app.html#launching-a-simple-teal-application",
+    "href": "exercises/topic_3/basic_app.html#launching-a-simple-teal-application",
+    "title": "Interactive Data Visualisation Using the Teal Framework",
+    "section": "Launching a simple teal application",
+    "text": "Launching a simple teal application\nWhen you launch this minimal application, you’ll observe:\n\nThe teal header - displaying the application title\nA main panel that shows our one empty module.\nThe filter panel on the left - ready to filter data (though no data is loaded yet)\nThe navigation structure - showing how teal organizes content"
+  },
+  {
+    "objectID": "exercises/topic_3/basic_app.html#basic-structure",
+    "href": "exercises/topic_3/basic_app.html#basic-structure",
+    "title": "Interactive Data Visualisation Using the Teal Framework",
+    "section": "Basic structure",
+    "text": "Basic structure\nEvery teal application follows this fundamental pattern:\n\nInitialization using teal::init()\nData specification (must be specified)\nModules definition\nApplication launch using the usual Shiny API"
+  },
+  {
+    "objectID": "exercises/topic_3/basic_app.html#code-example-simplest-teal-application",
+    "href": "exercises/topic_3/basic_app.html#code-example-simplest-teal-application",
+    "title": "Interactive Data Visualisation Using the Teal Framework",
+    "section": "Code example: Simplest teal application",
+    "text": "Code example: Simplest teal application\nlibrary(teal)\n\n# Create the simplest possible teal application\napp &lt;- teal::init(\n  data = teal.data::teal_data(iris = iris),\n  modules = teal::example_module(\n    label = \"example teal module\",\n    datanames = \"all\",\n    transformators = list(),\n    decorators = list()\n  )\n)\n\n# Launch the application\nshiny::shinyApp(app$ui, app$server)\n\nWhat this demonstrates\nThis minimal example shows you:\n\nThe teal framework structure\nThe filter panel\nThe modular architecture - the list in the top left shows the module list (with just one module for now)\nThe initialization pattern - teal::init() is the entry point for all teal applications"
+  },
+  {
+    "objectID": "exercises/topic_3/basic_app.html#the-data-argument---your-applications-foundation",
+    "href": "exercises/topic_3/basic_app.html#the-data-argument---your-applications-foundation",
+    "title": "Interactive Data Visualisation Using the Teal Framework",
+    "section": "The data argument - your application’s foundation",
+    "text": "The data argument - your application’s foundation\nThe data argument is where you specify all the datasets your application will use. There are several ways to provide data to teal:\n\nusing teal_data()\nusing cdisc_data() for clinical data\n\n\nOption 1: Using teal_data()\n# Create data using teal_data()\nmy_data &lt;- teal_data(\n  ADSL = adsl_data,\n  ADAE = adae_data,\n  IRIS = iris\n)\n\napp &lt;- init(\n  data = my_data,\n  modules = modules(...)\n)\n\n\nOption 2: Using cdisc_data() for clinical data\n# For CDISC/ADaM data with relationships\nmy_data &lt;- cdisc_data(\n  ADSL = adsl_data,\n  ADAE = adae_data,\n  code = c(\n    \"ADSL &lt;- adsl_data\",\n    \"ADAE &lt;- adae_data\"\n  )\n)\n\napp &lt;- init(\n  data = my_data,\n  modules = modules(...)\n)\n\n\nWhat the data argument controls:\n\nAvailable datasets - Which datasets appear in the filter panel\nData relationships - How datasets connect to each other (via join_keys)\nReproducibility - Code tracking for generating the data"
+  },
+  {
+    "objectID": "exercises/topic_3/basic_app.html#the-modules-argument---your-applications-functionality",
+    "href": "exercises/topic_3/basic_app.html#the-modules-argument---your-applications-functionality",
+    "title": "Interactive Data Visualisation Using the Teal Framework",
+    "section": "The modules argument - your application’s functionality",
+    "text": "The modules argument - your application’s functionality\nThe modules argument defines what your application can do. It accepts a modules() object containing one or more teal modules."
+  },
+  {
+    "objectID": "exercises/topic_3/basic_app.html#single-module-example",
+    "href": "exercises/topic_3/basic_app.html#single-module-example",
+    "title": "Interactive Data Visualisation Using the Teal Framework",
+    "section": "Single module example",
+    "text": "Single module example"
+  },
+  {
+    "objectID": "exercises/topic_3/basic_app.html#multiple-modules-example",
+    "href": "exercises/topic_3/basic_app.html#multiple-modules-example",
+    "title": "Interactive Data Visualisation Using the Teal Framework",
+    "section": "Multiple modules example",
+    "text": "Multiple modules example"
+  },
+  {
+    "objectID": "exercises/topic_3/basic_app.html#exercise-a-warm-up-really",
+    "href": "exercises/topic_3/basic_app.html#exercise-a-warm-up-really",
+    "title": "Interactive Data Visualisation Using the Teal Framework",
+    "section": "🛠️ Exercise (a warm up really)",
+    "text": "🛠️ Exercise (a warm up really)\n\nTry launching this application in your environment.\n\nlibrary(teal)\n\napp &lt;- teal::init(\n  data = teal.data::teal_data(iris = iris),\n  modules = teal::example_module(\n    label = \"example teal module\",\n    datanames = \"all\",\n    transformators = list(),\n    decorators = list()\n  )\n)\n\n# Launch the application\nif (interactive()) {\n  shiny::shinyApp(app$ui, app$server)\n}"
+  },
+  {
+    "objectID": "exercises/topic_3/basic_app.html#exercise",
+    "href": "exercises/topic_3/basic_app.html#exercise",
+    "title": "Interactive Data Visualisation Using the Teal Framework",
+    "section": "🛠️ Exercise",
+    "text": "🛠️ Exercise\n\nAdd another dataset to the application - mtcars\nLaunch the application and check if the dataset is available in the application\n\n\n\n\n\n\n\nTipAnswer\n\n\n\n\n\nlibrary(teal)\n\napp &lt;- teal::init(\n  data = teal.data::teal_data(iris = iris, mtcars = mtcars),\n  modules = teal::example_module(\n    label = \"example teal module\",\n    datanames = \"all\",\n    transformators = list(),\n    decorators = list()\n  )\n)\n\n# Launch the application\nif (interactive()) {\n  shiny::shinyApp(app$ui, app$server)\n}"
+  },
+  {
+    "objectID": "exercises/topic_3/basic_app.html#exercise-1",
+    "href": "exercises/topic_3/basic_app.html#exercise-1",
+    "title": "Interactive Data Visualisation Using the Teal Framework",
+    "section": "🛠️ Exercise",
+    "text": "🛠️ Exercise\n\nAdd a new module to the application - teal.modules.general::tm_data_table().\nLaunch the application and check if the module is available in the application\n\nHint: you will need to load the teal.modules.general package to use the module. via library(teal.modules.general). If you feel lost, please check out the manual at: https://insightsengineering.github.io/teal.modules.general/latest-tag/reference/tm_data_table.html\n\n\n\n\n\n\nTipAnswer\n\n\n\n\n\nlibrary(teal)\nlibrary(teal.modules.general) # &lt;- new library call\n\napp &lt;- teal::init(\n  data = teal.data::teal_data(iris = iris, mtcars = mtcars),\n  modules = teal::modules(\n    teal::example_module(\n      label = \"example teal module\",\n      datanames = \"all\",\n      transformators = list(),\n      decorators = list()\n    ),\n    teal.modules.general::tm_data_table()\n  )\n)\n\n# Launch the application\nif (interactive()) {\n  shiny::shinyApp(app$ui, app$server)\n}"
+  },
+  {
+    "objectID": "exercises/topic_1/foreward.html",
+    "href": "exercises/topic_1/foreward.html",
+    "title": "Interactive Data Visualisation Using the Teal Framework",
+    "section": "",
+    "text": "teal is an R framework designed to streamline the development of interactive data analysis applications. Built on top of Shiny, teal provides a modular, standardized approach to creating data exploration and visualization tools."
+  },
+  {
+    "objectID": "exercises/topic_1/foreward.html#what-is-teal",
+    "href": "exercises/topic_1/foreward.html#what-is-teal",
+    "title": "Interactive Data Visualisation Using the Teal Framework",
+    "section": "",
+    "text": "teal is an R framework designed to streamline the development of interactive data analysis applications. Built on top of Shiny, teal provides a modular, standardized approach to creating data exploration and visualization tools."
+  },
+  {
+    "objectID": "exercises/topic_1/foreward.html#teal-ecosystem",
+    "href": "exercises/topic_1/foreward.html#teal-ecosystem",
+    "title": "Interactive Data Visualisation Using the Teal Framework",
+    "section": "teal ecosystem",
+    "text": "teal ecosystem\nteal is just one R package from a teal ecosystem. Other packages that we will be using during these workshops that come from teal are: * teal.modules.clinical * teal.modules.general\nThere are multiple other packages that are developed alongside teal. You can find a comprehensive list at http://github.com/insightsengineering."
+  },
+  {
+    "objectID": "exercises/topic_1/foreward.html#key-characteristics-of-teal",
+    "href": "exercises/topic_1/foreward.html#key-characteristics-of-teal",
+    "title": "Interactive Data Visualisation Using the Teal Framework",
+    "section": "Key characteristics of teal",
+    "text": "Key characteristics of teal\n\nModular Architecture: Build applications using reusable, interchangeable components\nReproducible Analytics: Maintain complete analysis reproducibility with built-in code tracking\nUser-Friendly Interface: Intuitive design accessible to both developers and end-users\nClinical Focus: Specialized modules for pharmaceutical and clinical trial data analysis\nInteractive Exploration: Real-time data filtering, visualization, and analysis capabilities"
+  },
+  {
+    "objectID": "exercises/topic_1/foreward.html#how-teal-fits-with-shiny",
+    "href": "exercises/topic_1/foreward.html#how-teal-fits-with-shiny",
+    "title": "Interactive Data Visualisation Using the Teal Framework",
+    "section": "How teal fits with shiny",
+    "text": "How teal fits with shiny\nteal is built on top of Shiny, extending Shiny’s capabilities specifically for data analysis applications:\n\nModular framework: While Shiny provides the reactive infrastructure, teal adds a standardized, modular architecture for data analysis modules.\nReproducibility layer: teal adds automatic code tracking and reproducibility features that go beyond standard Shiny applications.\nClinical data handling: teal provides specialized data structures and workflows for clinical trial data (CDISC/ADaM) that aren’t available in base Shiny.\nIntegrated filtering: teal includes a sophisticated filter panel system that works seamlessly across all modules, which would require significant custom development in pure Shiny.\n\nIn essence, teal takes Shiny’s reactive web application framework and adds the specialized tools, patterns, and infrastructure needed for reproducible, clinical-grade data analysis applications."
+  },
+  {
+    "objectID": "exercises/topic_2/how_to_install.html",
+    "href": "exercises/topic_2/how_to_install.html",
+    "title": "Interactive Data Visualisation Using the Teal Framework",
+    "section": "",
+    "text": "You should have all the packages already preinstalled during these workshops on the remote workbenches we have prepared.\nWhen you are starting from scratch (or just reinstalled your R version):\ninstall.packages(c(\n    \"teal\",\n    \"teal.modules.clinical\",\n    \"teal.modules.general\",\n    \"pharmaverseadam\"\n))"
+  },
+  {
+    "objectID": "exercises/topic_2/how_to_install.html#how-to-install-the-teal-framework",
+    "href": "exercises/topic_2/how_to_install.html#how-to-install-the-teal-framework",
+    "title": "Interactive Data Visualisation Using the Teal Framework",
+    "section": "",
+    "text": "You should have all the packages already preinstalled during these workshops on the remote workbenches we have prepared.\nWhen you are starting from scratch (or just reinstalled your R version):\ninstall.packages(c(\n    \"teal\",\n    \"teal.modules.clinical\",\n    \"teal.modules.general\",\n    \"pharmaverseadam\"\n))"
+  },
+  {
+    "objectID": "exercises/topic_2/how_to_install.html#cloud-environment-for-the-workshop",
+    "href": "exercises/topic_2/how_to_install.html#cloud-environment-for-the-workshop",
+    "title": "Interactive Data Visualisation Using the Teal Framework",
+    "section": "Cloud environment for the workshop",
+    "text": "Cloud environment for the workshop\nLink: workbench.teal.sandbox.aws.appsilon.com"
+  },
+  {
+    "objectID": "exercises/topic_2/how_to_install.html#exercise-a-warm-up-really",
+    "href": "exercises/topic_2/how_to_install.html#exercise-a-warm-up-really",
+    "title": "Interactive Data Visualisation Using the Teal Framework",
+    "section": "🛠️ Exercise (a warm up really)",
+    "text": "🛠️ Exercise (a warm up really)\n\nTry loading the above packages to see if the environment is set up correctly\n\n\n\n\n\n\n\nTipAnswer\n\n\n\n\n\nlibrary(teal)\nlibrary(teal.modules.general)\nlibrary(teal.modules.clinical)\nlibrary(pharmaverseadam)"
+  },
+  {
+    "objectID": "exercises/topic_4/launching_tmc_modules.html",
+    "href": "exercises/topic_4/launching_tmc_modules.html",
+    "title": "Interactive Data Visualisation Using the Teal Framework",
+    "section": "",
+    "text": "The teal.modules.clinical (TMC) package offers specialized modules designed specifically for clinical trial data analysis. These modules are built on top of teal.modules.general and provide clinical-specific functionality and workflows.\n\n\n\nHere’s a simple example using a teal.modules.clinical module:\nlibrary(teal)\nlibrary(teal.modules.clinical)\nlibrary(teal.data)\nlibrary(pharmaverseadam)\n\n# Step 1: Load real ADaM data from pharmaverseadam\ndata(\"adsl\", package = \"pharmaverseadam\")\nadsl$ARM &lt;- as.factor(adsl$ARM)\nadsl$ARMCD &lt;- as.factor(adsl$ARM)\n\n# Step 2: Create teal_data object with the \"real\" dataset\nclinical_data &lt;- cdisc_data(\n    ADSL = adsl,\n    code = \"\n    adsl$ARM &lt;- as.factor(adsl$ARM)\n    adsl$ARMCD &lt;- as.factor(adsl$ARM)\n    ADSL &lt;- adsl\n    \"\n)\n\n# Step 3: Create the teal application with a TMC module\napp &lt;- teal::init(\n  data = clinical_data,\n  modules = teal::modules(\n  teal.modules.clinical::tm_t_summary(\n      label = \"Demographic Table\",\n      dataname = \"ADSL\",\n      arm_var = choices_selected(c(\"ARM\", \"ARMCD\"), \"ARM\"),\n      add_total = TRUE,\n      summarize_vars = choices_selected(\n        c(\"SEX\", \"RACE\", \"BMRKR2\", \"EOSDY\", \"DCSREAS\", \"AGE\"),\n        c(\"SEX\", \"RACE\")\n      ),\n      useNA = \"ifany\"\n    )\n  )\n)\n\n# Step 4: Launch the application\nif (interactive()) {\n  shiny::shinyApp(app$ui, app$server)\n}\n\n\n\nWhen you launch a teal.modules.clinical application, you’ll observe:\n\n\n\nDifferent parts of a teal module\n\n\n\nFilter Panel (Left): Shows filtering options for all dataset variables\n\nCategorical variables: Display as checkboxes (e.g., SEX, ARM, RACE)\nNumeric variables: Display as range sliders (e.g., AGE, BMIBL)\nDate variables: Display as date pickers (e.g., RFSTDTC, RFENDTC)\nAll filters are interconnected with module outputs\n\nEncoding Panel: Provides controls for configuring the analysis\n\nVariable selection dropdowns\nAnalysis parameter settings\nCustomization options specific to the module type\nShow R Code Button: generates reproducible R code for all operations:\n\nClick to view the exact R code used\nCopy code for reproducibility\nEnsures transparency in analysis\n\n\nMain Output (Center): Displays the module’s primary analytical output\n\nModule-specific visualizations or tables\nInteractive elements for exploration"
+  },
+  {
+    "objectID": "exercises/topic_4/launching_tmc_modules.html#topic-4-introduction-to-teal.modules.clinical-and-anatomy-of-a-module-15-minutes",
+    "href": "exercises/topic_4/launching_tmc_modules.html#topic-4-introduction-to-teal.modules.clinical-and-anatomy-of-a-module-15-minutes",
+    "title": "Interactive Data Visualisation Using the Teal Framework",
+    "section": "",
+    "text": "The teal.modules.clinical (TMC) package offers specialized modules designed specifically for clinical trial data analysis. These modules are built on top of teal.modules.general and provide clinical-specific functionality and workflows.\n\n\n\nHere’s a simple example using a teal.modules.clinical module:\nlibrary(teal)\nlibrary(teal.modules.clinical)\nlibrary(teal.data)\nlibrary(pharmaverseadam)\n\n# Step 1: Load real ADaM data from pharmaverseadam\ndata(\"adsl\", package = \"pharmaverseadam\")\nadsl$ARM &lt;- as.factor(adsl$ARM)\nadsl$ARMCD &lt;- as.factor(adsl$ARM)\n\n# Step 2: Create teal_data object with the \"real\" dataset\nclinical_data &lt;- cdisc_data(\n    ADSL = adsl,\n    code = \"\n    adsl$ARM &lt;- as.factor(adsl$ARM)\n    adsl$ARMCD &lt;- as.factor(adsl$ARM)\n    ADSL &lt;- adsl\n    \"\n)\n\n# Step 3: Create the teal application with a TMC module\napp &lt;- teal::init(\n  data = clinical_data,\n  modules = teal::modules(\n  teal.modules.clinical::tm_t_summary(\n      label = \"Demographic Table\",\n      dataname = \"ADSL\",\n      arm_var = choices_selected(c(\"ARM\", \"ARMCD\"), \"ARM\"),\n      add_total = TRUE,\n      summarize_vars = choices_selected(\n        c(\"SEX\", \"RACE\", \"BMRKR2\", \"EOSDY\", \"DCSREAS\", \"AGE\"),\n        c(\"SEX\", \"RACE\")\n      ),\n      useNA = \"ifany\"\n    )\n  )\n)\n\n# Step 4: Launch the application\nif (interactive()) {\n  shiny::shinyApp(app$ui, app$server)\n}\n\n\n\nWhen you launch a teal.modules.clinical application, you’ll observe:\n\n\n\nDifferent parts of a teal module\n\n\n\nFilter Panel (Left): Shows filtering options for all dataset variables\n\nCategorical variables: Display as checkboxes (e.g., SEX, ARM, RACE)\nNumeric variables: Display as range sliders (e.g., AGE, BMIBL)\nDate variables: Display as date pickers (e.g., RFSTDTC, RFENDTC)\nAll filters are interconnected with module outputs\n\nEncoding Panel: Provides controls for configuring the analysis\n\nVariable selection dropdowns\nAnalysis parameter settings\nCustomization options specific to the module type\nShow R Code Button: generates reproducible R code for all operations:\n\nClick to view the exact R code used\nCopy code for reproducibility\nEnsures transparency in analysis\n\n\nMain Output (Center): Displays the module’s primary analytical output\n\nModule-specific visualizations or tables\nInteractive elements for exploration"
+  },
+  {
+    "objectID": "exercises/topic_4/launching_tmc_modules.html#exercise",
+    "href": "exercises/topic_4/launching_tmc_modules.html#exercise",
+    "title": "Interactive Data Visualisation Using the Teal Framework",
+    "section": "🛠️ Exercise",
+    "text": "🛠️ Exercise\n\ncreate a cdisc_data object using ADSL and ADAE from pharmaverseadam\nuse join_keys(created_data) to ensure that your data has correct join_keys\n\n\n\n\n\n\n\nTipAnswer\n\n\n\n\n\nlibrary(teal.data)\nlibrary(pharmaverseadam)\n\nmy_data &lt;- cdisc_data(ADSL = pharmaverseadam::adsl, ADAE = pharmaverseadam::adae)\nprint(join_keys(my_data))"
+  },
+  {
+    "objectID": "exercises/topic_4/launching_tmc_modules.html#exercise-1",
+    "href": "exercises/topic_4/launching_tmc_modules.html#exercise-1",
+    "title": "Interactive Data Visualisation Using the Teal Framework",
+    "section": "🛠️ Exercise",
+    "text": "🛠️ Exercise\n\nusing documentation of teal.modules.clinical - https://insightsengineering.github.io/teal.modules.clinical/latest-tag/reference/tm_t_events.html create a teal application including the tm_t_events module\nchange the default sort criterium to alphanumeric\nadd a title to the module’s output using pre_output\n\n\n\n\n\n\n\nTipAnswer\n\n\n\n\n\nlibrary(teal.data)\nlibrary(teal)\nlibrary(pharmaverseadam)\nlibrary(teal.modules.clinical)\n\nADSL &lt;- pharmaverseadam::adsl\nADSL$ARM &lt;- as.factor(ADSL$ARM)\nADSL$ARMCD &lt;- as.factor(ADSL$ARMCD)\nmy_data &lt;- cdisc_data(ADSL = ADSL, ADAE = pharmaverseadam::adae, code = \"\n    ADAE &lt;- pharmaverseadam::adae\n    ADSL &lt;- pharmaverseadam::adsl\n    ADSL$ARM &lt;- as.factor(ADSL$ARM)\n    ADSL$ARMCD &lt;- as.factor(ADSL$ARMCD)\n\")\n\napp &lt;- init(\n  data = my_data,\n  modules = modules(\n    tm_t_events(\n      label = \"Adverse Event Table\",\n      dataname = \"ADAE\",\n      arm_var = choices_selected(c(\"ARM\", \"ARMCD\"), \"ARM\"),\n      llt = choices_selected(\n        choices = variable_choices(\"ADAE\", c(\"AETERM\", \"AEDECOD\")),\n        selected = c(\"AEDECOD\")\n      ),\n      hlt = choices_selected(\n        choices = variable_choices(\"ADAE\", c(\"AEBODSYS\", \"AESOC\")),\n        selected = \"AEBODSYS\"\n      ),\n      add_total = TRUE,\n      event_type = \"adverse event\",\n      sort_criteria = \"alpha\",\n      pre_output = shiny::div(\"Who won the most at the poker last night?\")\n    )\n  )\n)\n\nshinyApp(app$ui, app$server)"
+  },
+  {
+    "objectID": "exercises/topic_4/launching_tmc_modules.html#exercise-for-all-the-early-finishers",
+    "href": "exercises/topic_4/launching_tmc_modules.html#exercise-for-all-the-early-finishers",
+    "title": "Interactive Data Visualisation Using the Teal Framework",
+    "section": "🛠️ Exercise (for all the early finishers)",
+    "text": "🛠️ Exercise (for all the early finishers)\n\nusing documentation - https://insightsengineering.github.io/teal.modules.clinical/latest-tag/reference/tm_t_events_summary.html create a teal application including the tm_t_events_summary module.\n\n\n\n\n\n\n\nTipAnswer\n\n\n\n\n\nlibrary(dplyr)\nlibrary(teal.modules.clinical)\n\ndata &lt;- teal_data()\ndata &lt;- within(data, {\n  ADSL &lt;- pharmaverseadam::adsl %&gt;%\n    mutate(\n      DTHFL = case_when(\n        !is.na(DTHDT) ~ \"Y\",\n        TRUE ~ \"\"\n      ) %&gt;% with_label(\"Subject Death Flag\")\n    )\n  ADSL$DCSREAS &lt;- NA_character_\n  ADSL$ARM &lt;- as.factor(ADSL$ARM)\n  ADSL$ARMCD &lt;- as.factor(ADSL$ARMCD)\n  ADAE &lt;- pharmaverseadam::adae\n  ADAE$ARM &lt;- as.factor(ADAE$ARM)\n  ADAE$ARMCD &lt;- as.factor(ADAE$ARMCD)\n  ADAE$DCSREAS &lt;- NA_character_\n  levels(ADAE$ARM) &lt;- levels(ADSL$ARM)\n})\nprint(data)\nprint(names(data[[\"ADAE\"]]))\njoin_keys(data) &lt;- default_cdisc_join_keys[names(data)]\n\napp &lt;- init(\n  data = data,\n  modules = modules(\n    tm_t_events_summary(\n      label = \"Adverse Events Summary\",\n      dataname = \"ADAE\",\n      arm_var = choices_selected(\n        choices = variable_choices(\"ADSL\", c(\"ARM\", \"ARMCD\")),\n        selected = \"ARM\"\n      ),\n      add_total = TRUE\n    )\n  )\n)\nshinyApp(app$ui, app$server)"
+  },
+  {
+    "objectID": "exercises/topic_6/choices_selected.html",
+    "href": "exercises/topic_6/choices_selected.html",
+    "title": "Interactive Data Visualisation Using the Teal Framework",
+    "section": "",
+    "text": "The choices_selected function from teal.transform is a powerful utility for managing variable selections in teal modules. It provides a flexible way to specify choices and default selections for inputs, with support for both eager and delayed evaluation.\nThis topic will cover common scenarios app developers face when building teal applications from existing modules: - Limiting variable choices in module inputs - Providing choices without knowing the dataset structure upfront - Adapting to different datasets dynamically"
+  },
+  {
+    "objectID": "exercises/topic_6/choices_selected.html#topic-6-deeper-dive-into-customizing-the-parameters-of-teal.modules.clinical-modules-10-minutes",
+    "href": "exercises/topic_6/choices_selected.html#topic-6-deeper-dive-into-customizing-the-parameters-of-teal.modules.clinical-modules-10-minutes",
+    "title": "Interactive Data Visualisation Using the Teal Framework",
+    "section": "",
+    "text": "The choices_selected function from teal.transform is a powerful utility for managing variable selections in teal modules. It provides a flexible way to specify choices and default selections for inputs, with support for both eager and delayed evaluation.\nThis topic will cover common scenarios app developers face when building teal applications from existing modules: - Limiting variable choices in module inputs - Providing choices without knowing the dataset structure upfront - Adapting to different datasets dynamically"
+  },
+  {
+    "objectID": "exercises/topic_6/choices_selected.html#introduction-to-choices_selected",
+    "href": "exercises/topic_6/choices_selected.html#introduction-to-choices_selected",
+    "title": "Interactive Data Visualisation Using the Teal Framework",
+    "section": "Introduction to choices_selected",
+    "text": "Introduction to choices_selected\n\nBasic Usage\n\nThe choices_selected function creates an object that specifies both available choices and selected defaults for UI inputs.\n\nThe choices can be provided in two ways:\n\nStatically as character vectors\nDynamically by referencing the dataset (when using within a teal application that does not yet know the full data structure).\n\n\n\n\n\n\n\n\n\n\n\nteal example with clinical module\nLet’s start with a basic teal application that uses choices_selected:\nlibrary(teal.modules.clinical)\n\n# Create sample data\ndata &lt;- teal_data() |&gt;\n  within({\n    ADSL &lt;- pharmaverseadam::adsl\n\n    ADSL$ARM &lt;- as.factor(ADSL$ARM)\n    ADSL$ARMCD &lt;- as.factor(ADSL$ARMCD)\n    ADSL$SEX &lt;- as.factor(ADSL$SEX)\n    ADSL$RACE &lt;- as.factor(ADSL$RACE)\n\n    attr(ADSL$ARM, \"label\") &lt;- \"Actual Treatment Arm\"\n    attr(ADSL$ARMCD, \"label\") &lt;- \"Actual Treatment Arm Code\"\n    attr(ADSL$SEX, \"label\") &lt;- \"Sex\"\n    attr(ADSL$RACE, \"label\") &lt;- \"Race\"\n})\n\njoin_keys(data) &lt;- default_cdisc_join_keys[names(data)]\n\n# Basic application using choices_selected\napp &lt;- init(\n  data = data,\n  modules = modules(\n    tm_t_summary(\n      label = \"Demographic Table\",\n      dataname = \"ADSL\",\n      arm_var = choices_selected(c(\"ARM\", \"ARMCD\"), \"ARM\"),\n      add_total = TRUE,\n      summarize_vars = choices_selected(\n        c(\"SEX\", \"RACE\", \"AGE\"),\n        selected = c(\"SEX\", \"RACE\", \"AGE\")\n      ),\n      useNA = \"ifany\"\n    )\n  )\n)\n\nrunApp(app)"
+  },
+  {
+    "objectID": "exercises/topic_6/choices_selected.html#using-value_choices",
+    "href": "exercises/topic_6/choices_selected.html#using-value_choices",
+    "title": "Interactive Data Visualisation Using the Teal Framework",
+    "section": "Using value_choices",
+    "text": "Using value_choices\n\nThe value_choices function retrieves the actual choices from a dataset based on variable names.\n\n\nRequires a dataset to extract the values from specified columns\n\nDataset can be provided directly or as a reference to be resolved later\n\nWhen multiple columns are provided: it combines unique values from all specified columns"
+  },
+  {
+    "objectID": "exercises/topic_6/choices_selected.html#using-variable_choices",
+    "href": "exercises/topic_6/choices_selected.html#using-variable_choices",
+    "title": "Interactive Data Visualisation Using the Teal Framework",
+    "section": "Using variable_choices",
+    "text": "Using variable_choices\n\nThe variable_choices function allows you to dynamically select variables based on dataset characteristics.\n\n\n\n\n\n\n\n\n\n\nEager evaluation vs. Delayed evaluation\nThe variable_choices function can be used in two modes:\n\nEager evaluation computes choices immediately, allowing for inspecting the choices beforehand (just as shown above).\nDelayed evaluation allows choices to be determined at runtime, which is useful when dataset structure isn’t known beforehand (see example below).\n\n\n\n\n\n\n\n\n\n\nApplication with Dynamic Variable Selection\n# Application that automatically finds numeric variables\napp_dynamic &lt;- init(\n  data = data,\n  modules = modules(\n    tm_t_summary(\n      label = \"Demographic Table\",\n      dataname = \"ADSL\",\n      arm_var = choices_selected(c(\"ARM\", \"ARMCD\"), \"ARM\"),\n      add_total = TRUE,\n      summarize_vars = analysis_vars,\n      useNA = \"ifany\"\n    )\n  )\n)\n\nrunApp(app_dynamic)\n\n\n\nteal example with Kaplan-Meier module\nUsing Kaplan-Meier module from teal.modules.clinical\nlibrary(teal.data)\nlibrary(teal.modules.clinical)\nlibrary(teal.transform)\n\ndata_km &lt;- teal_data() |&gt;\n  within({\n  ADSL &lt;- pharmaverseadam::adsl\n\n  ADSL$ARM &lt;- as.factor(ADSL$ARM)\n  ADSL$ARMCD &lt;- as.factor(ADSL$ARMCD)\n  ADSL$SEX &lt;- as.factor(ADSL$SEX)\n  ADSL$RACE &lt;- as.factor(ADSL$RACE)\n\n  ADTTE &lt;- pharmaverseadam::adtte_onco\n  ADTTE$ARM &lt;- as.factor(ADTTE$ARM)\n  ADTTE$ARMCD &lt;- as.factor(ADTTE$ARMCD)\n  ADTTE$AVALU = as.factor(\"DAYS\")\n})\njoin_keys(data_km) &lt;- default_cdisc_join_keys[names(data_km)]\n\narm_ref_comp &lt;- list(\n  ACTARMCD = list(\n    ref = \"Pbo\",\n    comp = c(\"Xan_Hi\", \"Xan_Lo\")\n  ),\n  ARM = list(\n    ref = \"Placebo\",\n    comp = c(\"Xanomeline High Dose\", \"Xanomeline Low Dose\")\n  )\n)\n\napp &lt;- init(\n  data = data_km,\n  modules = modules(\n    tm_g_km(\n      label = \"Kaplan-Meier Plot\",\n      dataname = \"ADTTE\",\n      arm_var = choices_selected(\n        variable_choices(\"ADSL\", c(\"ARM\", \"ARMCD\", \"ACTARMCD\")),\n        \"ARM\"\n      ),\n      paramcd = choices_selected(\n        value_choices(\"ADTTE\", \"PARAMCD\", \"PARAM\"),\n        \"OS\"\n      ),\n      arm_ref_comp = arm_ref_comp,\n      strata_var = choices_selected(\n        variable_choices(\"ADSL\", c(\"SEX\", \"RACE\")),\n        \"RACE\"\n      ),\n      facet_var = choices_selected(\n        variable_choices(ADSL, c(\"SEX\", \"RACE\")),\n        NULL\n      )\n    )\n  )\n)\n\nshinyApp(ui = app$ui, server = app$server)\n\n\n\n\n\n\nTipExample App\n\n\n\n\n\n#| '!! shinylive warning !!': |\n#|   shinylive does not work in self-contained HTML documents.\n#|   Please set `embed-resources: false` in your metadata.\n#| standalone: true\n#| viewerHeight: 680\nlibrary(teal.data)\nlibrary(teal.modules.clinical)\nlibrary(teal.transform)\n\ndata_km &lt;- teal_data() |&gt;\n  within({\n  ADSL &lt;- pharmaverseadam::adsl\n\n  ADSL$ARM &lt;- as.factor(ADSL$ARM)\n  ADSL$ARMCD &lt;- as.factor(ADSL$ARMCD)\n  ADSL$SEX &lt;- as.factor(ADSL$SEX)\n  ADSL$RACE &lt;- as.factor(ADSL$RACE)\n\n  ADTTE &lt;- pharmaverseadam::adtte_onco\n  ADTTE$ARM &lt;- as.factor(ADTTE$ARM)\n  ADTTE$ARMCD &lt;- as.factor(ADTTE$ARMCD)\n  ADTTE$AVALU = as.factor(\"DAYS\")\n})\njoin_keys(data_km) &lt;- default_cdisc_join_keys[names(data_km)]\n\narm_ref_comp &lt;- list(\n  ACTARMCD = list(\n    ref = \"Pbo\",\n    comp = c(\"Xan_Hi\", \"Xan_Lo\")\n  ),\n  ARM = list(\n    ref = \"Placebo\",\n    comp = c(\"Xanomeline High Dose\", \"Xanomeline Low Dose\")\n  )\n)\n\napp &lt;- init(\n  data = data_km,\n  modules = modules(\n    tm_g_km(\n      label = \"Kaplan-Meier Plot\",\n      dataname = \"ADTTE\",\n      arm_var = choices_selected(\n        variable_choices(\"ADSL\", c(\"ARM\", \"ARMCD\", \"ACTARMCD\")),\n        \"ARM\"\n      ),\n      paramcd = choices_selected(\n        value_choices(\"ADTTE\", \"PARAMCD\", \"PARAM\"),\n        \"OS\"\n      ),\n      arm_ref_comp = arm_ref_comp,\n      strata_var = choices_selected(\n        variable_choices(\"ADSL\", c(\"SEX\", \"RACE\")),\n        \"RACE\"\n      ),\n      facet_var = choices_selected(\n        variable_choices(ADSL, c(\"SEX\", \"RACE\")),\n        NULL\n      )\n    )\n  )\n)\n\nshinyApp(ui = app$ui, server = app$server)"
+  },
+  {
+    "objectID": "exercises/topic_6/choices_selected.html#exercise",
+    "href": "exercises/topic_6/choices_selected.html#exercise",
+    "title": "Interactive Data Visualisation Using the Teal Framework",
+    "section": "🛠️ Exercise",
+    "text": "🛠️ Exercise\nFill in the code below to create a teal application that uses choices_selected to limit the variable choices for a summary table module.\n\ngroup_var with Treatment variable,\ny with Analysis variable,\nparam with Parameter of Interest\n\nlibrary(dplyr)\nlibrary(forcats)\nlibrary(teal.transform)\nlibrary(teal.modules.clinical)\n\ndata &lt;- teal_data()\ndata &lt;- within(data, {\n  ADSL &lt;- pharmaverseadam::adsl\n\n  ADSL$ARM &lt;- as.factor(ADSL$ARM)\n  ADSL$ARMCD &lt;- as.factor(ADSL$ARMCD)\n  ADSL$ACTARMCD &lt;- as.factor(ADSL$ACTARMCD)\n\n  ADLB &lt;- pharmaverseadam::adlb |&gt;\n    mutate(\n      AVISIT = as.factor(AVISIT),\n      AVISIT == fct_reorder(AVISIT, AVISITN, min),\n      AVALU = \"DAYS\"\n    )\n\n  ADLB$ARM &lt;- as.factor(ADLB$ARM)\n  ADLB$ARMCD &lt;- as.factor(ADLB$ARMCD)\n  ADLB$ACTARMCD &lt;- as.factor(ADLB$ACTARMCD)\n})\njoin_keys(data) &lt;- default_cdisc_join_keys[names(data)]\n\napp &lt;- init(\n  data = data,\n  modules = modules(\n    tm_g_lineplot(\n      label = \"Line Plot\",\n      dataname = \"ADLB\",\n      group_var = choices_selected(), # Select Treatment variable,\n      y = choices_selected(), # Select Analysis variable,\n      param = choices_selected() # Select Parameter of Interest\n    )\n  )\n)\nrunApp(app)\n\n\n\n\n\n\nTipAnswer\n\n\n\n\n\nlibrary(dplyr)\nlibrary(forcats)\nlibrary(teal.transform)\nlibrary(teal.modules.clinical)\n\ndata &lt;- teal_data()\ndata &lt;- within(data, {\n  ADSL &lt;- pharmaverseadam::adsl\n\n  ADSL$ARM &lt;- as.factor(ADSL$ARM)\n  ADSL$ARMCD &lt;- as.factor(ADSL$ARMCD)\n  ADSL$ACTARMCD &lt;- as.factor(ADSL$ACTARMCD)\n\n  ADLB &lt;- pharmaverseadam::adlb |&gt;\n    mutate(\n      AVISIT = as.factor(AVISIT),\n      AVISIT == fct_reorder(AVISIT, AVISITN, min),\n      AVALU = \"DAYS\"\n    )\n\n  ADLB$ARM &lt;- as.factor(ADLB$ARM)\n  ADLB$ARMCD &lt;- as.factor(ADLB$ARMCD)\n  ADLB$ACTARMCD &lt;- as.factor(ADLB$ACTARMCD)\n})\njoin_keys(data) &lt;- default_cdisc_join_keys[names(data)]\n\napp &lt;- init(\n  data = data,\n  modules = modules(\n    tm_g_lineplot(\n      label = \"Line Plot\",\n      dataname = \"ADLB\",\n      group_var = choices_selected(\n        variable_choices(\"ADSL\", c(\"ARM\", \"ARMCD\", \"ACTARMCD\")),\n        \"ARM\"\n      ),\n      y = choices_selected(\n        variable_choices(\"ADLB\", c(\"AVAL\", \"BASE\", \"CHG\", \"PCHG\")),\n        \"AVAL\"\n      ),\n      param = choices_selected(\n        value_choices(\"ADLB\", \"PARAMCD\", \"PARAM\"),\n        \"ALT\"\n      )\n    )\n  )\n)\nrunApp(app)"
+  },
+  {
+    "objectID": "exercises/topic_6/choices_selected.html#what-did-we-learn",
+    "href": "exercises/topic_6/choices_selected.html#what-did-we-learn",
+    "title": "Interactive Data Visualisation Using the Teal Framework",
+    "section": "📚 What did we learn?",
+    "text": "📚 What did we learn?\nThe choices_selected and value_choices functions provides powerful flexibility for managing variable and value selections in teal applications. By combining it with variable_choices and understanding when to use eager vs. delayed evaluation, you can create robust applications that adapt to different datasets and provide users with appropriate choices.\nKey takeaways: - Use variable_choices with subset functions for dynamic filtering - Delayed evaluation helps when dataset structure is unknown - Important with teal_data_modules - Smart defaults improve user experience across different datasets\n\n💭 What did we not cover?\ndata_extract_spec is the underlying specification that powers choices_selected in the modules. It provides a more general framework for defining choices and selections, and can be customized further for advanced use cases.\nThe data_extract_ui and data_extract_srv functions can be used in modules to create custom UI and server logic for data extraction based on data_extract_spec and choices_selected (via teal.modules.clinical::cs_to_des_select).\nUseful links for further exploration:\n\ndata_extract_spec documentation\ncs_to_des_select documentation\ndata_extract_ui documentation\ndata_extract_srv documentation"
+  },
+  {
+    "objectID": "exercises/topic_6/choices_selected.html#references",
+    "href": "exercises/topic_6/choices_selected.html#references",
+    "title": "Interactive Data Visualisation Using the Teal Framework",
+    "section": "🌐 References",
+    "text": "🌐 References\n\nchoices_selected() documentation\nvalue_choices() documentation\nvariable_choices() documentation"
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Interactive Data Visualisation Using the Teal Framework",
+    "section": "",
+    "text": "A hands-on workshop at Phuse EU 2025 on the teal framework\n\nPresented by Peyman Eshghi, Konrad Pagacz and André Veríssimo\nFind out more at Phuse EU Connect 2025 webpage\nSponsored by Appsilon\n\n\n\nParticipants will engage in collaborative activities aimed at enhancing their understanding of the Teal framework. The workshop will be structured based on valuable feedback gathered from leaders during cross-industry discussions in forums such as the PHUSE Working Groups.\nWith increasing interest from regulatory agencies in promoting data transparency and accessibility, this workshop will provide a platform to showcase practical applications of the Teal framework while ensuring alignment with regulatory expectations. Our presentation at the PHUSE CSS in May highlights the relevance of this topic in ongoing industry conversations.\nWe welcome participants from various industry backgrounds to join us at the PHUSE EU Connect for this engaging workshop. Attendees will be guided through both beginner and advanced examples of creating interactive visualisations using Teal. They will learn how to build a Teal app with integrated modules and develop customised modules to address more complex scenarios.\nMoreover, the workshop will review the Teal roadmap and discuss the prioritisation of future features. If time allows, we will host a mini-hackathon, where attendees can actively contribute to Teal’s development by enhancing documentation or adding new modules to existing Teal packages.\nThis interactive experience promises to foster learning and collaboration while advancing skills in data visualisation.\n\n\n\n\nA laptop with a modern web browser installed\nFamiliarity with R and Shiny, including:\n\nReactivity concepts - see Basic Reactivity and An Overview\nUsing modules in Shiny apps - see Modularizing Shiny app code and Shiny Modules\n\n\n\n\n\n\n\n\nOverview & Objectives\nIntroduction to teal: What is teal? Why use it?\nInstallation & Setup: Quick walkthrough to get started\nCode Sample: Demonstration of a simple teal app\nAnatomy of a teal App: Key components & structure\n\n\n\n\n\nDeeper dive into how to provide and pre-process data in teal.modules.clinical (15 minutes)\nIntroduction to teal.modules.clinical and anatomy of a module (15 minutes)\nDeeper dive into customizing the parameters of teal.modules.clinical modules (10 minutes)\n\n\n\n\n\nStep-by-step Development: Building your own teal modules\nBest Practices: Tips for effective customization\nData Integration: Incorporating custom data processing inside modules\n\n\n\n\n\nFuture Directions: Upcoming features and plans for teal\nDiscussion & Q&A: Open floor for questions, insights, and sharing experiences",
+    "crumbs": [
+      "Home"
+    ]
+  },
+  {
+    "objectID": "index.html#description",
+    "href": "index.html#description",
+    "title": "Interactive Data Visualisation Using the Teal Framework",
+    "section": "",
+    "text": "Participants will engage in collaborative activities aimed at enhancing their understanding of the Teal framework. The workshop will be structured based on valuable feedback gathered from leaders during cross-industry discussions in forums such as the PHUSE Working Groups.\nWith increasing interest from regulatory agencies in promoting data transparency and accessibility, this workshop will provide a platform to showcase practical applications of the Teal framework while ensuring alignment with regulatory expectations. Our presentation at the PHUSE CSS in May highlights the relevance of this topic in ongoing industry conversations.\nWe welcome participants from various industry backgrounds to join us at the PHUSE EU Connect for this engaging workshop. Attendees will be guided through both beginner and advanced examples of creating interactive visualisations using Teal. They will learn how to build a Teal app with integrated modules and develop customised modules to address more complex scenarios.\nMoreover, the workshop will review the Teal roadmap and discuss the prioritisation of future features. If time allows, we will host a mini-hackathon, where attendees can actively contribute to Teal’s development by enhancing documentation or adding new modules to existing Teal packages.\nThis interactive experience promises to foster learning and collaboration while advancing skills in data visualisation.",
+    "crumbs": [
+      "Home"
+    ]
+  },
+  {
+    "objectID": "index.html#requirements-for-the-workshop",
+    "href": "index.html#requirements-for-the-workshop",
+    "title": "Interactive Data Visualisation Using the Teal Framework",
+    "section": "",
+    "text": "A laptop with a modern web browser installed\nFamiliarity with R and Shiny, including:\n\nReactivity concepts - see Basic Reactivity and An Overview\nUsing modules in Shiny apps - see Modularizing Shiny app code and Shiny Modules",
+    "crumbs": [
+      "Home"
+    ]
+  },
+  {
+    "objectID": "index.html#agenda",
+    "href": "index.html#agenda",
+    "title": "Interactive Data Visualisation Using the Teal Framework",
+    "section": "",
+    "text": "Overview & Objectives\nIntroduction to teal: What is teal? Why use it?\nInstallation & Setup: Quick walkthrough to get started\nCode Sample: Demonstration of a simple teal app\nAnatomy of a teal App: Key components & structure\n\n\n\n\n\nDeeper dive into how to provide and pre-process data in teal.modules.clinical (15 minutes)\nIntroduction to teal.modules.clinical and anatomy of a module (15 minutes)\nDeeper dive into customizing the parameters of teal.modules.clinical modules (10 minutes)\n\n\n\n\n\nStep-by-step Development: Building your own teal modules\nBest Practices: Tips for effective customization\nData Integration: Incorporating custom data processing inside modules\n\n\n\n\n\nFuture Directions: Upcoming features and plans for teal\nDiscussion & Q&A: Open floor for questions, insights, and sharing experiences",
+    "crumbs": [
+      "Home"
+    ]
+  }
+]

@@ -173,6 +173,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#launching-a-simple-teal.modules.clinical-application" id="toc-launching-a-simple-teal.modules.clinical-application" class="nav-link" data-scroll-target="#launching-a-simple-teal.modules.clinical-application">Launching a simple <code>teal.modules.clinical</code> application</a></li>
   <li><a href="#anatomy-of-a-teal.modules.clinical-module" id="toc-anatomy-of-a-teal.modules.clinical-module" class="nav-link" data-scroll-target="#anatomy-of-a-teal.modules.clinical-module">Anatomy of a <code>teal.modules.clinical</code> module</a></li>
   </ul></li>
+  <li><a href="#exercise" id="toc-exercise" class="nav-link" data-scroll-target="#exercise">🛠️ Exercise</a></li>
+  <li><a href="#exercise-1" id="toc-exercise-1" class="nav-link" data-scroll-target="#exercise-1">🛠️ Exercise</a></li>
+  <li><a href="#exercise-for-all-the-early-finishers" id="toc-exercise-for-all-the-early-finishers" class="nav-link" data-scroll-target="#exercise-for-all-the-early-finishers">🛠️ Exercise (for all the early finishers)</a></li>
   </ul>
 </nav>
     </div>
@@ -198,32 +201,51 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-5"><a href="#cb1-5"></a></span>
 <span id="cb1-6"><a href="#cb1-6"></a><span class="co"># Step 1: Load real ADaM data from pharmaverseadam</span></span>
 <span id="cb1-7"><a href="#cb1-7"></a><span class="fu">data</span>(<span class="st">"adsl"</span>, <span class="at">package =</span> <span class="st">"pharmaverseadam"</span>)</span>
-<span id="cb1-8"><a href="#cb1-8"></a></span>
-<span id="cb1-9"><a href="#cb1-9"></a><span class="co"># Step 2: Create teal_data object with the real dataset</span></span>
-<span id="cb1-10"><a href="#cb1-10"></a>clinical_data <span class="ot">&lt;-</span> <span class="fu">cdisc_data</span>(</span>
-<span id="cb1-11"><a href="#cb1-11"></a>    <span class="at">ADSL =</span> adsl,</span>
-<span id="cb1-12"><a href="#cb1-12"></a>    <span class="at">code =</span> <span class="st">"ADSL &lt;- adsl"</span></span>
-<span id="cb1-13"><a href="#cb1-13"></a>)</span>
-<span id="cb1-14"><a href="#cb1-14"></a></span>
-<span id="cb1-15"><a href="#cb1-15"></a><span class="co"># Step 3: Create the teal application with a TMC module</span></span>
-<span id="cb1-16"><a href="#cb1-16"></a>app <span class="ot">&lt;-</span> teal<span class="sc">::</span><span class="fu">init</span>(</span>
-<span id="cb1-17"><a href="#cb1-17"></a>  <span class="at">data =</span> clinical_data,</span>
-<span id="cb1-18"><a href="#cb1-18"></a>  <span class="at">modules =</span> teal<span class="sc">::</span><span class="fu">modules</span>(</span>
-<span id="cb1-19"><a href="#cb1-19"></a>    <span class="fu">tm_t_summary</span>(</span>
-<span id="cb1-20"><a href="#cb1-20"></a>      <span class="at">label =</span> <span class="st">"Summary Statistics"</span>,</span>
-<span id="cb1-21"><a href="#cb1-21"></a>      <span class="at">dataname =</span> <span class="st">"ADSL"</span></span>
-<span id="cb1-22"><a href="#cb1-22"></a>    )</span>
-<span id="cb1-23"><a href="#cb1-23"></a>  )</span>
-<span id="cb1-24"><a href="#cb1-24"></a>)</span>
-<span id="cb1-25"><a href="#cb1-25"></a></span>
-<span id="cb1-26"><a href="#cb1-26"></a><span class="co"># Step 4: Launch the application</span></span>
-<span id="cb1-27"><a href="#cb1-27"></a><span class="cf">if</span> (<span class="fu">interactive</span>()) {</span>
-<span id="cb1-28"><a href="#cb1-28"></a>  shiny<span class="sc">::</span><span class="fu">shinyApp</span>(app<span class="sc">$</span>ui, app<span class="sc">$</span>server)</span>
-<span id="cb1-29"><a href="#cb1-29"></a>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb1-8"><a href="#cb1-8"></a>adsl<span class="sc">$</span>ARM <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(adsl<span class="sc">$</span>ARM)</span>
+<span id="cb1-9"><a href="#cb1-9"></a>adsl<span class="sc">$</span>ARMCD <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(adsl<span class="sc">$</span>ARM)</span>
+<span id="cb1-10"><a href="#cb1-10"></a></span>
+<span id="cb1-11"><a href="#cb1-11"></a><span class="co"># Step 2: Create teal_data object with the "real" dataset</span></span>
+<span id="cb1-12"><a href="#cb1-12"></a>clinical_data <span class="ot">&lt;-</span> <span class="fu">cdisc_data</span>(</span>
+<span id="cb1-13"><a href="#cb1-13"></a>    <span class="at">ADSL =</span> adsl,</span>
+<span id="cb1-14"><a href="#cb1-14"></a>    <span class="at">code =</span> <span class="st">"</span></span>
+<span id="cb1-15"><a href="#cb1-15"></a><span class="st">    adsl$ARM &lt;- as.factor(adsl$ARM)</span></span>
+<span id="cb1-16"><a href="#cb1-16"></a><span class="st">    adsl$ARMCD &lt;- as.factor(adsl$ARM)</span></span>
+<span id="cb1-17"><a href="#cb1-17"></a><span class="st">    ADSL &lt;- adsl</span></span>
+<span id="cb1-18"><a href="#cb1-18"></a><span class="st">    "</span></span>
+<span id="cb1-19"><a href="#cb1-19"></a>)</span>
+<span id="cb1-20"><a href="#cb1-20"></a></span>
+<span id="cb1-21"><a href="#cb1-21"></a><span class="co"># Step 3: Create the teal application with a TMC module</span></span>
+<span id="cb1-22"><a href="#cb1-22"></a>app <span class="ot">&lt;-</span> teal<span class="sc">::</span><span class="fu">init</span>(</span>
+<span id="cb1-23"><a href="#cb1-23"></a>  <span class="at">data =</span> clinical_data,</span>
+<span id="cb1-24"><a href="#cb1-24"></a>  <span class="at">modules =</span> teal<span class="sc">::</span><span class="fu">modules</span>(</span>
+<span id="cb1-25"><a href="#cb1-25"></a>  teal.modules.clinical<span class="sc">::</span><span class="fu">tm_t_summary</span>(</span>
+<span id="cb1-26"><a href="#cb1-26"></a>      <span class="at">label =</span> <span class="st">"Demographic Table"</span>,</span>
+<span id="cb1-27"><a href="#cb1-27"></a>      <span class="at">dataname =</span> <span class="st">"ADSL"</span>,</span>
+<span id="cb1-28"><a href="#cb1-28"></a>      <span class="at">arm_var =</span> <span class="fu">choices_selected</span>(<span class="fu">c</span>(<span class="st">"ARM"</span>, <span class="st">"ARMCD"</span>), <span class="st">"ARM"</span>),</span>
+<span id="cb1-29"><a href="#cb1-29"></a>      <span class="at">add_total =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb1-30"><a href="#cb1-30"></a>      <span class="at">summarize_vars =</span> <span class="fu">choices_selected</span>(</span>
+<span id="cb1-31"><a href="#cb1-31"></a>        <span class="fu">c</span>(<span class="st">"SEX"</span>, <span class="st">"RACE"</span>, <span class="st">"BMRKR2"</span>, <span class="st">"EOSDY"</span>, <span class="st">"DCSREAS"</span>, <span class="st">"AGE"</span>),</span>
+<span id="cb1-32"><a href="#cb1-32"></a>        <span class="fu">c</span>(<span class="st">"SEX"</span>, <span class="st">"RACE"</span>)</span>
+<span id="cb1-33"><a href="#cb1-33"></a>      ),</span>
+<span id="cb1-34"><a href="#cb1-34"></a>      <span class="at">useNA =</span> <span class="st">"ifany"</span></span>
+<span id="cb1-35"><a href="#cb1-35"></a>    )</span>
+<span id="cb1-36"><a href="#cb1-36"></a>  )</span>
+<span id="cb1-37"><a href="#cb1-37"></a>)</span>
+<span id="cb1-38"><a href="#cb1-38"></a></span>
+<span id="cb1-39"><a href="#cb1-39"></a><span class="co"># Step 4: Launch the application</span></span>
+<span id="cb1-40"><a href="#cb1-40"></a><span class="cf">if</span> (<span class="fu">interactive</span>()) {</span>
+<span id="cb1-41"><a href="#cb1-41"></a>  shiny<span class="sc">::</span><span class="fu">shinyApp</span>(app<span class="sc">$</span>ui, app<span class="sc">$</span>server)</span>
+<span id="cb1-42"><a href="#cb1-42"></a>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 <section id="anatomy-of-a-teal.modules.clinical-module" class="level3">
 <h3 class="anchored" data-anchor-id="anatomy-of-a-teal.modules.clinical-module">Anatomy of a <code>teal.modules.clinical</code> module</h3>
 <p>When you launch a <code>teal.modules.clinical</code> application, you’ll observe:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="tmc-modules-parts.png" class="img-fluid figure-img"></p>
+<figcaption>Different parts of a <code>teal</code> module</figcaption>
+</figure>
+</div>
 <ol type="1">
 <li><strong>Filter Panel (Left)</strong>: Shows filtering options for all dataset variables
 <ul>
@@ -232,25 +254,175 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li><strong>Date variables</strong>: Display as date pickers (e.g., RFSTDTC, RFENDTC)</li>
 <li>All filters are interconnected with module outputs</li>
 </ul></li>
-<li><strong>Main Output (Center)</strong>: Displays the module’s primary analytical output
-<ul>
-<li>Module-specific visualizations or tables</li>
-<li>Interactive elements for exploration</li>
-<li>Professional appearance following clinical data standards</li>
-</ul></li>
 <li><strong>Encoding Panel</strong>: Provides controls for configuring the analysis
 <ul>
 <li>Variable selection dropdowns</li>
 <li>Analysis parameter settings</li>
 <li>Customization options specific to the module type</li>
-</ul></li>
-<li><strong>Show R Code Button</strong>: Generates reproducible R code for all operations
+<li>Show R Code Button: generates reproducible R code for all operations:
 <ul>
 <li>Click to view the exact R code used</li>
 <li>Copy code for reproducibility</li>
 <li>Ensures transparency in analysis</li>
 </ul></li>
+</ul></li>
+<li><strong>Main Output (Center)</strong>: Displays the module’s primary analytical output
+<ul>
+<li>Module-specific visualizations or tables</li>
+<li>Interactive elements for exploration</li>
+</ul></li>
 </ol>
+</section>
+</section>
+<section id="exercise" class="level2">
+<h2 class="anchored" data-anchor-id="exercise">🛠️ Exercise</h2>
+<ul>
+<li>create a <code>cdisc_data</code> object using <code>ADSL</code> and <code>ADAE</code> from <code>pharmaverseadam</code></li>
+<li>use <code>join_keys(created_data)</code> to ensure that your data has correct <code>join_keys</code></li>
+</ul>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Answer
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-1" class="callout-1-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a><span class="fu">library</span>(teal.data)</span>
+<span id="cb2-2"><a href="#cb2-2"></a><span class="fu">library</span>(pharmaverseadam)</span>
+<span id="cb2-3"><a href="#cb2-3"></a></span>
+<span id="cb2-4"><a href="#cb2-4"></a>my_data <span class="ot">&lt;-</span> <span class="fu">cdisc_data</span>(<span class="at">ADSL =</span> pharmaverseadam<span class="sc">::</span>adsl, <span class="at">ADAE =</span> pharmaverseadam<span class="sc">::</span>adae)</span>
+<span id="cb2-5"><a href="#cb2-5"></a><span class="fu">print</span>(<span class="fu">join_keys</span>(my_data))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div>
+</div>
+</section>
+<section id="exercise-1" class="level2">
+<h2 class="anchored" data-anchor-id="exercise-1">🛠️ Exercise</h2>
+<ul>
+<li>using documentation of <code>teal.modules.clinical</code> - https://insightsengineering.github.io/teal.modules.clinical/latest-tag/reference/tm_t_events.html create a <code>teal</code> application including the <code>tm_t_events</code> module</li>
+<li>change the default sort criterium to alphanumeric</li>
+<li>add a title to the module’s output using <code>pre_output</code></li>
+</ul>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Answer
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-2" class="callout-2-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a><span class="fu">library</span>(teal.data)</span>
+<span id="cb3-2"><a href="#cb3-2"></a><span class="fu">library</span>(teal)</span>
+<span id="cb3-3"><a href="#cb3-3"></a><span class="fu">library</span>(pharmaverseadam)</span>
+<span id="cb3-4"><a href="#cb3-4"></a><span class="fu">library</span>(teal.modules.clinical)</span>
+<span id="cb3-5"><a href="#cb3-5"></a></span>
+<span id="cb3-6"><a href="#cb3-6"></a>ADSL <span class="ot">&lt;-</span> pharmaverseadam<span class="sc">::</span>adsl</span>
+<span id="cb3-7"><a href="#cb3-7"></a>ADSL<span class="sc">$</span>ARM <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(ADSL<span class="sc">$</span>ARM)</span>
+<span id="cb3-8"><a href="#cb3-8"></a>ADSL<span class="sc">$</span>ARMCD <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(ADSL<span class="sc">$</span>ARMCD)</span>
+<span id="cb3-9"><a href="#cb3-9"></a>my_data <span class="ot">&lt;-</span> <span class="fu">cdisc_data</span>(<span class="at">ADSL =</span> ADSL, <span class="at">ADAE =</span> pharmaverseadam<span class="sc">::</span>adae, <span class="at">code =</span> <span class="st">"</span></span>
+<span id="cb3-10"><a href="#cb3-10"></a><span class="st">    ADAE &lt;- pharmaverseadam::adae</span></span>
+<span id="cb3-11"><a href="#cb3-11"></a><span class="st">    ADSL &lt;- pharmaverseadam::adsl</span></span>
+<span id="cb3-12"><a href="#cb3-12"></a><span class="st">    ADSL$ARM &lt;- as.factor(ADSL$ARM)</span></span>
+<span id="cb3-13"><a href="#cb3-13"></a><span class="st">    ADSL$ARMCD &lt;- as.factor(ADSL$ARMCD)</span></span>
+<span id="cb3-14"><a href="#cb3-14"></a><span class="st">"</span>)</span>
+<span id="cb3-15"><a href="#cb3-15"></a></span>
+<span id="cb3-16"><a href="#cb3-16"></a>app <span class="ot">&lt;-</span> <span class="fu">init</span>(</span>
+<span id="cb3-17"><a href="#cb3-17"></a>  <span class="at">data =</span> my_data,</span>
+<span id="cb3-18"><a href="#cb3-18"></a>  <span class="at">modules =</span> <span class="fu">modules</span>(</span>
+<span id="cb3-19"><a href="#cb3-19"></a>    <span class="fu">tm_t_events</span>(</span>
+<span id="cb3-20"><a href="#cb3-20"></a>      <span class="at">label =</span> <span class="st">"Adverse Event Table"</span>,</span>
+<span id="cb3-21"><a href="#cb3-21"></a>      <span class="at">dataname =</span> <span class="st">"ADAE"</span>,</span>
+<span id="cb3-22"><a href="#cb3-22"></a>      <span class="at">arm_var =</span> <span class="fu">choices_selected</span>(<span class="fu">c</span>(<span class="st">"ARM"</span>, <span class="st">"ARMCD"</span>), <span class="st">"ARM"</span>),</span>
+<span id="cb3-23"><a href="#cb3-23"></a>      <span class="at">llt =</span> <span class="fu">choices_selected</span>(</span>
+<span id="cb3-24"><a href="#cb3-24"></a>        <span class="at">choices =</span> <span class="fu">variable_choices</span>(<span class="st">"ADAE"</span>, <span class="fu">c</span>(<span class="st">"AETERM"</span>, <span class="st">"AEDECOD"</span>)),</span>
+<span id="cb3-25"><a href="#cb3-25"></a>        <span class="at">selected =</span> <span class="fu">c</span>(<span class="st">"AEDECOD"</span>)</span>
+<span id="cb3-26"><a href="#cb3-26"></a>      ),</span>
+<span id="cb3-27"><a href="#cb3-27"></a>      <span class="at">hlt =</span> <span class="fu">choices_selected</span>(</span>
+<span id="cb3-28"><a href="#cb3-28"></a>        <span class="at">choices =</span> <span class="fu">variable_choices</span>(<span class="st">"ADAE"</span>, <span class="fu">c</span>(<span class="st">"AEBODSYS"</span>, <span class="st">"AESOC"</span>)),</span>
+<span id="cb3-29"><a href="#cb3-29"></a>        <span class="at">selected =</span> <span class="st">"AEBODSYS"</span></span>
+<span id="cb3-30"><a href="#cb3-30"></a>      ),</span>
+<span id="cb3-31"><a href="#cb3-31"></a>      <span class="at">add_total =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb3-32"><a href="#cb3-32"></a>      <span class="at">event_type =</span> <span class="st">"adverse event"</span>,</span>
+<span id="cb3-33"><a href="#cb3-33"></a>      <span class="at">sort_criteria =</span> <span class="st">"alpha"</span>,</span>
+<span id="cb3-34"><a href="#cb3-34"></a>      <span class="at">pre_output =</span> shiny<span class="sc">::</span><span class="fu">div</span>(<span class="st">"Who won the most at the poker last night?"</span>)</span>
+<span id="cb3-35"><a href="#cb3-35"></a>    )</span>
+<span id="cb3-36"><a href="#cb3-36"></a>  )</span>
+<span id="cb3-37"><a href="#cb3-37"></a>)</span>
+<span id="cb3-38"><a href="#cb3-38"></a></span>
+<span id="cb3-39"><a href="#cb3-39"></a><span class="fu">shinyApp</span>(app<span class="sc">$</span>ui, app<span class="sc">$</span>server)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div>
+</div>
+</section>
+<section id="exercise-for-all-the-early-finishers" class="level2">
+<h2 class="anchored" data-anchor-id="exercise-for-all-the-early-finishers">🛠️ Exercise (for all the early finishers)</h2>
+<ul>
+<li>using documentation - https://insightsengineering.github.io/teal.modules.clinical/latest-tag/reference/tm_t_events_summary.html create a <code>teal</code> application including the <code>tm_t_events_summary</code> module.</li>
+</ul>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Answer
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-3" class="callout-3-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb4-2"><a href="#cb4-2"></a><span class="fu">library</span>(teal.modules.clinical)</span>
+<span id="cb4-3"><a href="#cb4-3"></a></span>
+<span id="cb4-4"><a href="#cb4-4"></a>data <span class="ot">&lt;-</span> <span class="fu">teal_data</span>()</span>
+<span id="cb4-5"><a href="#cb4-5"></a>data <span class="ot">&lt;-</span> <span class="fu">within</span>(data, {</span>
+<span id="cb4-6"><a href="#cb4-6"></a>  ADSL <span class="ot">&lt;-</span> pharmaverseadam<span class="sc">::</span>adsl <span class="sc">%&gt;%</span></span>
+<span id="cb4-7"><a href="#cb4-7"></a>    <span class="fu">mutate</span>(</span>
+<span id="cb4-8"><a href="#cb4-8"></a>      <span class="at">DTHFL =</span> <span class="fu">case_when</span>(</span>
+<span id="cb4-9"><a href="#cb4-9"></a>        <span class="sc">!</span><span class="fu">is.na</span>(DTHDT) <span class="sc">~</span> <span class="st">"Y"</span>,</span>
+<span id="cb4-10"><a href="#cb4-10"></a>        <span class="cn">TRUE</span> <span class="sc">~</span> <span class="st">""</span></span>
+<span id="cb4-11"><a href="#cb4-11"></a>      ) <span class="sc">%&gt;%</span> <span class="fu">with_label</span>(<span class="st">"Subject Death Flag"</span>)</span>
+<span id="cb4-12"><a href="#cb4-12"></a>    )</span>
+<span id="cb4-13"><a href="#cb4-13"></a>  ADSL<span class="sc">$</span>DCSREAS <span class="ot">&lt;-</span> <span class="cn">NA_character_</span></span>
+<span id="cb4-14"><a href="#cb4-14"></a>  ADSL<span class="sc">$</span>ARM <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(ADSL<span class="sc">$</span>ARM)</span>
+<span id="cb4-15"><a href="#cb4-15"></a>  ADSL<span class="sc">$</span>ARMCD <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(ADSL<span class="sc">$</span>ARMCD)</span>
+<span id="cb4-16"><a href="#cb4-16"></a>  ADAE <span class="ot">&lt;-</span> pharmaverseadam<span class="sc">::</span>adae</span>
+<span id="cb4-17"><a href="#cb4-17"></a>  ADAE<span class="sc">$</span>ARM <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(ADAE<span class="sc">$</span>ARM)</span>
+<span id="cb4-18"><a href="#cb4-18"></a>  ADAE<span class="sc">$</span>ARMCD <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(ADAE<span class="sc">$</span>ARMCD)</span>
+<span id="cb4-19"><a href="#cb4-19"></a>  ADAE<span class="sc">$</span>DCSREAS <span class="ot">&lt;-</span> <span class="cn">NA_character_</span></span>
+<span id="cb4-20"><a href="#cb4-20"></a>  <span class="fu">levels</span>(ADAE<span class="sc">$</span>ARM) <span class="ot">&lt;-</span> <span class="fu">levels</span>(ADSL<span class="sc">$</span>ARM)</span>
+<span id="cb4-21"><a href="#cb4-21"></a>})</span>
+<span id="cb4-22"><a href="#cb4-22"></a><span class="fu">print</span>(data)</span>
+<span id="cb4-23"><a href="#cb4-23"></a><span class="fu">print</span>(<span class="fu">names</span>(data[[<span class="st">"ADAE"</span>]]))</span>
+<span id="cb4-24"><a href="#cb4-24"></a><span class="fu">join_keys</span>(data) <span class="ot">&lt;-</span> default_cdisc_join_keys[<span class="fu">names</span>(data)]</span>
+<span id="cb4-25"><a href="#cb4-25"></a></span>
+<span id="cb4-26"><a href="#cb4-26"></a>app <span class="ot">&lt;-</span> <span class="fu">init</span>(</span>
+<span id="cb4-27"><a href="#cb4-27"></a>  <span class="at">data =</span> data,</span>
+<span id="cb4-28"><a href="#cb4-28"></a>  <span class="at">modules =</span> <span class="fu">modules</span>(</span>
+<span id="cb4-29"><a href="#cb4-29"></a>    <span class="fu">tm_t_events_summary</span>(</span>
+<span id="cb4-30"><a href="#cb4-30"></a>      <span class="at">label =</span> <span class="st">"Adverse Events Summary"</span>,</span>
+<span id="cb4-31"><a href="#cb4-31"></a>      <span class="at">dataname =</span> <span class="st">"ADAE"</span>,</span>
+<span id="cb4-32"><a href="#cb4-32"></a>      <span class="at">arm_var =</span> <span class="fu">choices_selected</span>(</span>
+<span id="cb4-33"><a href="#cb4-33"></a>        <span class="at">choices =</span> <span class="fu">variable_choices</span>(<span class="st">"ADSL"</span>, <span class="fu">c</span>(<span class="st">"ARM"</span>, <span class="st">"ARMCD"</span>)),</span>
+<span id="cb4-34"><a href="#cb4-34"></a>        <span class="at">selected =</span> <span class="st">"ARM"</span></span>
+<span id="cb4-35"><a href="#cb4-35"></a>      ),</span>
+<span id="cb4-36"><a href="#cb4-36"></a>      <span class="at">add_total =</span> <span class="cn">TRUE</span></span>
+<span id="cb4-37"><a href="#cb4-37"></a>    )</span>
+<span id="cb4-38"><a href="#cb4-38"></a>  )</span>
+<span id="cb4-39"><a href="#cb4-39"></a>)</span>
+<span id="cb4-40"><a href="#cb4-40"></a><span class="fu">shinyApp</span>(app<span class="sc">$</span>ui, app<span class="sc">$</span>server)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div>
+</div>
 
 
 <script type="ojs-module-contents">
@@ -267,7 +439,6 @@ eyJjb250ZW50cyI6W119
 <script type="vfs-file">
 W10=
 </script>
-</section>
 </section>
 
 </main> <!-- /main -->

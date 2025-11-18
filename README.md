@@ -49,8 +49,8 @@ This interactive experience promises to foster learning and collaboration while 
 
 ### _Topic 2:_ Mastering teal for Pharma Data Analysis _(hands-on 40 minutes)_
 
-- Introduction to teal.modules.clinical and anatomy of a module (15 minutes)
 - Deeper dive into how to provide and pre-process data in teal.modules.clinical (15 minutes)
+- Introduction to teal.modules.clinical and anatomy of a module (15 minutes)
 - Deeper dive into customizing the parameters of teal.modules.clinical modules (10 minutes)
 
 ### _Topic 3:_ Creating custom teal modules _(20 minutes)_

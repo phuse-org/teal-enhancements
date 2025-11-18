@@ -62,7 +62,7 @@ library(teal.data)
 library(pharmaverseadam)
 
 adsl <- pharmaverseadam::adsl
-adae <- pharmaverseadae::adae
+adae <- pharmaverseadam::adae
 
 # Create cdisc_data object
 clinical_data <- cdisc_data(
@@ -70,7 +70,7 @@ clinical_data <- cdisc_data(
   ADAE = adae,
   code = c(
     "adsl <- pharmaverseadam::adsl",
-    "adae <- pharmaverseadae::adae"
+    "adae <- pharmaverseadam::adae"
   )
 )
 
@@ -80,11 +80,13 @@ print(clinical_data)
 ## Introduction to `teal.data` in the context of the CDISC data standard
 
 The `teal.data` package serves as the foundation for all data operations in `teal`. It provides a structured way to:
+
 - Store multiple datasets in a single object
 - Track the code used to create or modify data
 - Define relationships between datasets
 
 When you create a `teal_data` object, `teal` does several things behind the scenes:
+
 1. **Data storage** - Your datasets are stored within the object
 2. **Code tracking** - The creation process is recorded for reproducibility
 3. **Metadata creation** - Information about datasets and their relationships is stored
@@ -243,3 +245,133 @@ join_keys(custom_data) <- custom_keys
 cat("\nCustom join keys:\n")
 print(join_keys(custom_data))
 ```
+
+## 🛠️ Exercise
+
+* load `teal.data`
+* create a `teal_data` object named `basic_data` that bundles the built-in `iris` and `mtcars` datasets
+* print `teal_data` - notice the verification status printed in the console
+* try to [verify](https://insightsengineering.github.io/teal.data/v0.5.0/reference/verify.html)
+  the code you provided to `teal_data` actually reproduces the data you stored inside the object
+* inspect the resulting object with `print()` and `get_code()`
+
+::: {.callout-tip collapse="true"}
+## Answer
+```{.r}
+library(teal.data)
+
+basic_data <- teal_data(iris = iris, mtcars = mtcars, code = "iris <- iris; mtcars <- mtcars")
+print(basic_data)
+verify(basic_data)
+print(basic_data)
+cat(get_code(basic_data))
+```
+:::
+
+## 🛠️ Exercise
+
+* use `teal_data()` together with `within()` (or an equivalent approach) to
+  construct an object named `tracked_data`.
+* make at least one transformation to each dataset (e.g., convert a column
+  to a factor, create a derived variable).
+* confirm that `get_code(tracked_data)` records the transformation steps.
+
+::: {.callout-tip collapse="true"}
+## Answer
+```{.r}
+library(teal.data)
+
+tracked_data <- teal_data(iris = iris, mtcars = mtcars, code = "iris <- iris; mtcars <- mtcars")
+tracked_data <- within(tracked_data, {
+  iris$Species <- as.factor(iris$Species)
+  mtcars$new_column <- 3
+})
+cat(get_code(tracked_data))
+```
+:::
+
+## 🛠️ Exercise
+
+* load the `pharmaverseadam` package and pull the datasets `adsl`, `adae`,
+  and `adtte`.
+* build a single `teal_data` object named `adam_manual` containing those
+  three datasets.
+* define custom join keys that mimic the automatic CDISC relationships:
+    - `ADSL` -> `ADAE` on `c("STUDYID", "USUBJID")`
+    - `ADSL` -> `ADTTE` on `c("STUDYID", "USUBJID")`
+    - Optionally add subject-level self keys for each table.
+* assign the custom keys with `join_keys(adam_manual) <- ...`.
+* confirm the structure by printing the join keys.
+
+::: {.callout-tip collapse="true"}
+## Answer
+```{.r}
+library(pharmaverseadam)
+library(teal.data)
+library(teal)
+
+adam_manual <- teal_data(adsl = adsl, adae = adae, adtte = adtte_onco)
+custom_join_keys <- join_keys(
+  join_key("ADSL", "ADAE", c("STUDYID", "USUBJID")),
+  join_key("ADSL", "ADTTE", c("STUDYID", "USUBJID"))
+)
+join_keys(adam_manual) <- custom_join_keys
+print(join_keys(adam_manual))
+```
+:::
+
+## 🛠️ Exercise
+
+* use one of the application defined by you in exercises or one of the
+  applications shown as examples during workshops
+* debug issues with join keys if any
+* use the Show R Code button to verify the application returns
+  code that you can use to reproduce the output
+
+::: {.callout-tip collapse="true"}
+## Answer
+```{.r}
+library(pharmaverseadam)
+library(teal.data)
+library(teal)
+library(teal.modules.clinical)
+
+adam_manual <- teal_data(ADSL = adsl, ADAE = adae, ADTTE = adtte_onco)
+adam_manual <- within(adam_manual, {
+  ADSL$ARM <- as.factor(ADSL$ARM)
+  ADSL$ARMCD <- as.factor(ADSL$ARMCD)
+})
+custom_join_keys <- join_keys(
+  join_key("ADSL", "ADAE", c("STUDYID", "USUBJID")),
+  join_key("ADSL", "ADTTE", c("STUDYID", "USUBJID")),
+  join_key("ADSL", "ADSL", c("STUDYID", "USUBJID"))
+)
+join_keys(adam_manual) <- custom_join_keys
+print(join_keys(adam_manual))
+
+app <- init(
+  data = adam_manual,
+  modules = modules(
+    tm_t_events(
+      label = "Adverse Event Table",
+      dataname = "ADAE",
+      arm_var = choices_selected(c("ARM", "ARMCD"), "ARM"),
+      llt = choices_selected(
+        choices = variable_choices("ADAE", c("AETERM", "AEDECOD")),
+        selected = c("AEDECOD")
+      ),
+      hlt = choices_selected(
+        choices = variable_choices("ADAE", c("AEBODSYS", "AESOC")),
+        selected = "AEBODSYS"
+      ),
+      add_total = TRUE,
+      event_type = "adverse event",
+      sort_criteria = "alpha",
+      pre_output = shiny::div("Who won the most at the poker last night?")
+    )
+  )
+)
+
+shinyApp(app$ui, app$server)
+```
+:::
