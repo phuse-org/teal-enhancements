@@ -1,5 +1,5 @@
 # Topic 5
-#
+
 # Task 1: Create a `teal_data` object
 # * load `teal.data`
 # * create a `teal_data` object named `basic_data` that bundles the built-in `iris` and `mtcars` datasets
@@ -15,12 +15,12 @@
 
 
 # Task 3:
-# Tasks:
 # * generate synthetic CDISC-like `ADSL` and `ADAE` datasets (or reuse code
 #   from Exercise 1/2 with CDISC-style column names).
 # * build a `cdisc_data` object named `clinical_data`.
 # * use `join_keys(clinical_data)` to inspect automatically inferred join keys.
-# * verify that all `ADAE` subjects can be matched to `ADSL`.
+# * verify that all `ADAE` subjects can be matched to `ADSL` (hint: you can
+#   use the `all` methods to do it)
 
 
 # Task 4: Recreate CDISC join keys manually with `teal_data`
@@ -28,9 +28,16 @@
 #   and `adtte`.
 # * build a single `teal_data` object named `adam_manual` containing those
 #   three datasets.
-# * fefine custom join keys that mimic the automatic CDISC relationships:
+# * define custom join keys that mimic the automatic CDISC relationships:
 #     - `ADSL` -> `ADAE` on `c("STUDYID", "USUBJID")`
 #     - `ADSL` -> `ADTTE` on `c("STUDYID", "USUBJID")`
 #     - Optionally add subject-level self keys for each table if helpful.
 # * assign the custom keys with `join_keys(adam_manual) <- ...`.
 # * confirm the structure by printing the join keys.
+
+# Task 5: Launch the a `teal` application using your `adam_manual` dataset:
+# * use one of the application defined by you in exercises or one of the
+#   applications shown as examples during workshops
+# * debug issues with join keys if any
+# * use the Show R Code button to verify the application returns
+#   code that you can use to reproduce the output

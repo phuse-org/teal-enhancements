@@ -1,7 +1,7 @@
 ## What is `teal`?
 
-`teal` is a powerful **R framework** designed to streamline the development of **interactive data analysis applications**.
-Built on top of Shiny, `teal` provides a modular, standardized approach to creating sophisticated data exploration and visualization tools.
+`teal` is an **R framework** designed to streamline the development of **interactive data analysis applications**.
+Built on top of Shiny, `teal` provides a modular, standardized approach to creating data exploration and visualization tools.
 
 ## `teal` ecosystem
 `teal` is just one R package from a `teal` ecosystem. Other packages that we will be using
@@ -24,9 +24,14 @@ a comprehensive list at http://github.com/insightsengineering.
 
 `teal` is built **on top of Shiny**, extending Shiny's capabilities specifically for data analysis applications:
 
-- **Modular framework**: While Shiny provides the reactive infrastructure, `teal` adds a standardized, modular architecture for data analysis modules
-- **Reproducibility layer**: `teal` adds automatic code tracking and reproducibility features that go beyond standard Shiny applications
-- **Clinical data handling**: `teal` provides specialized data structures and workflows for clinical trial data (CDISC/ADaM) that aren't available in base Shiny
-- **Integrated filtering**: `teal` includes a sophisticated filter panel system that works seamlessly across all modules, which would require significant custom development in pure Shiny
+- **Modular framework**: While Shiny provides the reactive infrastructure,
+  `teal` adds a standardized, modular architecture for data analysis modules.
+- **Reproducibility layer**: `teal` adds automatic code tracking and reproducibility
+  features that go beyond standard Shiny applications.
+- **Clinical data handling**: `teal` provides specialized data structures and workflows for clinical
+  trial data (CDISC/ADaM) that aren't available in base Shiny.
+- **Integrated filtering**: `teal` includes a sophisticated filter panel system that works
+  seamlessly across all modules, which would require significant custom development in pure Shiny.
 
-In essence, `teal` takes Shiny's reactive web application framework and adds the specialized tools, patterns, and infrastructure needed for reproducible, clinical-grade data analysis applications.
+In essence, `teal` takes Shiny's reactive web application framework and adds the specialized tools,
+patterns, and infrastructure needed for reproducible, clinical-grade data analysis applications.

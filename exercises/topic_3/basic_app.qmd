@@ -58,7 +58,7 @@ The `data` argument is where you specify all the datasets your application will 
 
 ### Option 1: Using `teal_data()`
 
-```{web-r}
+```{.r}
 # Create data using teal_data()
 my_data <- teal_data(
   ADSL = adsl_data,
@@ -74,7 +74,7 @@ app <- init(
 
 ### Option 2: Using `cdisc_data()` for clinical data
 
-```{web-r}
+```{.r}
 # For CDISC/ADaM data with relationships
 my_data <- cdisc_data(
   ADSL = adsl_data,

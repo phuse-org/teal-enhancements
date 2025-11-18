@@ -2,7 +2,8 @@
 
 ### What is `teal.modules.clinical`?
 
-The `teal.modules.clinical` (TMC) package offers specialized modules designed specifically for clinical trial data analysis. These modules are built on top of `teal.modules.general` and provide clinical-specific functionality and workflows.
+The `teal.modules.clinical` (TMC) package offers specialized modules designed specifically for clinical trial data analysis.
+These modules are built on top of `teal.modules.general` and provide clinical-specific functionality and workflows.
 
 ### Launching a simple `teal.modules.clinical` application
 
@@ -16,20 +17,33 @@ library(pharmaverseadam)
 
 # Step 1: Load real ADaM data from pharmaverseadam
 data("adsl", package = "pharmaverseadam")
+adsl$ARM <- as.factor(adsl$ARM)
+adsl$ARMCD <- as.factor(adsl$ARM)
 
-# Step 2: Create teal_data object with the real dataset
+# Step 2: Create teal_data object with the "real" dataset
 clinical_data <- cdisc_data(
     ADSL = adsl,
-    code = "ADSL <- adsl"
+    code = "
+    adsl$ARM <- as.factor(adsl$ARM)
+    adsl$ARMCD <- as.factor(adsl$ARM)
+    ADSL <- adsl
+    "
 )
 
 # Step 3: Create the teal application with a TMC module
 app <- teal::init(
   data = clinical_data,
   modules = teal::modules(
-    tm_t_summary(
-      label = "Summary Statistics",
-      dataname = "ADSL"
+  teal.modules.clinical::tm_t_summary(
+      label = "Demographic Table",
+      dataname = "ADSL",
+      arm_var = choices_selected(c("ARM", "ARMCD"), "ARM"),
+      add_total = TRUE,
+      summarize_vars = choices_selected(
+        c("SEX", "RACE", "BMRKR2", "EOSDY", "DCSREAS", "AGE"),
+        c("SEX", "RACE")
+      ),
+      useNA = "ifany"
     )
   )
 )
@@ -44,23 +58,23 @@ if (interactive()) {
 
 When you launch a `teal.modules.clinical` application, you'll observe:
 
+![Different parts of a `teal` module](tmc-modules-parts.png)
+
 1. **Filter Panel (Left)**: Shows filtering options for all dataset variables
    - **Categorical variables**: Display as checkboxes (e.g., SEX, ARM, RACE)
    - **Numeric variables**: Display as range sliders (e.g., AGE, BMIBL)
    - **Date variables**: Display as date pickers (e.g., RFSTDTC, RFENDTC)
    - All filters are interconnected with module outputs
 
-2. **Main Output (Center)**: Displays the module's primary analytical output
-   - Module-specific visualizations or tables
-   - Interactive elements for exploration
-   - Professional appearance following clinical data standards
-
-3. **Encoding Panel**: Provides controls for configuring the analysis
+2. **Encoding Panel**: Provides controls for configuring the analysis
    - Variable selection dropdowns
    - Analysis parameter settings
    - Customization options specific to the module type
+   - Show R Code Button: generates reproducible R code for all operations:
+     - Click to view the exact R code used
+     - Copy code for reproducibility
+     - Ensures transparency in analysis
 
-4. **Show R Code Button**: Generates reproducible R code for all operations
-   - Click to view the exact R code used
-   - Copy code for reproducibility
-   - Ensures transparency in analysis
+3. **Main Output (Center)**: Displays the module's primary analytical output
+   - Module-specific visualizations or tables
+   - Interactive elements for exploration

@@ -2,10 +2,10 @@
 
 ## Topic 6: Deeper dive into customizing the parameters of `teal.modules.clinical` modules (10 minutes)
 
-The `choices_selected` function from `teal.transform` is a powerful utility for managing variable selections in teal modules.
+The `choices_selected` function from `teal.transform` is a powerful utility for managing variable selections in `teal` modules.
 It provides a flexible way to specify choices and default selections for inputs, with support for both eager and delayed evaluation.
 
-This topic will cover common scenarios app developers face when building teal applications from existing modules:
+This topic will cover common scenarios app developers face when building `teal` applications from existing modules:
 - Limiting variable choices in module inputs
 - Providing choices without knowing the dataset structure upfront
 - Adapting to different datasets dynamically
@@ -34,7 +34,7 @@ choices_selected(variable_choices("ADSL", c("ARM", "ARMCD")), "ARM") # Data-depe
 
 ### `teal` example with clinical module
 
-Let's start with a basic teal application that uses `choices_selected`:
+Let's start with a basic `teal` application that uses `choices_selected`:
 
 ```{.r}
 library(teal.modules.clinical)
@@ -183,7 +183,7 @@ Using Kaplan-Meier module from `teal.modules.clinical`
 
 ## 🛠️ Exercise
 
-Fill in the code below to create a teal application that uses `choices_selected` to limit the variable choices for a summary table module.
+Fill in the code below to create a `teal` application that uses `choices_selected` to limit the variable choices for a summary table module.
 
 - `group_var` with Treatment variable,
 - `y` with Analysis variable,
@@ -232,4 +232,3 @@ Useful links for further exploration:
 - [`choices_selected()` documentation](https://insightsengineering.github.io/teal.transform/latest-tag/reference/choices_selected.html)
 - [`value_choices()` documentation](https://insightsengineering.github.io/teal.transform/latest-tag/reference/value_choices.html)
 - [`variable_choices()` documentation](https://insightsengineering.github.io/teal.transform/latest-tag/reference/variable_choices.html)
-

@@ -25,7 +25,7 @@ website:
       #       text: How to install?
       #     - text: Simple `teal` application
       #       href: exercises/topic_3/basic_app.qmd
-      # - section: teal.modules.clinical
+      # - section: "`teal.modules.clinical`"
       #   contents:
       #     - text: Introduction and anatomy of a module
       #       href: exercises/topic_4/launching_tmc_modules.qmd
@@ -58,3 +58,4 @@ engine: knitr
 
 filters:
   - shinylive
+

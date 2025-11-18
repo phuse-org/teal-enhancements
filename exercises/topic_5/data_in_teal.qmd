@@ -2,7 +2,8 @@
 
 ## How to provide data to a `teal` application? - code samples
 
-The `data` argument in `teal::init()` is where you specify all the datasets your application will use. There are several ways to provide data to `teal`:
+The `data` argument in `teal::init()` is where you specify all the datasets your application will use.
+There are several ways to provide data to `teal`:
 
 - using `teal_data()`
 - using `cdisc_data()` for clinical data
@@ -53,40 +54,23 @@ get_code(my_data) |>
 
 ## Option 3: Using `cdisc_data()` for clinical data
 
-For clinical trial data following CDISC standards, `teal.data` provides the specialized `cdisc_data()` function that automatically handles common clinical data relationships.
+For clinical trial data following CDISC standards, `teal.data` provides the specialized `cdisc_data()`
+function that automatically handles common clinical data relationships.
 
 ```{r}
 library(teal.data)
+library(pharmaverseadam)
 
-# Create sample ADSL data
-adsl <- data.frame(
-  STUDYID = rep("STUDY001", 50),
-  USUBJID = paste0("SUBJ", sprintf("%03d", 1:50)),
-  AGE = sample(18:80, 50, replace = TRUE),
-  SEX = sample(c("M", "F"), 50, replace = TRUE),
-  ARM = sample(c("Placebo", "Treatment"), 50, replace = TRUE),
-  SAFFL = "Y",
-  stringsAsFactors = FALSE
-)
-
-# Create sample ADAE data (adverse events)
-adae <- data.frame(
-  STUDYID = rep("STUDY001", 150),
-  USUBJID = rep(paste0("SUBJ", sprintf("%03d", 1:50)), each = 3),
-  AESEQ = rep(1:3, 50),
-  AEDECOD = sample(c("Headache", "Nausea", "Fatigue", "Dizziness"), 150, replace = TRUE),
-  AESEV = sample(c("MILD", "MODERATE", "SEVERE"), 150, replace = TRUE),
-  AESER = sample(c("Y", "N"), 150, replace = TRUE, prob = c(0.1, 0.9)),
-  stringsAsFactors = FALSE
-)
+adsl <- pharmaverseadam::adsl
+adae <- pharmaverseadae::adae
 
 # Create cdisc_data object
 clinical_data <- cdisc_data(
   ADSL = adsl,
   ADAE = adae,
   code = c(
-    "ADSL <- adsl_data_creation_code()",
-    "ADAE <- adae_data_creation_code()"
+    "adsl <- pharmaverseadam::adsl",
+    "adae <- pharmaverseadae::adae"
   )
 )
 
@@ -107,105 +91,22 @@ When you create a `teal_data` object, `teal` does several things behind the scen
 
 ## Creating `cdisc_data` objects with explicit code
 
-```{r}
+```{.r}
 # More explicit approach with within()
+library(teal.data)
+library(teal)
+library(pharmaverseadam)
+
 clinical_data <- cdisc_data()
-
 clinical_data <- within(clinical_data, {
-  # Create ADSL
-  ADSL <- data.frame(
-    STUDYID = rep("STUDY001", 100),
-    USUBJID = paste0("SUBJ", sprintf("%03d", 1:100)),
-    AGE = sample(18:80, 100, replace = TRUE),
-    SEX = as.factor(sample(c("M", "F"), 100, replace = TRUE)),
-    ARM = as.factor(sample(c("Placebo", "Treatment"), 100, replace = TRUE)),
-    SAFFL = "Y"
-  )
-
-  # Create ADAE based on ADSL
-  n_events <- 300
-  ADAE <- data.frame(
-    STUDYID = "STUDY001",
-    USUBJID = sample(ADSL$USUBJID, n_events, replace = TRUE),
-    AESEQ = sequence(table(sample(ADSL$USUBJID, n_events, replace = TRUE))),
-    AEDECOD = sample(c("Headache", "Nausea", "Fatigue"), n_events, replace = TRUE),
-    AESEV = as.factor(sample(c("MILD", "MODERATE", "SEVERE"), n_events, replace = TRUE))
-  )
+  adsl <- pharmaverseadam::adsl
+  adae <- pharmaverseadam::adae
 })
+join_keys(clinical_data) <- teal.data::default_cdisc_join_keys[c("ADSL", "ADAE")]
 
 # View the structure and join keys
 print(clinical_data)
-join_keys(clinical_data)
-```
-
-## Complete CDISC example with ADSL-ADAE relationships
-
-```{r}
-# Step 1: Create the datasets
-cdisc_example <- teal_data()
-
-cdisc_example <- within(cdisc_example, {
-  # ADSL: Subject-Level Analysis Dataset
-  ADSL <- data.frame(
-    STUDYID = rep("STUDY001", 100),
-    USUBJID = paste0("SUBJ", sprintf("%03d", 1:100)),
-    SUBJID = sprintf("%03d", 1:100),
-    SITEID = sample(paste0("SITE", sprintf("%02d", 1:10)), 100, replace = TRUE),
-    AGE = sample(18:80, 100, replace = TRUE),
-    AGEGR1 = cut(sample(18:80, 100, replace = TRUE),
-                 breaks = c(0, 30, 50, 65, 100),
-                 labels = c("<30", "30-50", "50-65", ">65")),
-    SEX = as.factor(sample(c("M", "F"), 100, replace = TRUE)),
-    RACE = as.factor(sample(c("WHITE", "BLACK", "ASIAN", "OTHER"), 100, replace = TRUE)),
-    ARM = as.factor(sample(c("Placebo", "Treatment A", "Treatment B"), 100, replace = TRUE)),
-    ACTARM = as.factor(sample(c("Placebo", "Treatment A", "Treatment B"), 100, replace = TRUE)),
-    SAFFL = "Y",
-    ITTFL = "Y"
-  )
-
-  # ADAE: Adverse Event Analysis Dataset
-  # Generate realistic number of AEs per subject
-  ae_counts <- rpois(100, 2.5)  # Average 2.5 AEs per subject
-  total_aes <- sum(ae_counts)
-
-  ADAE <- data.frame(
-    STUDYID = rep("STUDY001", total_aes),
-    USUBJID = rep(ADSL$USUBJID, ae_counts),
-    SUBJID = rep(ADSL$SUBJID, ae_counts),
-    SITEID = rep(ADSL$SITEID, ae_counts),
-    AESEQ = sequence(ae_counts),
-    AEDECOD = sample(c("Headache", "Nausea", "Fatigue", "Dizziness", "Insomnia",
-                       "Diarrhea", "Constipation", "Rash", "Cough", "Fever"),
-                     total_aes, replace = TRUE),
-    AEBODSYS = sample(c("Nervous system disorders", "Gastrointestinal disorders",
-                        "General disorders", "Skin and subcutaneous tissue disorders",
-                        "Respiratory disorders"), total_aes, replace = TRUE),
-    AESEV = as.factor(sample(c("MILD", "MODERATE", "SEVERE"), total_aes,
-                            replace = TRUE, prob = c(0.6, 0.3, 0.1))),
-    AESER = as.factor(sample(c("Y", "N"), total_aes, replace = TRUE, prob = c(0.05, 0.95))),
-    AEREL = as.factor(sample(c("RELATED", "NOT RELATED", "POSSIBLY RELATED"),
-                            total_aes, replace = TRUE, prob = c(0.2, 0.6, 0.2))),
-    AEACN = as.factor(sample(c("NONE", "DOSE REDUCED", "DRUG WITHDRAWN"),
-                            total_aes, replace = TRUE, prob = c(0.8, 0.15, 0.05))),
-    AESTDY = sample(1:365, total_aes, replace = TRUE),
-    SAFFL = "Y"
-  )
-})
-
-# Step 2: Understand the automatic join keys
-cat("Automatic CDISC join keys:\n")
-print(join_keys(cdisc_example))
-
-# Step 3: Verify the relationships work
-cat("\nTesting the relationship:\n")
-cat("ADSL subjects:", length(unique(cdisc_example[["ADSL"]]$USUBJID)), "\n")
-cat("ADAE subjects:", length(unique(cdisc_example[["ADAE"]]$USUBJID)), "\n")
-cat("ADAE events:", nrow(cdisc_example[["ADAE"]]), "\n")
-
-# Step 4: Manual verification of join key validity
-adsl_keys <- unique(cdisc_example[["ADSL"]][c("STUDYID", "USUBJID")])
-adae_keys <- unique(cdisc_example[["ADAE"]][c("STUDYID", "USUBJID")])
-cat("All ADAE subjects exist in ADSL:", all(adae_keys$USUBJID %in% adsl_keys$USUBJID), "\n")
+print(join_keys(clinical_data))
 ```
 
 ## Introduction to the concept of keys in `teal.data`
@@ -214,68 +115,62 @@ cat("All ADAE subjects exist in ADSL:", all(adae_keys$USUBJID %in% adsl_keys$USU
 - Proper filtering across related datasets (filtering on the parent dataset filters entries in the child dataset as well)
 - Correct data merging in modules (`join_key` are used by the modules to merge datasets together)
 
-## What is the purpose of `join_keys`?
-
-`join_keys` serve several critical functions:
-1. **Data Relationships** - Define how datasets connect (parent-child relationships)
-2. **Filter Propagation** - Ensure filters apply correctly across related datasets
-3. **Module Integration** - Help modules understand how to merge data correctly
-
 ## Automatic join key detection with `cdisc_data()`
 
 One of the key advantages of `cdisc_data()` is automatic join key detection:
 
 ```{r}
-# View the automatically detected join keys
-join_keys(clinical_data)
+library(pharmaverseadam)
+library(teal)
+library(teal.data)
 
-# The output will show:
-# ADSL <-> ADAE: [STUDYID, USUBJID]
+adsl <- pharmaverseadam::adsl
+clinical_data_1 <- teal.data::cdisc_data(ADSL = adsl, code = "ADSL <- pharmaverseadam::adsl")
+print(join_keys(clinical_data_1))
+
+clinical_data_2 <- teal.data::cdisc_data()
+clinical_data_2 <- within(clinical_data_2, {
+  ADSL <- pharmaverseadam::adsl
+})
+print(join_keys(clinical_data_2))
 ```
+
+Notice the difference in the two above prints. When we pass a dataset directly to
+`cdisc_data` constructor, the constructor automatically adds the `join_keys` object.
+Whereas in the second example, we used `within` and our object did not automatically
+receive correct `join_keys`.
 
 ## Understanding join key output
 
 ```{r}
+library(pharmaverseadam)
+library(teal.data)
+library(teal)
 # Create example with multiple relationships
-complex_data <- cdisc_data()
-
-complex_data <- within(complex_data, {
-  ADSL <- data.frame(
-    STUDYID = rep("STUDY001", 30),
-    USUBJID = paste0("SUBJ", sprintf("%03d", 1:30)),
-    SITEID = sample(paste0("SITE", 1:5), 30, replace = TRUE),
-    AGE = sample(18:80, 30, replace = TRUE)
-  )
-
-  ADAE <- data.frame(
-    STUDYID = "STUDY001",
-    USUBJID = sample(ADSL$USUBJID, 90, replace = TRUE),
-    AESEQ = sequence(table(sample(ADSL$USUBJID, 90, replace = TRUE))),
-    AEDECOD = sample(c("Headache", "Nausea"), 90, replace = TRUE)
-  )
-
-  ADLB <- data.frame(
-    STUDYID = "STUDY001",
-    USUBJID = sample(ADSL$USUBJID, 120, replace = TRUE),
-    PARAMCD = sample(c("ALT", "AST", "BILI"), 120, replace = TRUE),
-    AVAL = rnorm(120, 50, 10)
-  )
-})
-
-# Print and interpret join keys
-cat("Join Keys Structure:\n")
-print(join_keys(complex_data))
+complex_data <- cdisc_data(
+  ADSL = pharmaverseadam::adsl,
+  ADAE = pharmaverseadam::adae,
+  ADEX = pharmaverseadam::adex
+)
+join_keys(complex_data) <- teal.data::default_cdisc_join_keys[c("ADSL", "ADAE", "ADEX")]
 
 # Understanding the output:
 # - Each line shows a relationship between two datasets
 # - The arrow (->) indicates the direction (parent -> child)
 # - Variables in brackets show the joining columns
 # - ADSL is typically the parent (subject-level data)
+# - the implicit join keys are created automatically when
+#   teal.data detects a possible join through a "middleman" dataset
+
+# Print and interpret join keys
+cat("Join Keys Structure:\n")
+print(join_keys(complex_data))
 ```
 
 ## Creating a custom `teal.data` object with custom user-defined keys - code samples
 
-Sometimes you need to create or modify join keys manually, especially when working with non-standard data structures or when you need custom relationships.
+Sometimes you need to create or modify join keys manually, especially when working with non-standard data structures or when you
+need custom relationships.
 
 ## Manual join keys creation
 
@@ -316,66 +211,10 @@ print(join_keys(my_data))
 Sometimes the automatic join key detection in `cdisc_data()` doesn't match your specific needs. Here's how to override the default behavior:
 
 ```{r}
+library(pharmaverseadam)
 library(teal)
-library(teal.modules.general)
 library(teal.data)
 
-# Step 1: Create datasets with CDISC structure
-create_cdisc_datasets <- function() {
-  # ADSL with standard CDISC variables
-  ADSL <- data.frame(
-    STUDYID = rep("STUDY001", 30),
-    USUBJID = paste0("SUBJ", sprintf("%03d", 1:30)),
-    SUBJID = sprintf("%03d", 1:30),
-    SITEID = sample(paste0("SITE", sprintf("%02d", 1:5)), 30, replace = TRUE),
-    AGE = sample(18:80, 30, replace = TRUE),
-    SEX = as.factor(sample(c("M", "F"), 30, replace = TRUE)),
-    ARM = as.factor(sample(c("Placebo", "Treatment A", "Treatment B"), 30, replace = TRUE)),
-    SAFFL = "Y"
-  )
-
-  # ADAE with additional sequence variable
-  n_aes <- 90
-  ADAE <- data.frame(
-    STUDYID = rep("STUDY001", n_aes),
-    USUBJID = sample(ADSL$USUBJID, n_aes, replace = TRUE),
-    SUBJID = sample(ADSL$SUBJID, n_aes, replace = TRUE),
-    SITEID = sample(ADSL$SITEID, n_aes, replace = TRUE),
-    AESEQ = sequence(table(sample(ADSL$USUBJID, n_aes, replace = TRUE))),
-    AEDECOD = sample(c("Headache", "Nausea", "Fatigue", "Dizziness"), n_aes, replace = TRUE),
-    AESEV = as.factor(sample(c("MILD", "MODERATE", "SEVERE"), n_aes, replace = TRUE)),
-    SAFFL = "Y"
-  )
-
-  # ADCM (Concomitant Medications) with different structure
-  n_cms <- 60
-  ADCM <- data.frame(
-    STUDYID = rep("STUDY001", n_cms),
-    USUBJID = sample(ADSL$USUBJID, n_cms, replace = TRUE),
-    SUBJID = sample(ADSL$SUBJID, n_cms, replace = TRUE),
-    CMSEQ = sequence(table(sample(ADSL$USUBJID, n_cms, replace = TRUE))),
-    CMDECOD = sample(c("Aspirin", "Ibuprofen", "Acetaminophen"), n_cms, replace = TRUE),
-    CMCLAS = sample(c("ANALGESICS", "ANTI-INFLAMMATORY"), n_cms, replace = TRUE),
-    SAFFL = "Y"
-  )
-
-  return(list(ADSL = ADSL, ADAE = ADAE, ADCM = ADCM))
-}
-
-# Step 2: Create cdisc_data with automatic join keys
-datasets <- create_cdisc_datasets()
-auto_data <- cdisc_data(
-  ADSL = datasets$ADSL,
-  ADAE = datasets$ADAE,
-  ADCM = datasets$ADCM
-)
-
-# View automatic join keys
-cat("Automatic join keys:\n")
-print(join_keys(auto_data))
-
-# Step 3: Define custom join keys
-# Let's say we want to use different joining variables or add additional relationships
 custom_keys <- join_keys(
   # Primary keys for each dataset
   join_key("ADSL", "ADSL", c("STUDYID", "USUBJID")),
@@ -391,11 +230,10 @@ custom_keys <- join_keys(
   join_key("ADAE", "ADCM", c("STUDYID", "USUBJID"))
 )
 
-# Step 4: Create cdisc_data with custom join keys
 custom_data <- cdisc_data(
-  ADSL = datasets$ADSL,
-  ADAE = datasets$ADAE,
-  ADCM = datasets$ADCM
+  ADSL = pharmaverseadam::adsl,
+  ADAE = pharmaverseadam::adae,
+  ADCM = pharmaverseadam::adcm
 )
 
 # Override the automatic join keys

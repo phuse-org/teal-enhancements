@@ -4,7 +4,6 @@
 ## Try launching the below application
 library(teal)
 
-# Create the simplest possible teal application
 app <- teal::init(
   data = teal.data::teal_data(iris = iris),
   modules = teal::example_module(
@@ -28,4 +27,5 @@ if (interactive()) {
 # 1. Add a new module to the application - `teal.modules.general::tm_data_table()`.
 # 2. Launch the application and check if the module is available in the application
 # Hint: you will need to load the `teal.modules.general` package to use the module.
-# via `library(teal.modules.general)`.
+# via `library(teal.modules.general)`. If you feel lost, please check out the
+# manual at: https://insightsengineering.github.io/teal.modules.general/latest-tag/reference/tm_data_table.html
