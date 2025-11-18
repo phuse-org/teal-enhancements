@@ -1,3 +1,8 @@
+---
+filters:
+  - shinylive
+---
+
 {{< include ../../_extensions/r-wasm/live/_knitr.qmd >}}
 
 ## Topic 3: Launching a simple `teal` application (7 minutes)
@@ -103,7 +108,10 @@ The `modules` argument defines what your application can do. It accepts a `modul
 
 ## Single module example
 
-```{webr}
+```{shinylive-r}
+#| standalone: true
+#| viewerHeight: 680
+
 library(teal.modules.general)
 
 app <- teal::init(
@@ -124,7 +132,10 @@ if (interactive()) {
 
 ## Multiple modules example
 
-```{webr}
+```{shinylive-r}
+#| standalone: true
+#| viewerHeight: 680
+
 library(teal.modules.general)
 
 app <- teal::init(
