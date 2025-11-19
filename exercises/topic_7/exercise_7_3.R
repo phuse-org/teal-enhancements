@@ -5,7 +5,6 @@ library(ggplot2)
 my_custom_module_ui <- function(id) {
   ns <- NS(id)
   tags$div(
-    teal.reporter::simple_reporter_ui(ns("reporter")),
     # Exercise 7.3: Add dataset selector --------------------------------------
 
     # -------------------------------------------------------------------------
@@ -26,10 +25,8 @@ my_custom_module_ui <- function(id) {
   )
 }
 
-my_custom_module_srv <- function(id, data, reporter, filter_panel_api) {
+my_custom_module_srv <- function(id, data) {
   moduleServer(id, function(input, output, session) {
-    with_filter <- !rlang::is_missing(filter_panel_api) && inherits(filter_panel_api, "FilterPanelApi")
-
     # Exercise 7.3: Add dataset selector ----------------------------------------
     #  - Update dataset selector choices
     #  - Update variable selector choices based on selected dataset
@@ -61,19 +58,6 @@ my_custom_module_srv <- function(id, data, reporter, filter_panel_api) {
 
     # render to output the object from qenv
     output$plot <- renderPlot(result()[["plot"]])
-
-    card_fun <- function(card = teal.reporter::ReportCard$new(), comment) {
-      card$set_name("My custom module")
-      card$append_text(filter_panel_api$get_filter_state(), "verbatim")
-      card$append_text(paste("Selected var:", input$variable))
-      card$append_text(paste("Selected binwidth:", input$binwidth))
-      card$append_plot(result()$plot)
-    }
-    teal.reporter::simple_reporter_srv(
-      id = "reporter",
-      reporter = reporter,
-      card_fun = card_fun
-    )
 
     result
   })
