@@ -255,3 +255,9 @@ if (interactive()) {
 }
 ```
 :::
+
+## 🌐 References
+
+- [`teal` documentation](https://insightsengineering.github.io/teal/latest-tag/)
+- [`teal.modules.general` documentation](https://insightsengineering.github.io/teal.modules.general/latest-tag/)
+- [`teal.data` documentation](https://insightsengineering.github.io/teal.data/latest-tag/)
