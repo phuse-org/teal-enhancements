@@ -108,11 +108,9 @@ The `modules` argument defines what your application can do. It accepts a `modul
 
 ## Single module example
 
-```{shinylive-r}
-#| standalone: true
-#| viewerHeight: 680
-
+```{.r}
 library(teal.modules.general)
+library(teal.data)
 
 app <- teal::init(
   data = teal.data::teal_data(IRIS = iris),
@@ -130,10 +128,7 @@ shiny::shinyApp(app$ui, app$server)
 
 ## Multiple modules example
 
-```{shinylive-r}
-#| standalone: true
-#| viewerHeight: 680
-
+```{.r}
 library(teal.modules.general)
 
 app <- teal::init(
