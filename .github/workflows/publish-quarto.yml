@@ -45,6 +45,9 @@ jobs:
         - name: Set up Quarto
           uses: quarto-dev/quarto-actions/setup@v2
 
+        - name: Setup renv
+          uses: r-lib/actions/setup-renv@v2
+
         # Render the Quarto file
         - name: "Render working directory"
           uses: quarto-dev/quarto-actions/render@v2
