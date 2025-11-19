@@ -18,23 +18,23 @@ website:
     contents:
       - href: index.qmd
         text: Home
-      # - section: "`teal` basics"
-      #   contents:
-      #     - href: exercises/topic_1/foreward.qmd
-      #     - href: exercises/topic_2/how_to_install.qmd
-      #       text: How to install?
-      #     - text: Simple `teal` application
-      #       href: exercises/topic_3/basic_app.qmd
-      # - section: "`teal.modules.clinical`"
-      #   contents:
-      #     - text: Pre-process data
-      #       href: exercises/topic_5/data_in_teal.qmd
-      #     - text: Introduction and anatomy of a module
-      #       href: exercises/topic_4/launching_tmc_modules.qmd
-      #     - text: Customizing the parameters
-      #       href: exercises/topic_6/choices_selected.qmd
-      # - text: Creating a custom module
-      #   href: exercises/topic_7/create_teal_module.qmd
+      - section: "`teal` basics"
+        contents:
+          - href: exercises/topic_1/foreward.qmd
+          - href: exercises/topic_2/how_to_install.qmd
+            text: How to install?
+          - text: Simple `teal` application
+            href: exercises/topic_3/basic_app.qmd
+      - section: "`teal.modules.clinical`"
+        contents:
+          - text: Pre-process data
+            href: exercises/topic_5/data_in_teal.qmd
+          - text: Introduction and anatomy of a module
+            href: exercises/topic_4/launching_tmc_modules.qmd
+          - text: Customizing the parameters
+            href: exercises/topic_6/choices_selected.qmd
+      - text: Creating a custom module
+        href: exercises/topic_7/create_teal_module.qmd
 
 format:
   live-html:
