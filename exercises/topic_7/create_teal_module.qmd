@@ -144,17 +144,18 @@ Let's enhance the module:
     }
     ```
     :::
-- Let's see how we can add a heading to the reporter
-    - Use `teal.reporter::teal_card` to get and modify the reporter card
-            - `teal.reporter::teal_card(x)` accesses the current card
-            - `teal.reporter::teal_card(x) <- c(...)` modifies the current card
-              - inside `c(...)` you can merge existing card content with new elements
-    - Add a title to the card using using a markdown string
-    - Evaluate the code that generates the histogram
+-   Let's see how we can add a heading to the reporter
 
-  ::: {.callout-tip collapse="true"}
+    -   Use `teal.reporter::teal_card` to get and modify the reporter card
+        -   `teal.reporter::teal_card(x)` accesses the current card
+        -   `teal.reporter::teal_card(x) <- c(...)` modifies the current card
+            -   inside `c(...)` you can merge existing card content with new elements
+    -   Add a title to the card using using a markdown string
+    -   Evaluate the code that generates the histogram
 
-  ## Answer
+    ::: {.callout-tip collapse="true"}
+
+    ## Answer
 
     ```{.r}
     reactive({
@@ -173,7 +174,7 @@ Let's enhance the module:
       )
     })
     ```
-  :::
+    :::
 
 ## 🛠️ Bonus Exercise _(add more datasets)_
 
