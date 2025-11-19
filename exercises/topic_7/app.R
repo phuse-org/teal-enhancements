@@ -29,6 +29,7 @@ my_custom_module_srv <- function(id, data) {
         data(),
         {
           plot <- ggplot(ADSL, aes(x = input_var)) + geom_histogram()
+          plot
         },
         input_var = as.name(input$variable) # Pass the selected variable as a symbol
       )
