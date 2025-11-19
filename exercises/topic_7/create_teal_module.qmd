@@ -70,13 +70,15 @@ Let's create a custom module that shows a **simple histogram plot** based on use
 {{< include app.R >}}
 ```
 
-## App running
+::: {.callout-tip collapse="true"}
+### Example App
 
 ```{shinylive-r}
 #| standalone: true
 #| viewerHeight: 680
 {{< include app.R >}}
 ```
+:::
 
 ## 🛠️ Exercise
 
@@ -94,6 +96,7 @@ Let's enhance the module:
         -   pass this parameter value as `binwidth` argument to the `geom_histogram()` function
 
     ::: {.callout-tip collapse="true"}
+
     ## Answer
 
     ```{.r code-line-numbers="1-9"}
@@ -150,10 +153,11 @@ Let's enhance the module:
     - Evaluate the code that generates the histogram
 
   ::: {.callout-tip collapse="true"}
+
   ## Answer
 
     ```{.r}
-    reactivd({
+    reactive({
       q <- data()
       teal.reporter::teal_card(q) <- c(
         teal.reporter::teal_card(q),

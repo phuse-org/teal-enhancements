@@ -47,7 +47,7 @@ my_custom_module_srv <- function(id, data) {
           plot
         },
         input_var = as.name(input$variable), # Pass the selected variable as a symbol
-        input_binwidth = input$binwidth
+        input_binwidth = input$binwidth # Pass the selected binwidth
       )
     })
     # -------------------------------------------------------------------------
