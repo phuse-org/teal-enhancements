@@ -15,9 +15,11 @@ install.packages(c(
 
 ## Cloud environment for the workshop
 
-Link: [workbench.teal.sandbox.aws.appsilon.com](https://workbench.teal.sandbox.aws.appsilon.com/){style="font-size:1.5em;"}
+> The cloud environment is only available for attendees of the workshop.
 
-<img src="workbench.png" width="50%"/>
+link: [workbench.teal.sandbox.aws.appsilon.com](https://workbench.teal.sandbox.aws.appsilon.com/)
+
+<img src="workbench.png" width="30%"/>
 
 ## 🛠️ Exercise (a warm up really)
 
