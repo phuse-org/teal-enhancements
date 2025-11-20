@@ -27,7 +27,10 @@ Every `teal` application follows this fundamental pattern:
 
 ## Code example: Simplest `teal` application
 
-```{.r}
+```{shinylive-r}
+#| components: [editor, viewer]
+#| standalone: true
+#| viewerHeight: 680
 library(teal)
 
 # Create the simplest possible teal application
