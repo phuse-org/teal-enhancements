@@ -163,14 +163,14 @@ Fill in the code below to create a `teal` application that uses `choices_selecte
 
 
 ```{.r}
-{{< include exercise_6.R >}}
+{{< include exercise_6_0.R >}}
 ```
 
 ::: {.callout-tip collapse="true"}
 ### Answer
 
 ```{.r}
-{{< include solution_exercise_6.R >}}
+{{< include solution_exercise_6_0.R >}}
 ```
 :::
 

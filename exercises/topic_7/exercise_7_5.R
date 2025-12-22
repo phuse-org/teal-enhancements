@@ -5,12 +5,14 @@ library(ggplot2)
 my_custom_module_ui <- function(id) {
   ns <- NS(id)
   tags$div(
+    # Exercise 7.3: Add dataset selector --------------------------------------
+
+    # -------------------------------------------------------------------------
     selectInput( # variable selector
       inputId = ns("variable"),
       label = "Select variable",
       choices = NULL # initialize empty - to be updated from within server
     ),
-    # Exercise 7: Add slider UI for binwidth ----------------------------------
     sliderInput(
       inputId = ns("binwidth"),
       label = "binwidth",
@@ -19,40 +21,48 @@ my_custom_module_ui <- function(id) {
       step = 1,
       value = 3
     ),
-    # -------------------------------------------------------------------------
     plotOutput(ns("plot")) # Output for the plot
   )
 }
 
 my_custom_module_srv <- function(id, data) {
   moduleServer(id, function(input, output, session) {
+    # Exercise 7.5: Add dataset selector ----------------------------------------
+    #  - Update dataset selector choices
+    #  - Update variable selector choices based on selected dataset
 
     updateSelectInput( # update variable selector by names of data
       inputId = "variable",
       choices = data()[["ADSL"]] |> select(where(is.numeric)) |> names()
     )
 
-    # Exercise 7: Add slider UI for binwidth ----------------------------------
-    # - Update reactive and render function to use binwidth
-
-    # add plot call to qenv
+    # Exercise 7.5: Update validation and plot call ---------------------------
+    #  - Validate that dataset is selected
+    #  - Validate input$variable is present in dataset
+    #  - Update plot call with
     result <- reactive({
-      req(input$variable)
-      req(input$binwidth)
+      validate(
+        need(input$variable, "Select a variable"),
+        need(input$binwidth > 0, "Binwidth must be greater than 0")
+      )
+      q <- data()
+      teal.reporter::teal_card(q) <- c(
+        teal.reporter::teal_card(q),
+        "### Histogram of Selected Variable"
+      )
       within(
-        data(),
+        q,
         {
-          plot <- ggplot(ADSL, aes(x = input_var)) +
-            geom_histogram(binwidth = input_binwidth)
+          plot <- ggplot(ADSL, aes(x = .data[[variable]])) +
+            geom_histogram(binwidth = binwidth)
           plot
         },
-        input_var = as.name(input$variable), # Pass the selected variable as a symbol
-        input_binwidth = input$binwidth # Pass the selected binwidth
+        variable = input$variable,
+        binwidth = input$binwidth
       )
     })
     # -------------------------------------------------------------------------
 
-    # render to output the object from qenv
     output$plot <- renderPlot(result()[["plot"]])
 
     result
@@ -68,6 +78,7 @@ my_custom_module <- module(
 data <- teal_data()
 data <- within(data, {
   ADSL <- pharmaverseadam::adsl
+  ADAE <- pharmaverseadam::adae
 })
 
 app <- init(

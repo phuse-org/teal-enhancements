@@ -64,10 +64,10 @@ Let's create a custom module that shows a **simple histogram plot** based on use
 
 ## Initial teal module code
 
-> See `topic_7/exercise_7.R` for the code to start with
+> See `topic_7/exercise_7_0.R` for the code to start with
 
 ```{.r}
-{{< include app.R >}}
+{{< include exercise_7_1.R >}}
 ```
 
 ::: {.callout-tip collapse="true"}

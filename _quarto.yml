@@ -28,9 +28,9 @@ website:
       - section: "`teal.modules.clinical`"
         contents:
           - text: Pre-process data
-            href: exercises/topic_5/data_in_teal.qmd
+            href: exercises/topic_4/data_in_teal.qmd
           - text: Introduction and anatomy of a module
-            href: exercises/topic_4/launching_tmc_modules.qmd
+            href: exercises/topic_5/launching_tmc_modules.qmd
           - text: Customizing the parameters
             href: exercises/topic_6/choices_selected.qmd
       - text: Creating a custom module

@@ -5,40 +5,34 @@ library(ggplot2)
 my_custom_module_ui <- function(id) {
   ns <- NS(id)
   tags$div(
-    selectInput( # variable selector
-      inputId = ns("variable"),
-      label = "Select variable",
-      choices = NULL # initialize empty - to be updated from within server
-    ),
     plotOutput(ns("plot")) # Output for the plot
   )
 }
 
 my_custom_module_srv <- function(id, data) {
   moduleServer(id, function(input, output, session) {
+    # Exercise 7.1: Use within to create plot ---------------------------------
+    # - Create a reactive variable that modifies data()
+    #   - hint: use within(data(), ggplot_code)
+    #   - within code should keep plot in a variable and print it
+    # - renderPlot() should access modified reactive data variable
 
-    updateSelectInput( # update variable selector by names of data
-      inputId = "variable",
-      choices = data()[["ADSL"]] |> select(where(is.numeric)) |> names()
-    )
-
-    # add plot call to qenv
     result <- reactive({
       req(input$variable)
       within(
         data(),
         {
-          plot <- ggplot(ADSL, aes(x = input_var)) + geom_histogram()
+          plot <- ggplot(ADSL, aes(x = .data[["AGE"]])) + geom_histogram()
           plot
-        },
-        input_var = as.name(input$variable) # Pass the selected variable as a symbol
+        }
       )
     })
-
-    # render to output the object from qenv
     output$plot <- renderPlot(result()[["plot"]])
+    # -------------------------------------------------------------------------
 
+    # Exercise 7.1: Return modified data object -------------------------------
     result
+    # -------------------------------------------------------------------------
   })
 }
 

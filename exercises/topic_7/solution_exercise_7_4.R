@@ -10,9 +10,14 @@ my_custom_module_ui <- function(id) {
       label = "Select variable",
       choices = NULL # initialize empty - to be updated from within server
     ),
-    # Exercise 7: Add slider UI for binwidth ----------------------------------
-
-    # -------------------------------------------------------------------------
+    sliderInput(
+      inputId = ns("binwidth"),
+      label = "binwidth",
+      min = 1,
+      max = 10,
+      step = 1,
+      value = 3
+    ),
     plotOutput(ns("plot")) # Output for the plot
   )
 }
@@ -25,25 +30,33 @@ my_custom_module_srv <- function(id, data) {
       choices = data()[["ADSL"]] |> select(where(is.numeric)) |> names()
     )
 
-    # Exercise 7: Add slider UI for binwidth ----------------------------------
-    # - Update reactive and render function to use binwidth
-
-    # add plot call to qenv
     result <- reactive({
-      req(input$variable)
-      #
+      validate(
+        need(input$variable, "Select a variable"),
+        need(input$binwidth > 0, "Binwidth must be greater than 0")
+      )
+      # Exercise 7.4: Add heading for plot code & output ----------------------
+      # - Store data in a temporary variable
+      # - Add markdown header
+      # - Then call within with temporary variable
+      q <- data()
+      teal.reporter::teal_card(q) <- c(
+        teal.reporter::teal_card(q),
+        "### Histogram of Selected Variable"
+      )
       within(
-        data(),
+        q,
         {
-          plot <- ggplot(ADSL, aes(x = input_var)) + geom_histogram()
+          plot <- ggplot(ADSL, aes(x = .data[[variable]])) +
+            geom_histogram(binwidth = binwidth)
           plot
         },
-        input_var = as.name(input$variable) # Pass the selected variable as a symbol
+        variable = input$variable,
+        binwidth = input$binwidth
       )
+      # -----------------------------------------------------------------------
     })
 
-    # -------------------------------------------------------------------------
-    # render to output the object from qenv
     output$plot <- renderPlot(result()[["plot"]])
 
     result

@@ -10,9 +10,14 @@ my_custom_module_ui <- function(id) {
       label = "Select variable",
       choices = NULL # initialize empty - to be updated from within server
     ),
-    # Exercise 7.3: Add slider UI for binwidth --------------------------------
-
-    # -------------------------------------------------------------------------
+    sliderInput(
+      inputId = ns("binwidth"),
+      label = "binwidth",
+      min = 1,
+      max = 10,
+      step = 1,
+      value = 3
+    ),
     plotOutput(ns("plot")) # Output for the plot
   )
 }
@@ -25,22 +30,27 @@ my_custom_module_srv <- function(id, data) {
       choices = data()[["ADSL"]] |> select(where(is.numeric)) |> names()
     )
 
-    # Exercise 7.3: Update reactive -------------------------------------------
-    # - Validate binwidth is greater than 0
-    #   - hint: validate accepts multiple need() arguments
-    # - Update reactive to use binwidth
     result <- reactive({
-      validate(need(input$variable, "Select a variable"))
+      validate(
+        need(input$variable, "Select a variable"),
+        need(input$binwidth > 0, "Binwidth must be greater than 0")
+      )
+      # Exercise 7.4: Add heading for plot code & output ----------------------
+      # - Store data in a temporary variable
+      # - Add markdown header
+      # - Then call within with temporary variable
       within(
         data(),
         {
-          plot <- ggplot(ADSL, aes(x = .data[[variable]])) + geom_histogram()
+          plot <- ggplot(ADSL, aes(x = .data[[variable]])) +
+            geom_histogram(binwidth = binwidth)
           plot
         },
-        variable = input$variable
+        variable = input$variable,
+        binwidth = input$binwidth
       )
+      # -----------------------------------------------------------------------
     })
-    # -------------------------------------------------------------------------
 
     output$plot <- renderPlot(result()[["plot"]])
 
